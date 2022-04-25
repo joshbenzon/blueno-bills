@@ -12,29 +12,34 @@ const Navbar = () => {
     return (
         <>
             <Nav>
+
                 <NavLink to='/'>
-                    <img src={require('../../images/blueno-logo.png')} alt='logo' width='75px' />
+                    <img src={require('../../images/blueno-logo.png')} alt='logo' width='75px'/>
                 </NavLink>
-                <Bars />
+
+                <Bars/>
                 <NavMenu>
-                    <NavLink to='/account'>
-                        Account
-                    </NavLink>
-                    <NavLink to='/menu'>
-                        Menu
-                    </NavLink>
                     <NavLink to='/request'>
                         Request
                     </NavLink>
                     <NavLink to='/transfer'>
                         Transfer
                     </NavLink>
-                     {/*Second Nav */}
-                     {/*<NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+                    <NavLink to='/menu'>
+                        Menus
+                    </NavLink>
+                    <NavLink to='/account'>
+                        Account
+                    </NavLink>
+                    <NavLink to='/settings'>
+                        Settings
+                    </NavLink>
                 </NavMenu>
+
                 <NavBtn>
                     <NavBtnLink to='/signin'>Sign In</NavBtnLink>
                 </NavBtn>
+
             </Nav>
         </>
     );

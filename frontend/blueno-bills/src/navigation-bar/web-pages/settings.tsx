@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Request = () => {
+const Settings = () => {
     return (
         <div
             style={{
@@ -10,12 +10,9 @@ const Request = () => {
                 height: '100vh'
             }}
         >
-            <h1>Request Page!</h1>
-
-            <h2>What Type of Payment to Request?</h2>
-
+            <h1>Settings Page!</h1>
         </div>
     );
 };
 
-export default Request;
+export default Settings;
