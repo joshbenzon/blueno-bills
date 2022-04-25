@@ -19,10 +19,8 @@ public class LoadDatabase implements Command {
   @Override
   public void run(String[] args, ObjectOrganizer objectOrganizer) {
     try {
-      String tableLoaded = TableHandler.loadDatabase(args[0]);
-      objectOrganizer.setTable(tableLoaded);
+      objectOrganizer.setTable(TableHandler.loadDatabase(args[0]));
       System.out.println("Success! " + args[0] + " loaded to the backend.");
-      System.out.println("SQL Table: " + tableLoaded);
       objectOrganizer.setFileName(args[0]);
     } catch (SQLException e) {
       System.out.println("ERROR: Could not load database");

@@ -1,5 +1,9 @@
 package edu.brown.cs.student.main.client;
 
+import com.google.gson.Gson;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * This class is used for testing and generates requests to all of my POST request endpoints.
  * I generate requests here and see if my POST requests do what I want it to do.
  */
 public class ClientRequestGenerator {
-
+  private static final Gson GSON = new Gson();
   /**
    * In this method I make a POST request to insert a row given a specific tableName and values.
    *
@@ -27,6 +32,7 @@ public class ClientRequestGenerator {
     HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2)
         .connectTimeout(Duration.ofSeconds(60)).build();
     String reqUri = "http://localhost:4567/insert";
+
     String param =
         "{\"tableName\":\"" + tableName + "\" , " + buildValuesArrayString(values) + "}";
     System.out.println("param: " + param);
@@ -42,6 +48,8 @@ public class ClientRequestGenerator {
     } catch (IOException | InterruptedException e) {
       System.out.println("failed to send request");
     }
+
+
   }
 
   /**
@@ -132,6 +140,7 @@ public class ClientRequestGenerator {
             buildStringFromMap(colToNewVal) + ",\"conditions\" " + buildStringFromMap(conditions)
             +
             "}";
+
     System.out.println("param: " + param);
     HttpRequest request =
         HttpRequest.newBuilder(URI.create(reqUri)).GET().POST(HttpRequest.BodyPublishers.ofString(

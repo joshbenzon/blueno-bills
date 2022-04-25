@@ -4,9 +4,13 @@ import edu.brown.cs.student.main.backendhandlers.DeleteHandler;
 import edu.brown.cs.student.main.backendhandlers.InsertRowHandler;
 import edu.brown.cs.student.main.backendhandlers.TableHandler;
 import edu.brown.cs.student.main.backendhandlers.UpdateHandler;
+import edu.brown.cs.student.main.replcommands.DeleteRowCommand;
+import edu.brown.cs.student.main.replcommands.InsertRowCommand;
 import edu.brown.cs.student.main.replcommands.LoadDatabase;
 import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
+import edu.brown.cs.student.main.replcommands.PrintStudentsCommand;
 import edu.brown.cs.student.main.replcommands.REPL;
+import edu.brown.cs.student.main.replcommands.UpdateRowCommand;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import spark.Spark;
@@ -50,6 +54,10 @@ public final class Main {
     objectOrganizer = new ObjectOrganizer();
     this.repl = new REPL(new BufferedReader(new InputStreamReader(System.in)), objectOrganizer);
     this.repl.addCommand(new LoadDatabase());
+    this.repl.addCommand(new PrintStudentsCommand());
+    this.repl.addCommand(new InsertRowCommand());
+    this.repl.addCommand(new UpdateRowCommand());
+    this.repl.addCommand(new DeleteRowCommand());
 
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));

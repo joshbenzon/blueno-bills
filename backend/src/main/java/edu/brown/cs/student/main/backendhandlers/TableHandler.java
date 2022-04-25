@@ -1,8 +1,8 @@
 package edu.brown.cs.student.main.backendhandlers;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.main.databaseaccessor.SQLTable;
 import edu.brown.cs.student.main.databaseaccessor.DatabaseProxy;
+import edu.brown.cs.student.main.databaseaccessor.SQLTable;
 import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
@@ -13,13 +13,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.google.gson.Gson;
 
 /**
  * a class with methods for handling tables in a database.
@@ -46,10 +44,10 @@ public class TableHandler implements Route {
    *
    * @param filename the name of the sqlite3 file
    * @return a Map from Table name to Table
-   * @throws SQLException if there is an error running one of the sql commands
+   * @throws SQLException             if there is an error running one of the sql commands
    * @throws IllegalArgumentException if the filename parameter isn't a valid file
    */
-  public static String loadDatabase(String filename)
+  public static SQLTable loadDatabase(String filename)
       throws SQLException, IllegalArgumentException {
 
     // checking if the filename is valid
@@ -62,14 +60,9 @@ public class TableHandler implements Route {
     tableNames = getTableNames();
     String tableName = tableNames.iterator().next();
     table = getTable(tableName);
-
     //closing connection here, so I don't have multiple connects to same table open
     dp.closeConn();
-    try {
-      return GSON.toJson(table);
-    } catch (IllegalStateException | IllegalArgumentException e) {
-      return GSON.toJson(e.getMessage());
-    }
+    return table;
   }
 
   //TODO: javadocs
@@ -105,7 +98,6 @@ public class TableHandler implements Route {
 //        PreparedStatement ps = SimpleProxy.prepareStatement("SELECT * FROM " + tableName + ";");
     ResultSet dbRes = dp.executeSQLCommand("SELECT * FROM " + tableName + ";");
     ResultSetMetaData dbResMeta = dbRes.getMetaData();
-    System.out.println("dbRes Metadata: " + dbResMeta);
 
     // Get the column headers
     int numCols = dbResMeta.getColumnCount();
@@ -113,21 +105,20 @@ public class TableHandler implements Route {
     for (int i = 1; i <= numCols; i++) {
       columnNames.add(dbResMeta.getColumnName(i));
     }
-    System.out.println("column names: " + columnNames);
+
 
     // Add each row of the db to a list
     List<Map<String, String>> rows = new ArrayList<>();
     while (dbRes.next()) {
       Map<String, String> curRow = new LinkedHashMap<>();
       for (int i = 1; i <= numCols; i++) {
-        System.out.println("get column name: " + dbResMeta.getColumnName(i));
-        System.out.println("get string: " + dbRes.getString(i));
+
         curRow.put(
             dbResMeta.getColumnName(i),
             dbRes.getString(i)
         );
       }
-      System.out.println("curr row: " + curRow);
+
       rows.add(curRow);
     }
     return new SQLTable(tableName, columnNames, rows);
@@ -140,7 +131,10 @@ public class TableHandler implements Route {
     if (ob.getTable() == null) {
       return "ERROR: Database not loaded";
     }
-    System.out.println("Database loaded to frontend!");
-    return new Gson().toJson(ob.getTable());
+    try {
+      return GSON.toJson(ob.getTable());
+    } catch (IllegalStateException | IllegalArgumentException e) {
+      return GSON.toJson(e.getMessage());
+    }
   }
 }

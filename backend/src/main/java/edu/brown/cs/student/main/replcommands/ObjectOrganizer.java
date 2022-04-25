@@ -16,7 +16,7 @@ public class ObjectOrganizer {
   // is a list of maps where each inner map represents a row in the table, mapping header name
   // to header value
   private String fileName;
-  private String table;
+  private SQLTable table;
   /**
    * This is the ObjectOrganizer constructor!
    */
@@ -28,7 +28,7 @@ public class ObjectOrganizer {
    *
    * @param table the new table
    */
-  public void setTable(String table) {
+  public void setTable(SQLTable table) {
     this.table = table;
   }
 
@@ -37,7 +37,7 @@ public class ObjectOrganizer {
    *
    * @return the table field
    */
-  public String getTable() {
+  public SQLTable getTable() {
     return this.table;
   }
 
