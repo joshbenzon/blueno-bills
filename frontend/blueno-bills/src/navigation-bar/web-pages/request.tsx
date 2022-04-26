@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../../buttons/components/buttons'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 const Request = () => {
     return (
@@ -35,7 +34,7 @@ const Request = () => {
                     width="200px"
                     radius="5%"
                     children="Meal Credits"
-                    onClick={() => console.log("Meal Credits!")}
+                    onClick={() => window.location.href='/requestMeal'}
                 />
             </div>
 
@@ -52,7 +51,7 @@ const Request = () => {
                     width="200px"
                     radius="5%"
                     children="Flex Points"
-                    onClick={() => console.log("Flex Points!")}
+                    onClick={() => window.location.href='/requestFlex'}
                 />
             </div>
 
@@ -69,7 +68,7 @@ const Request = () => {
                     width="200px"
                     radius="5%"
                     children="Bear Bucks"
-                    onClick={() => console.log("Bear Bucks!")}
+                    onClick={() => window.location.href='/requestBear'}
                 />
             </div>
 

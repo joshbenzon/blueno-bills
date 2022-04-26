@@ -12,6 +12,14 @@ import Settings from './navigation-bar/web-pages/settings';
 import SignIn from './navigation-bar/web-pages/signin';
 import Transfer from './navigation-bar/web-pages/transfer';
 
+import RequestMeal from "./navigation-bar/web-pages/requestMeal";
+import RequestFlex from "./navigation-bar/web-pages/requestFlex";
+import RequestBear from "./navigation-bar/web-pages/requestBear";
+
+import TransferMeal from "./navigation-bar/web-pages/transferMeal";
+import TransferFlex from "./navigation-bar/web-pages/transferFlex";
+import TransferBear from "./navigation-bar/web-pages/transferBear";
+
 function App() {
     return (
         <Router>
@@ -24,6 +32,14 @@ function App() {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/transfer" element={<Transfer/>}/>
+
+                <Route path="/requestMeal" element={<RequestMeal/>}/>
+                <Route path="/requestFlex" element={<RequestFlex/>}/>
+                <Route path="/requestBear" element={<RequestBear/>}/>
+
+                <Route path="/transferMeal" element={<TransferMeal/>}/>
+                <Route path="/transferFlex" element={<TransferFlex/>}/>
+                <Route path="/transferBear" element={<TransferBear/>}/>
             </Routes>
         </Router>
     );
