@@ -11,6 +11,10 @@ export const Nav = styled.nav`
   z-index: 10;
   /* Third Nav */
   /* justify-content: flex-start; */
+  
+  // stays on top when scrolling
+  // position: sticky;
+  // top: 0;
 `;
 
 export const NavLink = styled(Link)`
