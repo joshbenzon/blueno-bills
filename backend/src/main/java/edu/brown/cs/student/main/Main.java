@@ -1,5 +1,6 @@
 package edu.brown.cs.student.main;
 
+import edu.brown.cs.student.main.WebScraping.WebScraper;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import spark.Spark;
@@ -28,7 +29,7 @@ public final class Main {
   }
 
   private void run() {
-
+    new WebScraper();
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
