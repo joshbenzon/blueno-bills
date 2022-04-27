@@ -3,8 +3,8 @@ import Button from "../../buttons/components/buttons";
 import {useForm} from "react-hook-form";
 
 const TransferMeal = () => {
-    const {register, handleSubmit, watch, formState: {errors}} = useForm();
-    const onSubmit = (data: any) => console.log(data);
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const onSubmit = (data: any) => console.log(data);  // stores in map
 
     return (
         <div
@@ -35,7 +35,7 @@ const TransferMeal = () => {
                     To Who:
                     <input {...register("name",
                         {required: true, maxLength: 20, pattern: /^[A-Za-z]+$/i})} />
-                    {errors.name && "To Who is Required!"}
+                    {errors.name && "Required!"}
                 </div>
 
                 <div>
@@ -45,31 +45,44 @@ const TransferMeal = () => {
 
                 <div>
                     Amount:
-                    <input type="number" {...register("amount", {min: 0, max: 20})} />
-                    {errors.amount && "Amount Must Be in Bounds!"}
+                    <input type="number" {...register("amount", {required: true, min: 0, max: 20})} />
+                    {errors.amount && "Required and Must Be in Bounds!"}
                 </div>
 
                 <div>
-                    <input type="submit"/>
+                    <input className="transfer-meal-button" type="submit"
+                           style={{
+                               display: 'flex',
+                               padding: '10px',
+                               border: "none",
+                               background: "#4CC37B",
+                               height: "100px",
+                               width: "200px",
+                               borderRadius: "40px",
+                               textAlign: "center",
+                               boxShadow: "0 6px 20px -5px",
+                               cursor: "pointer",
+                               fontSize: "22px",
+                           }}/>
                 </div>
             </form>
 
-            <div className="transfer-meal-button"
-                 style={{
-                     display: 'flex',
-                     padding: '10px'
-                 }}>
+            {/*<div className="transfer-meal-button"*/}
+            {/*     style={{*/}
+            {/*         display: 'flex',*/}
+            {/*         padding: '10px'*/}
+            {/*     }}>*/}
 
-                <Button
-                    border="none"
-                    color="#4CC37B"
-                    height="100px"
-                    width="200px"
-                    radius="5%"
-                    children="Transfer"
-                    onClick={() => console.log("Transfer Meal Credit!")}
-                />
-            </div>
+            {/*    <Button*/}
+            {/*        border="none"*/}
+            {/*        color="#4CC37B"*/}
+            {/*        height="100px"*/}
+            {/*        width="200px"*/}
+            {/*        radius="5%"*/}
+            {/*        children="Transfer"*/}
+            {/*        onClick={() => console.log("Transfer Meal Credit!")}*/}
+            {/*    />*/}
+            {/*</div>*/}
         </div>
     );
 };
