@@ -19,6 +19,8 @@ public final class Main {
    */
   public static void main(String[] args) {
     new Main(args).run();
+    IDandPassword iDandPassword = new IDandPassword();
+    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
   private final String[] args;
