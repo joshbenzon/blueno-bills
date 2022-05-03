@@ -1,0 +1,60 @@
+@font-face {
+  font-family: Inter;
+  src: local(Inter), url("./fonts/Inter-SemiBold.ttf") format("truetype");
+}
+
+.web-page {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.sending-button {
+  background: #4CC37B;
+  padding: 10px 22px;
+}
+
+form {
+  display: flex;
+  padding: 10px;
+}
+
+button {
+  font-family: Inter, serif;
+  
+  height: 100px;
+  width: 200px;
+
+  align-items: center;
+  margin-right: 24px;
+
+  display: flex;
+  text-align: center;
+  font-size: 22px;
+
+  border-radius: 4px;
+  background: #79ACFF;
+  padding: 10px 50px;
+  color: #FFFFFF;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* MY STYLES */
+  background-color: #ADCCFF;
+  font-family: Inter, serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
