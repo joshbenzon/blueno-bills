@@ -1,10 +1,54 @@
 import React from 'react';
-import Button from "../../buttons/components/buttons";
+// import Button from "../../buttons/components/buttons";
 import {useForm} from "react-hook-form";
+
+import axios from 'axios';
+
+const TableRequest = () => {
+    const request = 'http://localhost:4567/table';  // 1) location for request
+
+    let config = {  // 3) configuration
+        headers: {
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*',
+        }
+    }
+
+    axios.get(request, config)
+
+        .then((response: any) => {
+            console.log(response.data);
+        })
+
+        .catch((error: any) => {
+            console.log(error);
+        });
+}
+
+const UpdateRequest = () => {
+    const request = 'http://localhost:4567/update';  // 1) location for request
+
+    let config = {  // 3) configuration
+        headers: {
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*',
+        }
+    }
+
+    axios.post(request, config)
+
+        .then((response: any) => {
+            console.log(response.data);
+        })
+
+        .catch((error: any) => {
+            console.log(error);
+        });
+}
 
 const TransferMeal = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const onSubmit = (data: any) => console.log(data);  // stores in map
+    // const onSubmit = (data: any) => UpdateRequest;  // stores in map
 
     return (
         <div
@@ -24,7 +68,7 @@ const TransferMeal = () => {
                 <h1>Transfer: Meal Credits</h1>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)}
+            <form onSubmit={handleSubmit(TableRequest)}
 
                   style={{
                       display: 'flex',
