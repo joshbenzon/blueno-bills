@@ -1,6 +1,16 @@
 package edu.brown.cs.student.main;
 
-
+import edu.brown.cs.student.main.backendhandlers.DeleteHandler;
+import edu.brown.cs.student.main.backendhandlers.InsertRowHandler;
+import edu.brown.cs.student.main.backendhandlers.TableHandler;
+import edu.brown.cs.student.main.backendhandlers.UpdateHandler;
+import edu.brown.cs.student.main.replcommands.DeleteRowCommand;
+import edu.brown.cs.student.main.replcommands.InsertRowCommand;
+import edu.brown.cs.student.main.replcommands.LoadDatabase;
+import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
+import edu.brown.cs.student.main.replcommands.PrintStudentsCommand;
+import edu.brown.cs.student.main.replcommands.REPL;
+import edu.brown.cs.student.main.replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -28,6 +38,9 @@ import static j2html.TagCreator.b;
 import static j2html.TagCreator.p;
 import static j2html.TagCreator.span;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 /**
  * The Main class of our project. This is where execution begins.
  */
@@ -35,6 +48,8 @@ import static j2html.TagCreator.span;
 public final class Main {
 
   private static final int DEFAULT_PORT = 4567;
+  private static ObjectOrganizer objectOrganizer;
+  private REPL repl;
 
   /**
    * The initial method called when execution begins.
@@ -63,9 +78,24 @@ public final class Main {
 
     OptionSet options = parser.parse(args);
 
+    objectOrganizer = new ObjectOrganizer();
+    this.repl = new REPL(new BufferedReader(new InputStreamReader(System.in)), objectOrganizer);
+    this.repl.addCommand(new LoadDatabase());
+    this.repl.addCommand(new PrintStudentsCommand());
+    this.repl.addCommand(new InsertRowCommand());
+    this.repl.addCommand(new UpdateRowCommand());
+    this.repl.addCommand(new DeleteRowCommand());
+
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
+
+    try {
+      this.repl.run();
+    } catch (Exception e) {
+      System.out.println("ERROR: Could not run REPL");
+    }
+
   }
 
   private static void runSparkServer(int port) {
@@ -94,7 +124,11 @@ public final class Main {
     Spark.before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
     // Put Routes Here
-    // Spark.get("/table", new TableHandler());
+    Spark.get("/table", new TableHandler(objectOrganizer));
+    Spark.post("/update", new UpdateHandler(objectOrganizer));
+    Spark.post("/insert", new InsertRowHandler(objectOrganizer));
+    Spark.post("/delete", new DeleteHandler(objectOrganizer));
+
     Spark.init();
   }private static FreeMarkerEngine createEngine() {
     Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);

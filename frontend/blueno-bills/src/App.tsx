@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Navbar from './navigation-bar/components/Navbar'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
+import Account from './navigation-bar/web-pages/account';
+import Home from './navigation-bar/web-pages/home';
+import Menu from './navigation-bar/web-pages/menu';
+import Request from './navigation-bar/web-pages/request';
+import Settings from './navigation-bar/web-pages/settings';
+import SignIn from './navigation-bar/web-pages/signin';
+import Transfer from './navigation-bar/web-pages/transfer';
+
+import RequestMeal from "./navigation-bar/web-pages/requestMeal";
+import RequestFlex from "./navigation-bar/web-pages/requestFlex";
+import RequestBear from "./navigation-bar/web-pages/requestBear";
+
+import TransferMeal from "./navigation-bar/web-pages/transferMeal";
+import TransferFlex from "./navigation-bar/web-pages/transferFlex";
+import TransferBear from "./navigation-bar/web-pages/transferBear";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Navbar/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/account" element={<Account/>}/>
+                <Route path="/menu" element={<Menu/>}/>
+                <Route path="/request" element={<Request/>}/>
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/transfer" element={<Transfer/>}/>
+
+                <Route path="/requestMeal" element={<RequestMeal/>}/>
+                <Route path="/requestFlex" element={<RequestFlex/>}/>
+                <Route path="/requestBear" element={<RequestBear/>}/>
+
+                <Route path="/transferMeal" element={<TransferMeal/>}/>
+                <Route path="/transferFlex" element={<TransferFlex/>}/>
+                <Route path="/transferBear" element={<TransferBear/>}/>
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
