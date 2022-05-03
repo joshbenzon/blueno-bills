@@ -2,26 +2,45 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 
 import axios from 'axios';
+import { useState } from 'react';
 
-const TableRequest = () => {
-    const request = 'http://localhost:4567/table';  // 1) location for request
+interface StudentData {
+    StudentID: string;
+    email: string;
+    mealSwipes: string;
+    bearBucks: string;
+    flexPoints: string;
+}
 
-    let config = {  // 3) configuration
-        headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*',
-        }
-    }
+function setStudentData(studentData: StudentData): void {
+    console.log(studentData["StudentID"])
+}
 
-    axios.get(request, config)
+const TableRequest = async () => {
+    // const request = 'http://localhost:4567/table';  // 1) location for request
 
-        .then((response: any) => {
-            console.log(response.data);
-        })
+    // let config = {  // 3) configuration
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         'Access-Control-Allow-Origin': '*',
+    //     }
+    // }
 
-        .catch((error: any) => {
-            console.log(error);
-        });
+    // axios.get(request, config)
+
+    //     .then((response: any) => {
+    //         console.log(response.data);
+    //     })
+
+    //     .catch((error: any) => {
+    //         console.log(error);
+    //     });
+    console.log("enters table request")
+    const response = await fetch("http://localhost:4567/table", {
+        method: 'GET',
+    })
+    console.log("response: " + response.status)
+    
 }
 
 const UpdateRequest = () => {
