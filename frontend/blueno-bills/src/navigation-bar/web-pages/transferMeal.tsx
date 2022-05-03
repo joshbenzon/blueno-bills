@@ -1,5 +1,4 @@
 import React from 'react';
-// import Button from "../../buttons/components/buttons";
 import {useForm} from "react-hook-form";
 
 import axios from 'axios';
@@ -51,40 +50,24 @@ const TransferMeal = () => {
     // const onSubmit = (data: any) => UpdateRequest;  // stores in map
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'Center',
-                alignItems: 'Top',
-                height: '100vh'
-            }}
-        >
-            <div className="request-info"
-                 style={{
-                     display: 'flex',
-                     padding: '10px'
-                 }}>
+        <div className={"web-page"}>
 
+            <div className="transfer-meal-info">
                 <h1>Transfer: Meal Credits</h1>
             </div>
 
-            <form onSubmit={handleSubmit(TableRequest)}
-
-                  style={{
-                      display: 'flex',
-                      padding: '10px'
-                  }}>
+            <form onSubmit={handleSubmit(TableRequest)}>
 
                 <div>
                     To Who:
-                    <input {...register("name",
+                    <input type="text" {...register("name",
                         {required: true, maxLength: 20, pattern: /^[A-Za-z]+$/i})} />
                     {errors.name && "Required!"}
                 </div>
 
                 <div>
                     Description:
-                    <input {...register("description", {maxLength: 100})} />
+                    <input type="text" {...register("description", {maxLength: 100})} />
                 </div>
 
                 <div>
@@ -94,39 +77,13 @@ const TransferMeal = () => {
                 </div>
 
                 <div>
-                    <input className="transfer-meal-button" type="submit"
-                           style={{
-                               display: 'flex',
-                               padding: '10px',
-                               border: "none",
-                               background: "#4CC37B",
-                               height: "100px",
-                               width: "200px",
-                               borderRadius: "40px",
-                               textAlign: "center",
-                               boxShadow: "0 6px 20px -5px",
-                               cursor: "pointer",
-                               fontSize: "22px",
-                           }}/>
+                    <button className="sending-button" type="submit">
+                        Submit
+                    </button>
                 </div>
+
             </form>
 
-            {/*<div className="transfer-meal-button"*/}
-            {/*     style={{*/}
-            {/*         display: 'flex',*/}
-            {/*         padding: '10px'*/}
-            {/*     }}>*/}
-
-            {/*    <Button*/}
-            {/*        border="none"*/}
-            {/*        color="#4CC37B"*/}
-            {/*        height="100px"*/}
-            {/*        width="200px"*/}
-            {/*        radius="5%"*/}
-            {/*        children="Transfer"*/}
-            {/*        onClick={() => console.log("Transfer Meal Credit!")}*/}
-            {/*    />*/}
-            {/*</div>*/}
         </div>
     );
 };
