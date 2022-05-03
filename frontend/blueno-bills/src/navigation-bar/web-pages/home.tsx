@@ -11,6 +11,11 @@ const Home = () => {
             }}
         >
             <h1>Home Page!</h1>
+            <body>
+                <ul id="userlist">  </ul>
+                <div id="chat">  </div>
+                <script src="websocketDemo.js"></script>
+            </body>
         </div>
     );
 };
