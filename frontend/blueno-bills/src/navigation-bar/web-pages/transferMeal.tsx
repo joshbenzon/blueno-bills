@@ -12,36 +12,7 @@ interface StudentData {
     flexPoints: string;
 }
 
-function setStudentData(studentData: StudentData): void {
-    console.log(studentData["StudentID"])
-}
 
-const TableRequest = async () => {
-    // const request = 'http://localhost:4567/table';  // 1) location for request
-
-    // let config = {  // 3) configuration
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         'Access-Control-Allow-Origin': '*',
-    //     }
-    // }
-
-    // axios.get(request, config)
-
-    //     .then((response: any) => {
-    //         console.log(response.data);
-    //     })
-
-    //     .catch((error: any) => {
-    //         console.log(error);
-    //     });
-    console.log("enters table request")
-    const response = await fetch("http://localhost:4567/table", {
-        method: 'GET',
-    })
-    console.log("response: " + response.status)
-    
-}
 
 const UpdateRequest = () => {
     const request = 'http://localhost:4567/update';  // 1) location for request
@@ -75,7 +46,7 @@ const TransferMeal = () => {
                 <h1>Transfer: Meal Credits</h1>
             </div>
 
-            <form onSubmit={handleSubmit(TableRequest)}>
+            <form onSubmit={handleSubmit(UpdateRequest)}>
 
                 <div>
                     To Who:

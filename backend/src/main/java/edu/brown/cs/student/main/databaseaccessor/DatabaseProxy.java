@@ -93,6 +93,14 @@ public class DatabaseProxy {
   }
 
   /**
+   * @return the connection
+   * This method is for JUnit testing purposes to ensure my connection is closed when I want it to be
+   */
+  public Connection getConn(){
+    return conn;
+  }
+
+  /**
    * @param sql sql command string
    * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0
    * for SQL statements that return nothing, or -1 if an error occurs.

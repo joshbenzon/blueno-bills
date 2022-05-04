@@ -36,7 +36,6 @@ public final class REPL {
    */
   public void addCommand(Command command) {
     map.put(command.getName(), command);
-    System.out.println("curr repl command map: " + map);
   }
 
   /**
