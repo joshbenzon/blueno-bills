@@ -43,13 +43,26 @@ interface database {
 function App() {
     const [tableName, setTableName] = useState<string | null>(null);
     const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
-    const [rows, setRows] = useState<Row[] | null>(null);
+    const [rows, setRows] = useState<string[][] | null>(null);
 
     function setDatabase(db: database): void {
         console.log("enters set db")
         setTableName(db["name"]);
         setTableHeaders(db["headers"]);
-        setRows(db["rows"]);
+        let arr = Array.from(db["rows"].values())
+        let row:string[] = []
+        let rows:string[][] = [[]]
+        for(let i =0; i<arr.length; i++){
+            row.push(arr[i].StudentID);
+            row.push(arr[i].email)
+            row.push(arr[i].mealSwipes)
+            row.push(arr[i].flexPoints)
+            row.push(arr[i].bearBucks)
+            console.log("row: " + row)
+            rows.push(row)
+            row = []
+        }
+        setRows(rows);
     }
 
     function loadDatabase(): void {
