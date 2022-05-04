@@ -1,4 +1,4 @@
-package edu.brown.cs.student.main.databaseaccessor;
+package databaseaccessor;
 
 
 import java.sql.Connection;

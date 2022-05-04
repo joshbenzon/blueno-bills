@@ -1,16 +1,16 @@
 package edu.brown.cs.student.main;
 
-import edu.brown.cs.student.main.backendhandlers.DeleteHandler;
-import edu.brown.cs.student.main.backendhandlers.InsertRowHandler;
-import edu.brown.cs.student.main.backendhandlers.TableHandler;
-import edu.brown.cs.student.main.backendhandlers.UpdateHandler;
-import edu.brown.cs.student.main.replcommands.DeleteRowCommand;
-import edu.brown.cs.student.main.replcommands.InsertRowCommand;
-import edu.brown.cs.student.main.replcommands.LoadDatabase;
-import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
-import edu.brown.cs.student.main.replcommands.PrintStudentsCommand;
-import edu.brown.cs.student.main.replcommands.REPL;
-import edu.brown.cs.student.main.replcommands.UpdateRowCommand;
+import backendhandlers.DeleteHandler;
+import backendhandlers.InsertRowHandler;
+import backendhandlers.TableHandler;
+import backendhandlers.UpdateHandler;
+import replcommands.DeleteRowCommand;
+import replcommands.InsertRowCommand;
+import replcommands.LoadDatabase;
+import replcommands.ObjectOrganizer;
+import replcommands.PrintStudentsCommand;
+import replcommands.REPL;
+import replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -102,8 +102,8 @@ public final class Main {
     Spark.port(port);
     Spark.externalStaticFileLocation("src/main/resources/static");
 
-    FreeMarkerEngine engine = createEngine();
-    Spark.get("/ws", new Main.HomePage(), engine);
+//    FreeMarkerEngine engine = createEngine();
+//    Spark.get("/ws", new Main.HomePage(), engine);
     Spark.init();
 
     Spark.options("/*", (request, response) -> {
@@ -130,52 +130,54 @@ public final class Main {
     Spark.post("/delete", new DeleteHandler(objectOrganizer));
 
     Spark.init();
-  }private static FreeMarkerEngine createEngine() {
-    Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-    File templates = new File("src/main/resources/public");
-    try {
-      config.setDirectoryForTemplateLoading(templates);
-    } catch (IOException ioe) {
-      System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
-      System.exit(1);
-    }
-    return new FreeMarkerEngine(config);
   }
 
-  //Sends a message from one user to all users, along with a list of current usernames
-  public static void broadcastMessage(String sender, String message, int room) {
-    List<Session> sessionsToSend = new ArrayList<>();
-    List<String> usersList = new ArrayList<>();
-
-
-
-    sessionsToSend.stream().filter(Session::isOpen).forEach(session ->{
-      try {
-        session.getRemote().sendString(String.valueOf(new JSONObject()
-            .put("userMessage", createHtmlMessageFromSender(sender, message))
-            .put("userlist", usersList)
-        ));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    });
-
-  }
-
-  //Builds a HTML element with a sender-name, a message, and a timestamp,
-  private static String createHtmlMessageFromSender(String sender, String message) {
-    return article(
-        b(sender + " says:"),
-        span(attrs(".timestamp"), new SimpleDateFormat("HH:mm:ss").format(new Date())),
-        p(message)
-    ).render();
-  }
-
-  public static class HomePage implements TemplateViewRoute {
-    @Override
-    public ModelAndView handle(Request request, Response response) throws Exception {
-      // TODO Auto-generated method stub
-      return new ModelAndView(null, "websocket.ftl");
-    }
-  }
+//  private static FreeMarkerEngine createEngine() {
+//    Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+//    File templates = new File("src/main/resources/public");
+//    try {
+//      config.setDirectoryForTemplateLoading(templates);
+//    } catch (IOException ioe) {
+//      System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
+//      System.exit(1);
+//    }
+//    return new FreeMarkerEngine(config);
+//  }
+//
+//  //Sends a message from one user to all users, along with a list of current usernames
+//  public static void broadcastMessage(String sender, String message, int room) {
+//    List<Session> sessionsToSend = new ArrayList<>();
+//    List<String> usersList = new ArrayList<>();
+//
+//
+//
+//    sessionsToSend.stream().filter(Session::isOpen).forEach(session ->{
+//      try {
+//        session.getRemote().sendString(String.valueOf(new JSONObject()
+//            .put("userMessage", createHtmlMessageFromSender(sender, message))
+//            .put("userlist", usersList)
+//        ));
+//      } catch (Exception e) {
+//        e.printStackTrace();
+//      }
+//    });
+//
+//  }
+//
+//  //Builds a HTML element with a sender-name, a message, and a timestamp,
+//  private static String createHtmlMessageFromSender(String sender, String message) {
+//    return article(
+//        b(sender + " says:"),
+//        span(attrs(".timestamp"), new SimpleDateFormat("HH:mm:ss").format(new Date())),
+//        p(message)
+//    ).render();
+//  }
+//
+//  public static class HomePage implements TemplateViewRoute {
+//    @Override
+//    public ModelAndView handle(Request request, Response response) throws Exception {
+//      // TODO Auto-generated method stub
+//      return new ModelAndView(null, "websocket.ftl");
+//    }
+//  }
 }
