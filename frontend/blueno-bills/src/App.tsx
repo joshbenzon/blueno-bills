@@ -42,8 +42,8 @@ interface database {
 
 function App() {
     const [tableName, setTableName] = useState<string | null>(null);
-    const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
-    const [rows, setRows] = useState<string[][] | null>(null);
+    const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
+    const [rows, setRows] = useState<string[][] |null>(null);
 
     function setDatabase(db: database): void {
         console.log("enters set db")
@@ -97,7 +97,7 @@ function App() {
                 <Route path="/requestFlex" element={<RequestFlex/>}/>
                 <Route path="/requestBear" element={<RequestBear/>}/>
 
-                <Route path="/transferMeal" element={<TransferMeal/>}/>
+                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
                 <Route path="/transferFlex" element={<TransferFlex/>}/>
                 <Route path="/transferBear" element={<TransferBear/>}/>
             </Routes>

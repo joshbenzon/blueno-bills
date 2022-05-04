@@ -4,40 +4,42 @@ import {useForm} from "react-hook-form";
 import axios from 'axios';
 import { useState } from 'react';
 
-interface StudentData {
-    StudentID: string;
-    email: string;
-    mealSwipes: string;
-    bearBucks: string;
-    flexPoints: string;
+
+
+
+interface TransferMealProp{
+    tableHeaders: string[]|null;
+    rows: string[][]|null;
 }
 
-
-
-const UpdateRequest = () => {
-    const request = 'http://localhost:4567/update';  // 1) location for request
-
-    let config = {  // 3) configuration
-        headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*',
-        }
-    }
-
-    axios.post(request, config)
-
-        .then((response: any) => {
-            console.log(response.data);
-        })
-
-        .catch((error: any) => {
-            console.log(error);
-        });
-}
-
-const TransferMeal = () => {
+function TransferMeal(props:TransferMealProp){
     const {register, handleSubmit, formState: {errors}} = useForm();
     // const onSubmit = (data: any) => UpdateRequest;  // stores in map
+
+
+
+    const UpdateRequest = () => {
+        console.log("headers: " + props.tableHeaders);
+        console.log("rows: " + props.rows);
+        const request = 'http://localhost:4567/update';  // 1) location for request
+    
+        let config = {  // 3) configuration
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }
+    
+        axios.post(request, config)
+    
+            .then((response: any) => {
+                console.log(response.data);
+            })
+    
+            .catch((error: any) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className={"web-page"}>
