@@ -3,17 +3,87 @@
   src: local(Inter), url("./fonts/Inter-SemiBold.ttf") format("truetype");
 }
 
+* {
+  font-family: Inter, serif;
+}
+
+.page-info {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.sending-button {
+  background: #4cc37b;
+  height: 50px;
+  width: 150px;
+  padding: 10px 27px;
+}
+
+.input-group {
+  padding: 10px;
+}
+
+input {
+  padding: 5px;
+  border: 2px solid #79acff;
+  border-radius: 5px;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  color: red;
+}
+
+form {
+  display: flex;
+}
+
+button {
+  height: 100px;
+  width: 200px;
+
+  align-items: center;
+  margin-right: 24px;
+
+  display: flex;
+  text-align: center;
+  font-size: 22px;
+
+  border-radius: 25px;
+  background: #79acff;
+  padding: 10px 50px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+button:hover {
+  transition: all 0.2s ease-in-out;
+  background: #ffffff;
+  color: #000814;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* MY STYLES */
-  background-color: #ADCCFF;
-  font-family: Inter, serif;
+  background-color: #adccff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

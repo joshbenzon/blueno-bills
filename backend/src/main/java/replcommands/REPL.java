@@ -1,4 +1,4 @@
-package edu.brown.cs.student.main.replcommands;
+package replcommands;
 
 
 import java.io.BufferedReader;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Home = () => {
+// websockets
     return (
         <div
             style={{
@@ -18,6 +19,15 @@ const Home = () => {
             </body>
         </div>
     );
+
+  // pure frontend
+//   return (
+//     <React.Fragment>
+//       <div className={"page-info"}>
+//         <h1>Home Page!</h1>
+//       </div>
+//     </React.Fragment>
+//   );
 };
 
 export default Home;

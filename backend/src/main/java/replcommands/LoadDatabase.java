@@ -1,8 +1,7 @@
-package edu.brown.cs.student.main.replcommands;
+package replcommands;
 
 
-import edu.brown.cs.student.main.backendhandlers.TableHandler;
-import edu.brown.cs.student.main.databaseaccessor.SQLTable;
+import backendhandlers.TableHandler;
 
 import java.sql.SQLException;
 
