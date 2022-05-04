@@ -11,6 +11,7 @@ import replcommands.ObjectOrganizer;
 import replcommands.PrintStudentsCommand;
 import replcommands.REPL;
 import replcommands.UpdateRowCommand;
+
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -58,7 +59,7 @@ public final class Main {
    */
   public static void main(String[] args) {
     new Main(args).run();
-    runSparkServer(4567);
+    runSparkServer(DEFAULT_PORT);
   }
 
   private final String[] args;
@@ -69,6 +70,7 @@ public final class Main {
 
   public static int nextUserNumber = 1; //Assign to username for next connecting user
 
+  public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
   private void run() {
 
@@ -102,8 +104,15 @@ public final class Main {
     Spark.port(port);
     Spark.externalStaticFileLocation("src/main/resources/static");
 
+    // web sockets
+//     FreeMarkerEngine engine = createEngine();
+//     Spark.webSocket("", SocketHandler.class);
+//     Spark.get("", new Main.HomePage(), engine);
+
+    // pure frontend
 //    FreeMarkerEngine engine = createEngine();
 //    Spark.get("/ws", new Main.HomePage(), engine);
+  
     Spark.init();
 
     Spark.options("/*", (request, response) -> {
@@ -131,7 +140,51 @@ public final class Main {
 
     Spark.init();
   }
+  
+  // web sockets
+  //Sends a message from one user to all users, along with a list of current usernames
+//   public static void broadcastMessage(String sender, String message) {
+//     List<Session> sessionsToSend = new ArrayList<>();
+//     List<String> usersList = new ArrayList<>();
 
+//     for (UserInfo user : users.values()) {
+//       sessionsToSend.add(user.getSession());
+//       usersList.add(user.getUserName());
+//     }
+
+//     sessionsToSend.stream().filter(Session::isOpen).forEach(session ->{
+//       try {
+//         session.getRemote().sendString(String.valueOf(new JSONObject()
+//             .put("userlist", usersList)
+//         ));
+//       } catch (Exception e) {
+//         e.printStackTrace();
+//       }
+//     });
+
+//   }
+
+//   private static FreeMarkerEngine createEngine() {
+//     Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+//     File templates = new File("src/main/resources/public");
+//     try {
+//       config.setDirectoryForTemplateLoading(templates);
+//     } catch (IOException ioe) {
+//       System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
+//       System.exit(1);
+//     }
+//     return new FreeMarkerEngine(config);
+//   }
+
+//   public static class HomePage implements TemplateViewRoute {
+//     @Override
+//     public ModelAndView handle(Request request, Response response) throws Exception {
+//       // TODO Auto-generated method stub
+//       return new ModelAndView(null, "websocket.ftl");
+//     }
+//   }
+
+    // pure frontend
 //  private static FreeMarkerEngine createEngine() {
 //    Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
 //    File templates = new File("src/main/resources/public");
