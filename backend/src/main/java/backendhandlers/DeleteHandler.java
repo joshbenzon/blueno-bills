@@ -2,7 +2,7 @@ package backendhandlers;
 
 import com.google.gson.Gson;
 import databaseaccessor.DatabaseProxy;
-import backendhandlers.replcommands.ObjectOrganizer;
+import replcommands.ObjectOrganizer;
 import org.json.JSONObject;
 import spark.Request;
 import spark.Response;

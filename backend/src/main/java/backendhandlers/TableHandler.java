@@ -3,7 +3,7 @@ package backendhandlers;
 import com.google.gson.Gson;
 import databaseaccessor.DatabaseProxy;
 import databaseaccessor.SQLTable;
-import backendhandlers.replcommands.ObjectOrganizer;
+import replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
 import spark.Route;

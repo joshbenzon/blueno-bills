@@ -1,4 +1,4 @@
-package backendhandlers.replcommands;
+package replcommands;
 
 
 import client.ClientRequestGenerator;
