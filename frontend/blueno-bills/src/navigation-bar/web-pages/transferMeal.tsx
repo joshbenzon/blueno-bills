@@ -4,27 +4,38 @@ import {useForm} from "react-hook-form";
 import axios from 'axios';
 import {useState} from 'react';
 
-// import { useTable } from 'react-table';
+// inputs as props in console.log
 
-interface TransferMealProp {
+interface TransferMealProps {
     tableName: string | null;
     tableHeaders: string[] | null;
     rows: string[][] | null;
 }
 
-function TransferMeal(props: TransferMealProp) {
-    const tableData: string[][] | null = props.rows;
+interface InputProps {
+    inputName: string | null;
+    inputDescription: string | null;
+    inputAmount: number | null;
+}
+
+function TransferMeal(props: TransferMealProps) {
+    const [inputName, setInputName] = useState<string | null>(null);
+    const [inputDescription, setInputDescription] = useState<string | null>(null);
+    const [inputAmount, setInputAmount] = useState<number | null>(null);
 
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     const onSubmit = (data: any) => console.log(data); // stores in map
 
+    const updateInputs = (event: any) => {
+        setInputName(event.target)
+        console.log(event.target)
+    };
+
     const UpdateRequest = () => {  // makes post request
         console.log("name: " + props.tableName)
         console.log("headers: " + props.tableHeaders);
         console.log("rows: " + props.rows);
-        // console.log("rows length: " + props.rows?.length);
-        // console.log("rows values: " + props.rows?.at(1));
 
         const request = 'http://localhost:4567/update';  // 1) location for request
 
@@ -59,7 +70,7 @@ function TransferMeal(props: TransferMealProp) {
             </div>
 
             <div className={"page-buttons"}>
-                <form onSubmit={handleSubmit(UpdateRequest)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="input-group">
                         <div>To Who*:</div>
@@ -104,8 +115,6 @@ function TransferMeal(props: TransferMealProp) {
                     </div>
                 </form>
             </div>
-
-
 
         </React.Fragment>
     );
