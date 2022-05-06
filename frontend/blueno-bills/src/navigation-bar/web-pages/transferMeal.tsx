@@ -26,11 +26,17 @@ function TransferMeal(props: TransferMealProps) {
 import { useState } from 'react';
 
 
-
+interface Row{
+    StudentID: string;
+    email:string;
+    mealSwipes:string;
+    flexPoints:string;
+    bearBucks:string;
+}
 
 interface TransferMealProp{
     tableHeaders: string[]|null;
-    rows: string[][]|null;
+    rows: Row[]|null;
 }
 >>>>>>> c30b94d36fabac056f3270980f7b0d085a07fe50
 
