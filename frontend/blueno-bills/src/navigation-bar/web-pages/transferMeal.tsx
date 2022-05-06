@@ -26,8 +26,7 @@ function TransferMeal(props:TransferMealProp){
 
 
     const UpdateRequest = () => {
-        console.log("headers: " + props.tableHeaders);
-        console.log("rows: " + props.rows);
+       
         const request = 'http://localhost:4567/update';  // 1) location for request
     
         let config = {  // 3) configuration

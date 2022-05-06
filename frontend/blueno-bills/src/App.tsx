@@ -75,10 +75,11 @@ function App() {
         console.log("table name: " + tableName)
         console.log("table headers: " + tableHeaders)
         console.log("table values: " + rows)
+
       }, [])
      
 
-    
+
 
     return (
         <Router>

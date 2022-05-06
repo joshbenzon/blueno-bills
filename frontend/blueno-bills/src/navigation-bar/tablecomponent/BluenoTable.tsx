@@ -17,9 +17,13 @@ interface TableProp  {
 function BluenoTable(props: TableProp){
 
     const headerContent = []
+    //we don't want the studentID column to show up
     if(props.tableHeaders){
-        for (const header in props.tableHeaders) {
-            headerContent.push(<th>{props.tableHeaders[header]} </th>)
+
+        for(let i = 0; i<props.tableHeaders.length; i++){
+            if(i!=0){
+                headerContent.push(<th>{props.tableHeaders[i]} </th>)
+            }
         }
     }
 
@@ -35,7 +39,6 @@ function BluenoTable(props: TableProp){
               <tbody>
               {props.rows?.map(row => 
                   <tr key = {props.rows?.indexOf(row)}>
-                  <td>{row.StudentID}</td> 
                   <td>{row.email}</td> 
                   <td>{row.mealSwipes}</td>
                   <td>{row.flexPoints}</td>
