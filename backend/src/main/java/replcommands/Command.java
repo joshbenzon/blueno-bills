@@ -1,7 +1,5 @@
 package replcommands;
 
-
-
 /**
  * This interface represents any command that is compatible with the generic REPL.
  */

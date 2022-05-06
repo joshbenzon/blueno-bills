@@ -1,10 +1,8 @@
 package replcommands;
 
-
 import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.HashMap;
-
 
 /**
  * This is the REPL class! This represents the read-evaluate-print loop. The input is read from
@@ -36,7 +34,6 @@ public final class REPL {
    */
   public void addCommand(Command command) {
     map.put(command.getName(), command);
-    System.out.println("curr repl command map: " + map);
   }
 
   /**

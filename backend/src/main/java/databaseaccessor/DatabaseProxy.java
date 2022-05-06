@@ -1,6 +1,5 @@
 package databaseaccessor;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +12,6 @@ import java.sql.Statement;
  * if they have the right permissions
  */
 public class DatabaseProxy {
-
   private static Connection conn = null;
   private final String filename;
 
@@ -22,6 +20,7 @@ public class DatabaseProxy {
    */
   public DatabaseProxy(String filename) {
     this.filename = filename;
+
     //opening the initial connection
     this.openConn();
   }
@@ -56,12 +55,14 @@ public class DatabaseProxy {
     } catch (ClassNotFoundException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
+
     String urlToDB = "jdbc:sqlite:" + this.filename;
     try {
       conn = DriverManager.getConnection(urlToDB);
     } catch (SQLException throwable) {
       System.out.println("ERROR: " + throwable.getMessage());
     }
+
     // these two lines tell the database to enforce foreign keys during operations,
     // and should be present
     Statement stat = null;
@@ -70,6 +71,7 @@ public class DatabaseProxy {
     } catch (SQLException throwable) {
       System.out.println("ERROR: " + throwable.getMessage());
     }
+
     try {
       if (stat != null) {
         stat.executeUpdate("PRAGMA foreign_keys=ON;");
@@ -90,6 +92,14 @@ public class DatabaseProxy {
     } catch (SQLException throwables) {
       System.out.println("ERROR: " + throwables.getMessage());
     }
+  }
+
+  /**
+   * @return the connection
+   * This method is for JUnit testing purposes to ensure my connection is closed when I want it to be
+   */
+  public Connection getConn() {
+    return conn;
   }
 
   /**
