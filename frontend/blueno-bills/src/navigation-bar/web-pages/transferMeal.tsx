@@ -6,11 +6,17 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-
+interface Row{
+    StudentID: string;
+    email:string;
+    mealSwipes:string;
+    flexPoints:string;
+    bearBucks:string;
+}
 
 interface TransferMealProp{
     tableHeaders: string[]|null;
-    rows: string[][]|null;
+    rows: Row[]|null;
 }
 
 function TransferMeal(props:TransferMealProp){

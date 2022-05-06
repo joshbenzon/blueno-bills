@@ -19,26 +19,7 @@ import RequestBear from "./navigation-bar/web-pages/requestBear";
 import TransferMeal from "./navigation-bar/web-pages/transferMeal";
 import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
-import { useState } from 'react';
-import { useEffect } from 'react';
 
-interface Row{
-    StudentID: string;
-    email:string;
-    mealSwipes:string;
-    flexPoints:string;
-    bearBucks:string;
-}
-
-interface database {
-    // each table is a slot in the array
-    name: string;
-    // each table is a slot in the outer array, each header for a table is a slot in the inner array
-    headers: string[];
-    // each table is a slot in the outer array, each header for a table is a slot in the inner array, each value for a
-    // header is a slot in the inner-inner array
-    rows: Row[];
-}
 
 import {useState} from 'react';
 import {useEffect} from 'react';
@@ -67,29 +48,13 @@ function App() {
     const [tableName, setTableName] = useState<string | null>(null);
 
     const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
-    const [rows, setRows] = useState<string[][] |null>(null);
+    const [rows, setRows] = useState<Row[] |null>(null);
 
     function setDatabase(db: database): void {
         console.log("enters set db")
         setTableName(db["name"]);
         setTableHeaders(db["headers"]);
-        let arr = Array.from(db["rows"].values())
-        let row:string[] = []
-        let rows:string[][] = [[]]
-        for(let i =0; i<arr.length; i++){
-
-            row.push(arr[i].StudentID);
-            row.push(arr[i].email)
-            row.push(arr[i].mealSwipes)
-            row.push(arr[i].flexPoints)
-            row.push(arr[i].bearBucks)
-
-            console.log("row: " + row)
-            rows.push(row)
-            row = []
-        }
-
-        setRows(rows);
+        setRows(db["rows"]);
     }
 
     function loadDatabase(): void {
@@ -123,11 +88,10 @@ function App() {
                 <Route path="/request" element={<Request/>}/>
 
                 <Route path="/settings" element={<Settings/>} />
-                <Route path="/signin" element={<SignIn />} />
 
                 <Route path="/transfer" element={<Transfer/>}/>
                 <Route path="/menu" element={<Menu/>}/>
-                <Route path="/account" element={<Account/>}/>
+                <Route path="/account" element={<Account tableHeaders = {tableHeaders} rows = {rows} />}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/logout" element={<LogOut/>}/>
 
