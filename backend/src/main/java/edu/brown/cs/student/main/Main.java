@@ -101,7 +101,12 @@ public final class Main {
     Spark.port(port);
     Spark.externalStaticFileLocation("src/main/resources/static");
 
+
     // web sockets
+
+    String localhost = "127.0.0.1";
+    Spark.ipAddress(localhost);
+
     FreeMarkerEngine engine = createEngine();
     Spark.webSocket("", SocketHandler.class);
     Spark.get("", new HomePage(), engine);
