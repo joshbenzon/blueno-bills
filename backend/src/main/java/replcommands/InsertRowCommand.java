@@ -1,6 +1,6 @@
-package edu.brown.cs.student.main.replcommands;
+package replcommands;
 
-import edu.brown.cs.student.main.client.ClientRequestGenerator;
+import client.ClientRequestGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

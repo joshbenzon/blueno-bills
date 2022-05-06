@@ -1,6 +1,4 @@
-package edu.brown.cs.student.main.replcommands;
-
-
+package replcommands;
 
 /**
  * This interface represents any command that is compatible with the generic REPL.

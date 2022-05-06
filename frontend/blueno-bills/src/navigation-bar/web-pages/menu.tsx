@@ -1,18 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const Menu = () => {
-    return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'Center',
-                alignItems: 'Top',
-                height: '100vh'
-            }}
-        >
-            <h1>Menu Page!</h1>
-        </div>
-    );
+  return (
+    <React.Fragment>
+      <div className={"page-info"}>
+        <h1>Menu Page!</h1>
+      </div>
+    </React.Fragment>
+  );
 };
 
 export default Menu;

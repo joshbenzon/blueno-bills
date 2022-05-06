@@ -1,44 +1,41 @@
 package edu.brown.cs.student.main;
 
-import edu.brown.cs.student.main.backendhandlers.DeleteHandler;
-import edu.brown.cs.student.main.backendhandlers.InsertRowHandler;
-import edu.brown.cs.student.main.backendhandlers.TableHandler;
-import edu.brown.cs.student.main.backendhandlers.UpdateHandler;
-import edu.brown.cs.student.main.replcommands.DeleteRowCommand;
-import edu.brown.cs.student.main.replcommands.InsertRowCommand;
-import edu.brown.cs.student.main.replcommands.LoadDatabase;
-import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
-import edu.brown.cs.student.main.replcommands.PrintStudentsCommand;
-import edu.brown.cs.student.main.replcommands.REPL;
-import edu.brown.cs.student.main.replcommands.UpdateRowCommand;
-import edu.brown.cs.student.main.websockets.SocketHandler;
-import edu.brown.cs.student.main.websockets.UserInfo;
-import freemarker.template.Configuration;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import org.eclipse.jetty.websocket.api.Session;
+import backendhandlers.DeleteHandler;
+import backendhandlers.InsertRowHandler;
+import backendhandlers.TableHandler;
+import backendhandlers.UpdateHandler;
 import org.json.JSONObject;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
+import websockets.SocketHandler;
+import websockets.UserInfo;
+import replcommands.DeleteRowCommand;
+import replcommands.InsertRowCommand;
+import replcommands.LoadDatabase;
+import replcommands.ObjectOrganizer;
+import replcommands.PrintStudentsCommand;
+import replcommands.REPL;
+import replcommands.UpdateRowCommand;
+
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import org.eclipse.jetty.websocket.api.Session;
+import spark.Spark;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+
+import freemarker.template.Configuration;
+
+import static freemarker.template.Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static j2html.TagCreator.article;
-import static j2html.TagCreator.attrs;
-import static j2html.TagCreator.b;
-import static j2html.TagCreator.p;
-import static j2html.TagCreator.span;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -48,10 +45,16 @@ import java.io.InputStreamReader;
  */
 
 public final class Main {
-
   private static final int DEFAULT_PORT = 4567;
+  //  private static final int DEFAULT_PORT = 3000;
   private static ObjectOrganizer objectOrganizer;
-  private REPL repl;
+  private final String[] args;
+  public static int nextUserNumber = 1; // assign to username for next connecting user
+  public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
+
+  private Main(String[] args) {
+    this.args = args;
+  }
 
   /**
    * The initial method called when execution begins.
@@ -63,18 +66,7 @@ public final class Main {
     runSparkServer(DEFAULT_PORT);
   }
 
-  private final String[] args;
-
-  private Main(String[] args) {
-    this.args = args;
-  }
-
-  public static int nextUserNumber = 1; //Assign to username for next connecting user
-
-  public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
-
   private void run() {
-
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
@@ -82,35 +74,43 @@ public final class Main {
     OptionSet options = parser.parse(args);
 
     objectOrganizer = new ObjectOrganizer();
-    this.repl = new REPL(new BufferedReader(new InputStreamReader(System.in)), objectOrganizer);
-    this.repl.addCommand(new LoadDatabase());
-    this.repl.addCommand(new PrintStudentsCommand());
-    this.repl.addCommand(new InsertRowCommand());
-    this.repl.addCommand(new UpdateRowCommand());
-    this.repl.addCommand(new DeleteRowCommand());
+    REPL repl = new REPL(new BufferedReader(new InputStreamReader(System.in)), objectOrganizer);
+
+    repl.addCommand(new LoadDatabase());
+    repl.addCommand(new PrintStudentsCommand());
+    repl.addCommand(new InsertRowCommand());
+    repl.addCommand(new UpdateRowCommand());
+    repl.addCommand(new DeleteRowCommand());
 
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
 
     try {
-      this.repl.run();
+      repl.run();
     } catch (Exception e) {
       System.out.println("ERROR: Could not run REPL");
     }
-
   }
 
   private static void runSparkServer(int port) {
+    // new stuff
+    String localHost = "127.0.0.1";
+    Spark.ipAddress(localHost);
+
     Spark.port(port);
     Spark.externalStaticFileLocation("src/main/resources/static");
+
+
+    // web sockets
 
     String localhost = "127.0.0.1";
     Spark.ipAddress(localhost);
 
     FreeMarkerEngine engine = createEngine();
     Spark.webSocket("", SocketHandler.class);
-    Spark.get("", new Main.HomePage(), engine);
+    Spark.get("", new HomePage(), engine);
+
     Spark.init();
 
     Spark.options("/*", (request, response) -> {
@@ -120,7 +120,6 @@ public final class Main {
       }
 
       String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-
       if (accessControlRequestMethod != null) {
         response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
       }
@@ -139,7 +138,22 @@ public final class Main {
     Spark.init();
   }
 
-  //Sends a message from one user to all users, along with a list of current usernames
+  private static FreeMarkerEngine createEngine() {
+    Configuration config = new Configuration(DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+    File templates = new File("src/main/resources/public");
+
+    try {
+      config.setDirectoryForTemplateLoading(templates);
+
+    } catch (IOException ioe) {
+      System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
+      System.exit(1);
+    }
+
+    return new FreeMarkerEngine(config);
+  }
+
+  // sends a message from one user to all users, along with a list of current usernames
   public static void broadcastMessage(String sender, String message) {
     List<Session> sessionsToSend = new ArrayList<>();
     List<String> usersList = new ArrayList<>();
@@ -149,34 +163,21 @@ public final class Main {
       usersList.add(user.getUserName());
     }
 
-    sessionsToSend.stream().filter(Session::isOpen).forEach(session ->{
+    sessionsToSend.stream().filter(Session::isOpen).forEach(session -> {
       try {
         session.getRemote().sendString(String.valueOf(new JSONObject()
             .put("userlist", usersList)
         ));
+
       } catch (Exception e) {
         e.printStackTrace();
       }
     });
-
-  }
-
-  private static FreeMarkerEngine createEngine() {
-    Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-    File templates = new File("src/main/resources/public");
-    try {
-      config.setDirectoryForTemplateLoading(templates);
-    } catch (IOException ioe) {
-      System.out.printf("ERROR: Unable use %s for template loading.%n", templates);
-      System.exit(1);
-    }
-    return new FreeMarkerEngine(config);
   }
 
   public static class HomePage implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request request, Response response) throws Exception {
-      // TODO Auto-generated method stub
       return new ModelAndView(null, "websocket.ftl");
     }
   }

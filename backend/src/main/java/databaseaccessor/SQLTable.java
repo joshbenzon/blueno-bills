@@ -1,9 +1,7 @@
-package edu.brown.cs.student.main.databaseaccessor;
+package databaseaccessor;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Map;
