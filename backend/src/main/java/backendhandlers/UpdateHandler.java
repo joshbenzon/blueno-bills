@@ -18,7 +18,7 @@ public class UpdateHandler implements Route {
   private final ObjectOrganizer objectOrganizer;
 
   public UpdateHandler(ObjectOrganizer objectOrganizer) {
-  this.objectOrganizer = objectOrganizer;
+    this.objectOrganizer = objectOrganizer;
   }
 
   @Override
@@ -39,10 +39,12 @@ public class UpdateHandler implements Route {
     String sqlString = this.buildSqlString(tableName, conditionsMap, colNameToNewVal);
     System.out.println("SQL: " + sqlString);
     DatabaseProxy db = new DatabaseProxy(objectOrganizer.getFileName());
+
     int updateQueryRes = db.executeWCommands(sqlString);
     if (updateQueryRes == -1) { //means an error was thrown
       return GSON.toJson("ERROR: was not able to execute update command");
     }
+
     db.closeConn();
     return GSON.toJson("Success");
   }

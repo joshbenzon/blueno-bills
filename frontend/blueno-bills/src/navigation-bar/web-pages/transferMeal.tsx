@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 import {useForm} from "react-hook-form";
 
 import axios from 'axios';
+
 import { useState } from 'react';
 
 
@@ -36,48 +37,70 @@ function TransferMeal(props:TransferMealProp){
                 console.log(response.data);
             })
     
+
             .catch((error: any) => {
                 console.log(error);
             });
     }
 
     return (
-        <div className={"web-page"}>
-
-            <div className="transfer-meal-info">
+        <React.Fragment>
+            <div className="page-info">
                 <h1>Transfer: Meal Credits</h1>
             </div>
 
-            <form onSubmit={handleSubmit(UpdateRequest)}>
+            <div className={"page-buttons"}>
+                <form onSubmit={handleSubmit(UpdateRequest)}>
 
-                <div>
-                    To Who:
-                    <input type="text" {...register("name",
-                        {required: true, maxLength: 20, pattern: /^[A-Za-z]+$/i})} />
-                    {errors.name && "Required!"}
-                </div>
+                    <div className="input-group">
+                        <div>To Who*:</div>
 
-                <div>
-                    Description:
-                    <input type="text" {...register("description", {maxLength: 100})} />
-                </div>
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            {...register("name", {
+                                required: true,
+                                maxLength: 20,
+                                pattern: /^[A-Za-z]+$/i,
+                            })}
+                        />
+                        <div className="error-message">{errors.name && "Required!"}</div>
+                    </div>
 
-                <div>
-                    Amount:
-                    <input type="number" {...register("amount", {required: true, min: 0, max: 20})} />
-                    {errors.amount && "Required and Must Be in Bounds!"}
-                </div>
+                    <div className="input-group">
+                        <div>Description:</div>
 
-                <div>
-                    <button className="sending-button" type="submit">
-                        Submit
-                    </button>
-                </div>
+                        <input
+                            type="text"
+                            placeholder="Optional"
+                            {...register("description", {maxLength: 100})}
+                        />
+                    </div>
 
-            </form>
+                    <div className="input-group">
+                        <div>Amount*:</div>
 
-        </div>
+                        <input
+                            type="number"
+                            placeholder="Between 1-20"
+                            {...register("amount", {required: true, min: 1, max: 20})}
+                        />
+                        <div className="error-message">{errors.amount && "Required!"}</div>
+                    </div>
+
+                    <div className="input-group">
+                        <button className="sending-button" type="submit">
+                            Transfer!
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+        </React.Fragment>
     );
-};
+}
 
 export default TransferMeal;
