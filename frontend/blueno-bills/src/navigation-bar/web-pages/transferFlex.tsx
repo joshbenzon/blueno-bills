@@ -1,6 +1,17 @@
 import React from 'react';
+interface Row{
+    StudentID: string;
+    email:string;
+    mealSwipes:string;
+    flexPoints:string;
+    bearBucks:string;
+}
 
-const TransferFlex = () => {
+interface TableProp  {
+    tableHeaders : string[] | null;
+    rows : Row[] | null;
+}
+function TransferFlex(props: TableProp){
     return (
         <div
             style={{

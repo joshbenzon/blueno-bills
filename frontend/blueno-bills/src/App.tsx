@@ -96,14 +96,14 @@ function App() {
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/logout" element={<LogOut/>}/>
 
-                <Route path="/requestMeal" element={<RequestMeal/>}/>
-                <Route path="/requestFlex" element={<RequestFlex/>}/>
-                <Route path="/requestBear" element={<RequestBear/>}/>
+                <Route path="/requestMeal" element={<RequestMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
+                <Route path="/requestFlex" element={<RequestFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
+                <Route path="/requestBear" element={<RequestBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
 
 
                 <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/transferFlex" element={<TransferFlex/>}/>
-                <Route path="/transferBear" element={<TransferBear/>}/>
+                <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
+                <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
             </Routes>
         </Router>
     );
