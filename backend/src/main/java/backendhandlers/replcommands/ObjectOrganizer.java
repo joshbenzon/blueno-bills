@@ -1,7 +1,7 @@
-package edu.brown.cs.student.main.replcommands;
+package backendhandlers.replcommands;
 
 
-import edu.brown.cs.student.main.databaseaccessor.SQLTable;
+import databaseaccessor.SQLTable;
 
 /**
  * This is the ObjectOrganizer! This class represents "dependency injection," which allows all

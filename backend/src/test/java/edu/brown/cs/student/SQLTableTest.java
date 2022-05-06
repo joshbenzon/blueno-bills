@@ -1,6 +1,6 @@
 package edu.brown.cs.student;
 
-import edu.brown.cs.student.main.databaseaccessor.SQLTable;
+import databaseaccessor.SQLTable;
 import org.junit.Test;
 
 import java.util.ArrayList;

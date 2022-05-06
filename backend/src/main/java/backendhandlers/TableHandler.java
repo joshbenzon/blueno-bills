@@ -1,9 +1,9 @@
-package edu.brown.cs.student.main.backendhandlers;
+package backendhandlers;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.main.databaseaccessor.DatabaseProxy;
-import edu.brown.cs.student.main.databaseaccessor.SQLTable;
-import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
+import databaseaccessor.DatabaseProxy;
+import databaseaccessor.SQLTable;
+import backendhandlers.replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
 import spark.Route;

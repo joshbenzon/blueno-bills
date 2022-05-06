@@ -1,8 +1,8 @@
-package edu.brown.cs.student.main.backendhandlers;
+package backendhandlers;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.main.databaseaccessor.DatabaseProxy;
-import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
+import databaseaccessor.DatabaseProxy;
+import backendhandlers.replcommands.ObjectOrganizer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

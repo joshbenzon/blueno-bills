@@ -1,21 +1,22 @@
-package edu.brown.cs.student.main.replcommands;
+package backendhandlers.replcommands;
 
 
-import edu.brown.cs.student.main.client.ClientRequestGenerator;
+import client.ClientRequestGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class is for testing purposes to see if a POST request to my /update endpoint works.
+ * This class is for testing purposes and uses a REPL command to test that a POST request to the
+ * /delete endpoint works.
  */
-public class UpdateRowCommand implements Command {
+public class DeleteRowCommand implements Command {
   /**
-   * @return the REPL command name
+   * @return the name of this REPL command
    */
   @Override
   public String getName() {
-    return "update-row";
+    return "delete-row";
   }
 
   /**
@@ -27,9 +28,8 @@ public class UpdateRowCommand implements Command {
   public void run(String[] args, ObjectOrganizer objectOrganizer) throws Exception {
     String tableName = "Students";
     Map<String, String> conditions = new HashMap<>();
-    Map<String, String> oldColToNewVals = new HashMap<>();
-    oldColToNewVals.put("mealSwipes", "99");
+    //SQL Command: DELETE FROM horoscopes WHERE horoscope_id = '13'
     conditions.put("StudentID", "8");
-    ClientRequestGenerator.makeUpdatePostRequest(tableName, oldColToNewVals, conditions);
+    ClientRequestGenerator.makeDeletePostRequest(tableName, conditions);
   }
 }

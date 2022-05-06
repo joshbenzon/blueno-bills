@@ -1,7 +1,7 @@
 package edu.brown.cs.student;
 
 
-import edu.brown.cs.student.main.databaseaccessor.DatabaseProxy;
+import databaseaccessor.DatabaseProxy;
 import org.junit.Test;
 
 import java.sql.SQLException;

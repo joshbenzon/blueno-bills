@@ -1,16 +1,16 @@
 package edu.brown.cs.student.main;
 
-import edu.brown.cs.student.main.backendhandlers.DeleteHandler;
-import edu.brown.cs.student.main.backendhandlers.InsertRowHandler;
-import edu.brown.cs.student.main.backendhandlers.TableHandler;
-import edu.brown.cs.student.main.backendhandlers.UpdateHandler;
-import edu.brown.cs.student.main.replcommands.DeleteRowCommand;
-import edu.brown.cs.student.main.replcommands.InsertRowCommand;
-import edu.brown.cs.student.main.replcommands.LoadDatabase;
-import edu.brown.cs.student.main.replcommands.ObjectOrganizer;
-import edu.brown.cs.student.main.replcommands.PrintStudentsCommand;
-import edu.brown.cs.student.main.replcommands.REPL;
-import edu.brown.cs.student.main.replcommands.UpdateRowCommand;
+import backendhandlers.DeleteHandler;
+import backendhandlers.InsertRowHandler;
+import backendhandlers.TableHandler;
+import backendhandlers.UpdateHandler;
+import backendhandlers.replcommands.DeleteRowCommand;
+import backendhandlers.replcommands.InsertRowCommand;
+import backendhandlers.replcommands.LoadDatabase;
+import backendhandlers.replcommands.ObjectOrganizer;
+import backendhandlers.replcommands.PrintStudentsCommand;
+import backendhandlers.replcommands.REPL;
+import backendhandlers.replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -29,8 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static j2html.TagCreator.article;
 import static j2html.TagCreator.attrs;

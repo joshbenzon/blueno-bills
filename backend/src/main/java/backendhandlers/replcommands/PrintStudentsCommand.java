@@ -1,7 +1,7 @@
-package edu.brown.cs.student.main.replcommands;
+package backendhandlers.replcommands;
 
 
-import edu.brown.cs.student.main.databaseaccessor.DatabaseProxy;
+import databaseaccessor.DatabaseProxy;
 
 import java.sql.ResultSet;
 
