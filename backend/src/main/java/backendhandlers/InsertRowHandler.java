@@ -2,10 +2,10 @@ package backendhandlers;
 
 import com.google.gson.Gson;
 import databaseaccessor.DatabaseProxy;
+import replcommands.ObjectOrganizer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -141,4 +141,6 @@ public class InsertRowHandler implements Route {
     return String.valueOf(insertQuery);
   }
 
+
 }
+

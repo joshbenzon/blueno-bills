@@ -24,8 +24,6 @@ public class UpdateHandler implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     JSONObject reqData = new JSONObject(request.body());
-    System.out.println(reqData + " ITZY");
-
     String tableName = reqData.getString("tableName");
     JSONObject colNameToOldValJSON = reqData.getJSONObject("conditions");
 

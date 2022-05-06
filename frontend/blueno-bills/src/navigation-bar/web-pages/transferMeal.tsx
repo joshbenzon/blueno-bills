@@ -2,8 +2,8 @@ import React from "react";
 import {useForm} from "react-hook-form";
 
 import axios from 'axios';
-import {useState} from 'react';
 
+<<<<<<< HEAD
 // inputs as props in console.log
 
 interface TransferMealProps {
@@ -22,11 +22,25 @@ function TransferMeal(props: TransferMealProps) {
     const [inputName, setInputName] = useState<string | null>(null);
     const [inputDescription, setInputDescription] = useState<string | null>(null);
     const [inputAmount, setInputAmount] = useState<number | null>(null);
+=======
+import { useState } from 'react';
 
+
+
+
+interface TransferMealProp{
+    tableHeaders: string[]|null;
+    rows: string[][]|null;
+}
+>>>>>>> c30b94d36fabac056f3270980f7b0d085a07fe50
+
+function TransferMeal(props:TransferMealProp){
     const {register, handleSubmit, formState: {errors}} = useForm();
+    // const onSubmit = (data: any) => UpdateRequest;  // stores in map
 
-    const onSubmit = (data: any) => console.log(data); // stores in map
 
+
+<<<<<<< HEAD
     const updateInputs = (event: any) => {
         setInputName(event.target)
         console.log(event.target)
@@ -37,26 +51,26 @@ function TransferMeal(props: TransferMealProps) {
         console.log("headers: " + props.tableHeaders);
         console.log("rows: " + props.rows);
 
+=======
+    const UpdateRequest = () => {
+        console.log("headers: " + props.tableHeaders);
+        console.log("rows: " + props.rows);
+>>>>>>> c30b94d36fabac056f3270980f7b0d085a07fe50
         const request = 'http://localhost:4567/update';  // 1) location for request
-
-        const toSend = {  // 2) your data
-            "tableName": props.tableName,
-            "tableHeaders": props.tableHeaders,
-            "rows": props.rows
-        }
-
+    
         let config = {  // 3) configuration
             headers: {
                 "Content-Type": "application/json",
                 'Access-Control-Allow-Origin': '*',
             }
         }
-
-        axios.post(request, toSend, config)
-
+    
+        axios.post(request, config)
+    
             .then((response: any) => {
                 console.log(response.data);
             })
+    
 
             .catch((error: any) => {
                 console.log(error);
@@ -116,6 +130,12 @@ function TransferMeal(props: TransferMealProps) {
                 </form>
             </div>
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> c30b94d36fabac056f3270980f7b0d085a07fe50
         </React.Fragment>
     );
 }
