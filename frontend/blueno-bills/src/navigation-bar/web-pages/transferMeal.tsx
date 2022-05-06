@@ -1,149 +1,114 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 
 import axios from 'axios';
-import { useState } from 'react';
+import {useState} from 'react';
 
-interface TransferMealProp{
-  tableHeaders: string[]|null;
-  rows: string[][]|null;
+import { useTable } from 'react-table';
+
+interface TransferMealProp {
+    tableName: string | null;
+    tableHeaders: string[] | null;
+    rows: string[][] | null;
 }
 
-function TransferMeal(props:TransferMealProp){
-  const {register, handleSubmit, formState: {errors}} = useForm();
-  // const onSubmit = (data: any) => UpdateRequest;  // stores in map
+function TransferMeal(props: TransferMealProp) {
+    const tableData: string[][] | null = props.rows;
 
-  const UpdateRequest = () => {
-    console.log("headers: " + props.tableHeaders);
-    console.log("rows: " + props.rows);
-    const request = 'http://localhost:4567/update';  // 1) location for request
+    const {register, handleSubmit, formState: {errors}} = useForm();
 
-    let config = {  // 3) configuration
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      }
+    const onSubmit = (data: any) => console.log(data); // stores in map
+
+    const UpdateRequest = () => {  // makes post request
+        console.log("name: " + props.tableName)
+        console.log("headers: " + props.tableHeaders);
+        console.log("rows: " + props.rows);
+        // console.log("rows length: " + props.rows?.length);
+        // console.log("rows values: " + props.rows?.at(1));
+
+        const request = 'http://localhost:4567/update';  // 1) location for request
+
+        const toSend = {  // 2) your data
+            "tableName": props.tableName,
+            "tableHeaders": props.tableHeaders,
+            "rows": props.rows
+        }
+
+        let config = {  // 3) configuration
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*',
+            }
+        }
+
+        axios.post(request, toSend, config)
+
+            .then((response: any) => {
+                console.log(response.data);
+            })
+
+            .catch((error: any) => {
+                console.log(error);
+            });
     }
 
-    axios.post(request, config)
+    return (
+        <React.Fragment>
+            <div className="page-info">
+                <h1>Transfer: Meal Credits</h1>
+            </div>
 
-        .then((response: any) => {
-          console.log(response.data);
-        })
+            <div className={"page-buttons"}>
+                <form onSubmit={handleSubmit(UpdateRequest)}>
 
-        .catch((error: any) => {
-          console.log(error);
-        });
-  }
+                    <div className="input-group">
+                        <div>To Who*:</div>
 
-const onSubmit = (data: any) => console.log(data); // stores in map
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            {...register("name", {
+                                required: true,
+                                maxLength: 20,
+                                pattern: /^[A-Za-z]+$/i,
+                            })}
+                        />
+                        <div className="error-message">{errors.name && "Required!"}</div>
+                    </div>
 
-// const TableRequest = () => {
-//   const request = "http://localhost:4567/table"; // 1) location for request
+                    <div className="input-group">
+                        <div>Description:</div>
 
-//   let config = {
-//     // 3) configuration
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//     },
-//   };
+                        <input
+                            type="text"
+                            placeholder="Optional"
+                            {...register("description", {maxLength: 100})}
+                        />
+                    </div>
 
-//   axios
-//     .get(request, config)
+                    <div className="input-group">
+                        <div>Amount*:</div>
 
-//     .then((response: any) => {
-//       console.log(response.data);
-//     })
+                        <input
+                            type="number"
+                            placeholder="Between 1-20"
+                            {...register("amount", {required: true, min: 1, max: 20})}
+                        />
+                        <div className="error-message">{errors.amount && "Required!"}</div>
+                    </div>
 
-//     .catch((error: any) => {
-//       console.log(error);
-//     });
-// };
+                    <div className="input-group">
+                        <button className="sending-button" type="submit">
+                            Transfer!
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-// const UpdateRequest = () => {
-//   const request = "http://localhost:4567/update"; // 1) location for request
 
-//   let config = {
-//     // 3) configuration
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//     },
-//   };
 
-//   axios
-//     .post(request, config)
-
-//     .then((response: any) => {
-//       console.log(response.data);
-//     })
-
-//     .catch((error: any) => {
-//       console.log(error);
-//     });
-// };
-
-// const TransferMeal = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
-
-  return (
-    <React.Fragment>
-      <div className="page-info">
-        <h1>Transfer: Meal Credits</h1>
-      </div>
-
-      <div className={"page-buttons"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group">
-            <div>To Who*:</div>
-
-            <input
-              type="text"
-              placeholder="Name"
-              {...register("name", {
-                required: true,
-                maxLength: 20,
-                pattern: /^[A-Za-z]+$/i,
-              })}
-            />
-            <div className="error-message">{errors.name && "Required!"}</div>
-          </div>
-
-          <div className="input-group">
-            <div>Description:</div>
-
-            <input
-              type="text"
-              placeholder="Optional"
-              {...register("description", { maxLength: 100 })}
-            />
-          </div>
-
-          <div className="input-group">
-            <div>Amount*:</div>
-
-            <input
-              type="number"
-              placeholder="Between 1-20"
-              {...register("amount", { required: true, min: 1, max: 20 })}
-            />
-            <div className="error-message">{errors.amount && "Required!"}</div>
-          </div>
-
-          <div className="input-group">
-            <button className="sending-button" type="submit">
-              Transfer!
-            </button>
-          </div>
-        </form>
-      </div>
-    </React.Fragment>
-  );
+        </React.Fragment>
+    );
 }
 
 export default TransferMeal;
