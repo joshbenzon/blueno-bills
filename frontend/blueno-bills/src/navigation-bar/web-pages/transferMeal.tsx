@@ -2,50 +2,41 @@ import React from "react";
 import {useForm} from "react-hook-form";
 
 import axios from 'axios';
-import {useState} from 'react';
 
-// import { useTable } from 'react-table';
+import { useState } from 'react';
 
-interface TransferMealProp {
-    tableName: string | null;
-    tableHeaders: string[] | null;
-    rows: string[][] | null;
+
+
+
+interface TransferMealProp{
+    tableHeaders: string[]|null;
+    rows: string[][]|null;
 }
 
-function TransferMeal(props: TransferMealProp) {
-    const tableData: string[][] | null = props.rows;
-
+function TransferMeal(props:TransferMealProp){
     const {register, handleSubmit, formState: {errors}} = useForm();
+    // const onSubmit = (data: any) => UpdateRequest;  // stores in map
 
-    const onSubmit = (data: any) => console.log(data); // stores in map
 
-    const UpdateRequest = () => {  // makes post request
-        console.log("name: " + props.tableName)
+
+    const UpdateRequest = () => {
         console.log("headers: " + props.tableHeaders);
         console.log("rows: " + props.rows);
-        // console.log("rows length: " + props.rows?.length);
-        // console.log("rows values: " + props.rows?.at(1));
-
         const request = 'http://localhost:4567/update';  // 1) location for request
-
-        const toSend = {  // 2) your data
-            "tableName": props.tableName,
-            "tableHeaders": props.tableHeaders,
-            "rows": props.rows
-        }
-
+    
         let config = {  // 3) configuration
             headers: {
                 "Content-Type": "application/json",
                 'Access-Control-Allow-Origin': '*',
             }
         }
-
-        axios.post(request, toSend, config)
-
+    
+        axios.post(request, config)
+    
             .then((response: any) => {
                 console.log(response.data);
             })
+    
 
             .catch((error: any) => {
                 console.log(error);
@@ -104,6 +95,7 @@ function TransferMeal(props: TransferMealProp) {
                     </div>
                 </form>
             </div>
+
 
 
 

@@ -98,7 +98,9 @@ public class DatabaseProxy {
    * @return the connection
    * This method is for JUnit testing purposes to ensure my connection is closed when I want it to be
    */
-  public Connection getConn() {
+
+  public Connection getConn(){
+
     return conn;
   }
 
