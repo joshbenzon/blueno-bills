@@ -1,7 +1,40 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import axios from "axios";
+import axios from 'axios';
+import { useState } from 'react';
+
+interface TransferMealProp{
+  tableHeaders: string[]|null;
+  rows: string[][]|null;
+}
+
+function TransferMeal(props:TransferMealProp){
+  const {register, handleSubmit, formState: {errors}} = useForm();
+  // const onSubmit = (data: any) => UpdateRequest;  // stores in map
+
+  const UpdateRequest = () => {
+    console.log("headers: " + props.tableHeaders);
+    console.log("rows: " + props.rows);
+    const request = 'http://localhost:4567/update';  // 1) location for request
+
+    let config = {  // 3) configuration
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+      }
+    }
+
+    axios.post(request, config)
+
+        .then((response: any) => {
+          console.log(response.data);
+        })
+
+        .catch((error: any) => {
+          console.log(error);
+        });
+  }
 
 const onSubmit = (data: any) => console.log(data); // stores in map
 
@@ -51,12 +84,12 @@ const onSubmit = (data: any) => console.log(data); // stores in map
 //     });
 // };
 
-const TransferMeal = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+// const TransferMeal = () => {
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm();
 
   return (
     <React.Fragment>
@@ -111,6 +144,6 @@ const TransferMeal = () => {
       </div>
     </React.Fragment>
   );
-};
+}
 
 export default TransferMeal;
