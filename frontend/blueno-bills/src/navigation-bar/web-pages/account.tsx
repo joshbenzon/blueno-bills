@@ -1,8 +1,6 @@
 import React from "react";
 import BluenoTable from "../tablecomponent/BluenoTable";
 
-
-
 interface Row{
   StudentID: string;
   email:string;
