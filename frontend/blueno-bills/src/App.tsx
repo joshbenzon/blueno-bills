@@ -80,7 +80,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/request" element={<Request />} />
-        <Route path="/settings" element={<Settings />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/menu" element={<Menu />} />
         <Route
