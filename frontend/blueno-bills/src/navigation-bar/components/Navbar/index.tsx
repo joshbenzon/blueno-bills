@@ -19,7 +19,7 @@ const Navbar = () => {
           <NavLink to="/transfer">Transfer</NavLink>
           <NavLink to="/menu">Menus</NavLink>
           <NavLink to="/account">Account</NavLink>
-          <NavLink to="/settings">Settings</NavLink>
+          {/* <NavLink to="/settings">Settings</NavLink> */}
         </NavMenu>
 
         <NavBtn>

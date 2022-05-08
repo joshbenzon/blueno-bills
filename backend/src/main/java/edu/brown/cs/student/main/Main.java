@@ -54,6 +54,8 @@ import java.util.List;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The Main class of our project. This is where execution begins.
@@ -79,6 +81,16 @@ public final class Main {
   public static void main(String[] args) {
     new Main(args).run();
     runSparkServer(DEFAULT_PORT);
+    
+    // user auth
+    IDandPassword iDandPassword = new IDandPassword();
+    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
+  }
+
+  private final String[] args;
+
+  private Main(String[] args) {
+    this.args = args;
   }
 
   private void run() {

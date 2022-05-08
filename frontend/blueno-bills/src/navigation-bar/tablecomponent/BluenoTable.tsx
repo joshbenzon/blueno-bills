@@ -1,6 +1,3 @@
-
-
-
 interface Row{
     StudentID: string;
     email:string;

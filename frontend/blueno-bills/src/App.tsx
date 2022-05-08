@@ -1,16 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Navbar from './navigation-bar/components/Navbar'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Navbar from "./navigation-bar/components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Account from './navigation-bar/web-pages/account';
-import Home from './navigation-bar/web-pages/home';
-import Menu from './navigation-bar/web-pages/menu';
-import Request from './navigation-bar/web-pages/request';
-import Settings from './navigation-bar/web-pages/settings';
-import LogOut from './navigation-bar/web-pages/logout';
-import Transfer from './navigation-bar/web-pages/transfer';
+import Account from "./navigation-bar/web-pages/account";
+import Home from "./navigation-bar/web-pages/home";
+import Menu from "./navigation-bar/web-pages/menu";
+import Request from "./navigation-bar/web-pages/request";
+import Settings from "./navigation-bar/web-pages/settings";
+import LogOut from "./navigation-bar/web-pages/logout";
+import Transfer from "./navigation-bar/web-pages/transfer";
 
 import RequestMeal from "./navigation-bar/web-pages/requestMeal";
 import RequestFlex from "./navigation-bar/web-pages/requestFlex";
@@ -20,31 +20,31 @@ import TransferMeal from "./navigation-bar/web-pages/transferMeal";
 import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
 
-
-import {useState} from 'react';
-import {useEffect} from 'react';
+import { useState } from "react";
+import { useEffect } from "react";
 
 interface Row {
-    StudentID: string;
-    email: string;
-    mealSwipes: string;
-    flexPoints: string;
-    bearBucks: string;
+  StudentID: string;
+  email: string;
+  mealSwipes: string;
+  flexPoints: string;
+  bearBucks: string;
 }
 
 interface database {
-    // each table is a slot in the array
-    name: string;
+  // each table is a slot in the array
+  name: string;
 
-    // each table is a slot in the outer array, each header for a table is a slot in the inner array
-    headers: string[];
+  // each table is a slot in the outer array, each header for a table is a slot in the inner array
+  headers: string[];
 
-    // each table is a slot in the outer array, each header for a table is a slot in the inner array, each value for a
-    // header is a slot in the inner-inner array
-    rows: Row[];
+  // each table is a slot in the outer array, each header for a table is a slot in the inner array, each value for a
+  // header is a slot in the inner-inner array
+  rows: Row[];
 }
 
 function App() {
+
     const [tableName, setTableName] = useState<string | null>(null);
 
     const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
@@ -107,6 +107,7 @@ function App() {
             </Routes>
         </Router>
     );
+
 }
 
 export default App;
