@@ -8,6 +8,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +42,6 @@ public class UpdateHandler implements Route {
     DatabaseProxy db = new DatabaseProxy(objectOrganizer.getFileName());
 
     int updateQueryRes = db.executeWCommands(sqlString);
-    if (updateQueryRes == -1) { //means an error was thrown
-      return GSON.toJson("ERROR: was not able to execute update command");
-    }
 
     db.closeConn();
     return GSON.toJson("Success");

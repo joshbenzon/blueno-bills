@@ -35,13 +35,28 @@ public class DatabaseProxy {
    * to execute the passed in command.
    */
   public ResultSet executeSQLCommand(String sql) throws SQLException {
+
+    PreparedStatement roleFinder = null;
     try {
-      PreparedStatement roleFinder = conn.prepareStatement(sql);
-      return roleFinder.executeQuery();
+      roleFinder = conn.prepareStatement(sql);
+      if(roleFinder!= null && roleFinder.execute())
+      return roleFinder.getResultSet();
     } catch (SQLException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
     return null;
+//    if (conn == null) {
+//      throw new IllegalStateException("ERROR: Cannot prepare statement before db is loaded.");
+//    }
+//    PreparedStatement command = conn.prepareStatement(sql);
+//    if (command != null && command.execute()) {
+//
+//      return command.getResultSet();
+//    } else {
+//      command.close();
+//      return null;
+//    }
+
   }
 
   /**
@@ -112,11 +127,21 @@ public class DatabaseProxy {
    * This method executes my commands with W/RW permissions.
    */
   public int executeWCommands(String sql) {
+
+    PreparedStatement roleFinder = null;
     try {
-      PreparedStatement roleFinder = conn.prepareStatement(sql);
+      roleFinder = conn.prepareStatement(sql);
       return roleFinder.executeUpdate();
     } catch (SQLException e) {
       System.out.println("ERROR: " + e.getMessage());
+    } finally {
+      try {
+        if (roleFinder != null) {
+          roleFinder.close();
+        }
+      } catch (SQLException throwables) {
+        throwables.printStackTrace();
+      }
     }
     return -1;
   }

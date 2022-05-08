@@ -75,13 +75,15 @@ function TransferMeal(props: TransferMealProp) {
   }
 
   const UpdateRequest = () => {
+
+    console.log("enters POST")
     storeInputData();
     //here we are updating the mealSwipes column in the StudentData table
     //decrementing the current user's meal swipes by 1 since they are transferring
     const body: string =
       '{"tableName": ' +
       '"' +
-      "StudentData" +
+      "Students" +
       '"' +
       ', "colNameToNewVal" : {' +
       '"' +
@@ -114,39 +116,18 @@ function TransferMeal(props: TransferMealProp) {
 
     //we need another POST request to update the values of the user who was sent the meal swipe
 
-    const recipientBody: string =
-      '{"tableName": ' +
-      '"' +
-      "StudentData" +
-      '"' +
-      ', "colNameToNewVal" : {' +
-      '"' +
-      "mealSwipes" +
-      '"' +
-      " : " +
-      '"' +
-      newRecipientMealSwipes +
-      '"' +
-      '}, "conditions" : {' +
-      '"' +
-      "email" +
-      '"' +
-      " : " +
-      '"' +
-      inputEmail +
-      '"' +
-      "}}";
+    const recipientBody :string =  "{\"tableName\": " + "\"" + "Students" + "\"" + ", \"colNameToNewVal\" : {" +  "\"" +"mealSwipes" + "\"" + " : " 
+        + "\""+ newRecipientMealSwipes + "\"" + "}, \"conditions\" : {" 
+        + "\"" + "email" + "\"" + " : "  + "\"" + inputEmail + "\""+ "}}"
 
-    const requestOptionsRecipient = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: body,
-    };
-    console.log("req body: " + requestOptions.body);
-    fetch("http://localhost:4567/update", requestOptions).then((response) => {
-      response.json();
-      console.log("response: " + response.status);
-    });
+        const requestOptionsRecipient = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: recipientBody
+        };
+        console.log("req body: " + requestOptionsRecipient.body)
+        fetch('http://localhost:4567/update', requestOptionsRecipient)
+            .then(response => {response.json();console.log("response: " + response.status)})
   };
 
   return (
