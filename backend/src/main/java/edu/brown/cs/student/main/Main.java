@@ -77,6 +77,16 @@ public final class Main {
   public static void main(String[] args) {
     new Main(args).run();
     runSparkServer(DEFAULT_PORT);
+    
+    // user auth
+    IDandPassword iDandPassword = new IDandPassword();
+    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
+  }
+
+  private final String[] args;
+
+  private Main(String[] args) {
+    this.args = args;
   }
 
   private void run() {
