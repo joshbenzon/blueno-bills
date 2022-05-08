@@ -1,7 +1,5 @@
 package edu.brown.cs.student.main;
 
-//import javafx.scene.paint.Color;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,8 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-//import javafx.scene.paint.Color;
-//import java.awt.Color;
+import java.awt.Color;
 
 public class LoginFrontEnd implements ActionListener {
   JFrame jFrame = new JFrame();
@@ -65,18 +62,17 @@ public class LoginFrontEnd implements ActionListener {
       insertUserName.setText("");
       insertPassword.setText("");
     }
-
     if(e.getSource() == loginButton) {
       String id = insertUserName.getText();
-      String pass = String.valueOf(insertPassword.getPassword());
+      String password = String.valueOf(insertPassword.getPassword());
       if(loginInfo.containsKey(id)) {
-        if(loginInfo.get(id).equals(pass)) {
-          //message.setForeground(Color.BLUE);
+        if(loginInfo.get(id).equals(password)) {
+          message.setForeground(Color.BLUE);
           message.setText("You have Logged In");
           jFrame.dispose();
           UserAuthPage welcome = new UserAuthPage(id);
         } else {
-          //message.setForeground(Color.RED);
+          message.setForeground(Color.RED);
           message.setText("Incorrect Password");
         }
       } else {

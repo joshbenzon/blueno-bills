@@ -18,6 +18,5 @@ public class UserAuthPage {
     jFrame.setSize(600, 600);
     jFrame.setLayout(null);
     jFrame.setVisible(true);
-
   }
 }
