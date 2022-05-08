@@ -20,6 +20,19 @@
   <!-- Dependencies section for libraries put all of your libraries in here -->
   <dependencies>
 
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+
     <!--
         jopt-simple is a command line parser.
         https://pholser.github.io/jopt-simple/.

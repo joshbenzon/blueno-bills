@@ -23,6 +23,7 @@ interface InputProp {
   amount: number | null;
 }
 
+
 function TransferMeal(props: TransferMealProp) {
   const [inputName, setInputName] = useState<string | null>(null);
   const [inputDescription, setInputDescription] = useState<string | null>(null);
@@ -138,6 +139,7 @@ function TransferMeal(props: TransferMealProp) {
       </div>
     </React.Fragment>
   );
+
 }
 
 export default TransferMeal;

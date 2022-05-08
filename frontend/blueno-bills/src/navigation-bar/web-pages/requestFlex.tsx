@@ -1,6 +1,17 @@
 import React from 'react';
+interface Row{
+    StudentID: string;
+    email:string;
+    mealSwipes:string;
+    flexPoints:string;
+    bearBucks:string;
+}
 
-const RequestFlex = () => {
+interface TableProp  {
+    tableHeaders : string[] | null;
+    rows : Row[] | null;
+}
+function RequestFlex(props: TableProp) {
     return (
         <div
             style={{

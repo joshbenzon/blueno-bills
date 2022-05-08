@@ -1,6 +1,20 @@
 import React from 'react';
 
-const TransferBear = () => {
+interface Row{
+    StudentID: string;
+    email:string;
+    mealSwipes:string;
+    flexPoints:string;
+    bearBucks:string;
+}
+
+interface TableProp  {
+    tableHeaders : string[] | null;
+    rows : Row[] | null;
+}
+
+function TransferBear(props: TableProp){
+
     return (
         <div
             style={{
