@@ -1,0 +1,5 @@
+INPUT
+load-database ../data/StudentData.sqlite3
+OUTPUT
+Success! ../data/StudentData.sqlite3 loaded to the backend.
+END
