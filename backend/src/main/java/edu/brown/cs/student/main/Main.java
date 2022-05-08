@@ -87,15 +87,8 @@ public final class Main {
     LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
-  private final String[] args;
-
-  private Main(String[] args) {
-    this.args = args;
-  }
-
   private void run() {
-
-    new WebScraper();
+//    new WebScraper();
 
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
