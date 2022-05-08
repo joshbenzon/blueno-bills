@@ -1,0 +1,127 @@
+@font-face {
+  font-family: Inter;
+  src: local(Inter), url("./fonts/Inter-SemiBold.ttf") format("truetype");
+}
+
+* {
+  font-family: Inter, serif;
+}
+
+.page-info {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.sending-button {
+  background: #4cc37b;
+  height: 50px;
+  width: 150px;
+  padding: 10px 27px;
+}
+
+.input-group {
+  padding: 10px;
+}
+
+input {
+  padding: 5px;
+  border: 2px solid #79acff;
+  border-radius: 5px;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  color: red;
+}
+
+form {
+  display: flex;
+}
+
+button {
+  height: 100px;
+  width: 200px;
+
+  align-items: center;
+  margin-right: 24px;
+
+  display: flex;
+  text-align: center;
+  font-size: 22px;
+
+  border-radius: 25px;
+  background: #79acff;
+  padding: 10px 50px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 24px;
+}
+
+button:hover {
+  transition: all 0.2s ease-in-out;
+  background: #ffffff;
+  color: #000814;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: #adccff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* credit: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: #0ebfe9;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #0ebfe9;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #0ebfe9;
+}
