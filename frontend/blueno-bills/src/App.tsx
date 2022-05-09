@@ -74,6 +74,7 @@ function App() {
     console.log("table values: " + rows);
   }, []);
 
+
   return (
     <Router>
       <Navbar />

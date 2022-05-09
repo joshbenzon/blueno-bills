@@ -65,9 +65,9 @@ public final class Main {
   public static int nextUserNumber = 1; // assign to username for next connecting user
   public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
-  private Main(String[] args) {
-    this.args = args;
-  }
+//  private Main(String[] args) {
+//    this.args = args;
+//  }
 
   /**
    * The initial method called when execution begins.
@@ -83,7 +83,7 @@ public final class Main {
     LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
-  private final String[] args;
+//  private final String[] args;
 
   private Main(String[] args) {
     this.args = args;
