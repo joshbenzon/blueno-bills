@@ -25,7 +25,13 @@ const gmailProvider = new GoogleAuthProvider();
 export const googleSignIn = () => {
     signInWithPopup(auth, gmailProvider)
         .then((result) => {
-            console.log(result);
+            const name = result.user.displayName;
+            const gmail = result.user.email;
+
+            // stores the information given to us from the Google auth somewhere
+            // on our browser to remember who is logged in
+            localStorage.setItem("name", name);
+            localStorage.setItem("gmail", gmail);
         })
         .catch((error) => {
             console.log(error);
