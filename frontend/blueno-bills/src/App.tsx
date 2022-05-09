@@ -44,38 +44,39 @@ interface database {
 }
 
 function App() {
-  const [tableName, setTableName] = useState<string | null>(null);
-  const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
-  const [rows, setRows] = useState<Row[] | null>(null);
+    const [tableName, setTableName] = useState<string | null>(null);
+    const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
+    const [rows, setRows] = useState<Row[] |null>(null);
 
-  function setDatabase(db: database): void {
-    console.log("enters set db");
+    function setDatabase(db: database): void {
+        console.log("enters set db")
+      
+        setTableName(db["name"]);
+        setTableHeaders(db["headers"]);
+        setRows(db["rows"]);
+    }
 
-    setTableName(db["name"]);
-    setTableHeaders(db["headers"]);
-    setRows(db["rows"]);
-  }
+    function loadDatabase(): void {
+        console.log("enters load database")
 
-  function loadDatabase(): void {
-    console.log("enters load database");
+        fetch("http://localhost:4567/table", {
+            method: 'GET',
+        })
+            .then(r => r.json())
+            .then((db: database) => setDatabase(db))
 
-    fetch("http://localhost:4567/table", {
-      method: "GET",
-    })
-      .then((r) => r.json())
-      .then((db: database) => setDatabase(db));
-  }
+    }
 
-  useEffect(() => {
-    loadDatabase();
+    useEffect(() => {
+        loadDatabase()
 
-    console.log("table name: " + tableName);
-    console.log("table headers: " + tableHeaders);
-    console.log("table values: " + rows);
-  }, []);
+        console.log("table name: " + tableName)
+        console.log("table headers: " + tableHeaders)
+        console.log("table values: " + rows)
 
-
-  return (
+      }, [])
+     
+    return (
     <Router>
       <Navbar />
       <Routes>

@@ -1,5 +1,6 @@
 package edu.brown.cs.student.main;
 
+
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
@@ -13,6 +14,9 @@ import replcommands.PrintStudentsCommand;
 import replcommands.REPL;
 import replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
+
+import edu.brown.cs.student.main.WebScraping.WebScraper;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.eclipse.jetty.websocket.api.Session;
@@ -65,9 +69,9 @@ public final class Main {
   public static int nextUserNumber = 1; // assign to username for next connecting user
   public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
-//  private Main(String[] args) {
-//    this.args = args;
-//  }
+ private Main(String[] args) {
+   this.args = args;
+ }
 
   /**
    * The initial method called when execution begins.
@@ -83,13 +87,9 @@ public final class Main {
     LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
-//  private final String[] args;
-
-  private Main(String[] args) {
-    this.args = args;
-  }
-
   private void run() {
+//    new WebScraper();
+
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
