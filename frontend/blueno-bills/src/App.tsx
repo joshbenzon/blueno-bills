@@ -44,14 +44,13 @@ interface database {
 }
 
 function App() {
-
     const [tableName, setTableName] = useState<string | null>(null);
-
     const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
     const [rows, setRows] = useState<Row[] |null>(null);
 
     function setDatabase(db: database): void {
         console.log("enters set db")
+      
         setTableName(db["name"]);
         setTableHeaders(db["headers"]);
         setRows(db["rows"]);
@@ -59,7 +58,6 @@ function App() {
 
     function loadDatabase(): void {
         console.log("enters load database")
-
 
         fetch("http://localhost:4567/table", {
             method: 'GET',
@@ -78,36 +76,35 @@ function App() {
 
       }, [])
      
-
-
-
     return (
-        <Router>
-            <Navbar/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/request" element={<Request/>}/>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/request" element={<Request />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
+        <Route path="/transfer" element={<Transfer />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route
+          path="/account"
+          element={<Account tableHeaders={tableHeaders} rows={rows} />}
+        />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/logout" element={<LogOut />} />
 
-                <Route path="/settings" element={<Settings/>} />
+        <Route path="/requestMeal" element={<RequestMeal />} />
+        <Route path="/requestFlex" element={<RequestFlex />} />
+        <Route path="/requestBear" element={<RequestBear />} />
 
-                <Route path="/transfer" element={<Transfer/>}/>
-                <Route path="/menu" element={<Menu/>}/>
-                <Route path="/account" element={<Account tableHeaders = {tableHeaders} rows = {rows} />}/>
-                <Route path="/settings" element={<Settings/>}/>
-                <Route path="/logout" element={<LogOut/>}/>
-
-                <Route path="/requestMeal" element={<RequestMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/requestFlex" element={<RequestFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/requestBear" element={<RequestBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
-
-
-                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
-            </Routes>
-        </Router>
-    );
-
+        <Route
+          path="/transferMeal"
+          element={<TransferMeal tableHeaders={tableHeaders} rows={rows} />}
+        />
+        <Route path="/transferFlex" element={<TransferFlex />} />
+        <Route path="/transferBear" element={<TransferBear />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
