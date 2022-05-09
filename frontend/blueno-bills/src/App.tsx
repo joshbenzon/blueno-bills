@@ -1,16 +1,25 @@
 import React from "react";
 import "./App.css";
 
-import Navbar from "./navigation-bar/components/Navbar";
+import { useState } from "react";
+import { useEffect } from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Account from "./navigation-bar/web-pages/account";
+import WithNav from "./navigation-bar/web-pages/withNav";
+import Main from "./navigation-bar/web-pages/main";
+
+import WithoutNav from "./navigation-bar/web-pages/withoutNav";
+import Login from "./navigation-bar/web-pages/login";
+
+import Authentication from "./navigation-bar/web-pages/authentication";
+
 import Home from "./navigation-bar/web-pages/home";
-import Menu from "./navigation-bar/web-pages/menu";
 import Request from "./navigation-bar/web-pages/request";
-import Settings from "./navigation-bar/web-pages/settings";
-import LogOut from "./navigation-bar/web-pages/logout";
 import Transfer from "./navigation-bar/web-pages/transfer";
+import Menu from "./navigation-bar/web-pages/menu";
+import Account from "./navigation-bar/web-pages/account";
+// import Login from "./navigation-bar/web-pages/login";
 
 import RequestMeal from "./navigation-bar/web-pages/requestMeal";
 import RequestFlex from "./navigation-bar/web-pages/requestFlex";
@@ -19,9 +28,6 @@ import RequestBear from "./navigation-bar/web-pages/requestBear";
 import TransferMeal from "./navigation-bar/web-pages/transferMeal";
 import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
-
-import { useState } from "react";
-import { useEffect } from "react";
 
 interface Row {
   StudentID: string;
@@ -43,68 +49,133 @@ interface database {
   rows: Row[];
 }
 
+interface userStatus {
+  isLogin: boolean | null;
+}
+
 function App() {
-    const [tableName, setTableName] = useState<string | null>(null);
-    const [tableHeaders, setTableHeaders] = useState<string[] |null>(null);
-    const [rows, setRows] = useState<Row[] |null>(null);
+  const [tableName, setTableName] = useState<string | null>(null);
+  const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
+  const [rows, setRows] = useState<Row[] | null>(null);
 
-    function setDatabase(db: database): void {
-        console.log("enters set db")
-      
-        setTableName(db["name"]);
-        setTableHeaders(db["headers"]);
-        setRows(db["rows"]);
-    }
+  function setDatabase(db: database): void {
+    console.log("enters set db");
 
-    function loadDatabase(): void {
-        console.log("enters load database")
+    setTableName(db["name"]);
+    setTableHeaders(db["headers"]);
+    setRows(db["rows"]);
+  }
 
-        fetch("http://localhost:4567/table", {
-            method: 'GET',
-        })
-            .then(r => r.json())
-            .then((db: database) => setDatabase(db))
+  function loadDatabase(): void {
+    console.log("enters load database");
 
-    }
+    fetch("http://localhost:4567/table", {
+      method: "GET",
+    })
+      .then((r) => r.json())
+      .then((db: database) => setDatabase(db));
+  }
 
-    useEffect(() => {
-        loadDatabase()
+  useEffect(() => {
+    loadDatabase();
 
-        console.log("table name: " + tableName)
-        console.log("table headers: " + tableHeaders)
-        console.log("table values: " + rows)
+    console.log("table name: " + tableName);
+    console.log("table headers: " + tableHeaders);
+    console.log("table values: " + rows);
+  }, []);
 
-      }, [])
-     
-    return (
+  //   const [isLogIn, setIsLogIn] = useState<boolean | null>(false);
+
+  //   return (
+  //     <Router>
+  //       <Routes>
+  //         <Route path="/" element={<Main />} />
+  //         <Route path="/login" element={<Main />} />
+  //       </Routes>
+  //     </Router>
+  //   );
+
+  //   const [isLogin, setIsLogin] = useState<boolean | null>(false);
+
+  //   function setStatusTrue() {
+  //     setIsLogin(true);
+  //   }
+
+  //   function setStatusFalse() {
+  //     setIsLogin(false);
+  //   }
+
+  //   let pageStatus;
+
+  //   if (!isLogin) {
+  //     pageStatus = <Main></Main>;
+  //     // setStatusTrue();
+  //   } else {
+  //     pageStatus = <Login></Login>;
+  //     // setStatusFalse();
+  //   }
+
+  //   return <React.Fragment>{pageStatus}</React.Fragment>;
+
+  return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/request" element={<Request />} />
-        {/* <Route path="/settings" element={<Settings />} /> */}
-        <Route path="/transfer" element={<Transfer />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route
-          path="/account"
-          element={<Account tableHeaders={tableHeaders} rows={rows} />}
-        />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/logout" element={<LogOut />} />
+        <Route element={<WithoutNav />}>
+          <Route path="/" element={<Login />} />
+        </Route>
 
-        <Route path="/requestMeal" element={<RequestMeal />} />
-        <Route path="/requestFlex" element={<RequestFlex />} />
-        <Route path="/requestBear" element={<RequestBear />} />
+        <Route element={<WithNav />}>
+          <Route path="/main/*" element={<Main />} />
 
-        <Route
-          path="/transferMeal"
-          element={<TransferMeal tableHeaders={tableHeaders} rows={rows} />}
-        />
-        <Route path="/transferFlex" element={<TransferFlex />} />
-        <Route path="/transferBear" element={<TransferBear />} />
+          {/* <Route path="/" element={<Login />} /> */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/request" element={<Request />} />
+          <Route path="/transfer" element={<Transfer />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route
+            path="/account"
+            element={<Account tableHeaders={tableHeaders} rows={rows} />}
+          />
+
+          <Route
+            path="/requestMeal"
+            element={<RequestMeal tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/requestFlex"
+            element={<RequestFlex tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/requestBear"
+            element={<RequestBear tableHeaders={tableHeaders} rows={rows} />}
+          />
+
+          <Route
+            path="/transferMeal"
+            element={<TransferMeal tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/transferFlex"
+            element={<TransferFlex tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/transferBear"
+            element={<TransferBear tableHeaders={tableHeaders} rows={rows} />}
+          />
+        </Route>
       </Routes>
     </Router>
   );
+
+  //   return <React.Fragment></React.Fragment>;
 }
+
+// function handleLoginClick() {
+//   this.setState({ isLoggedIn: true });
+// }
+
+// function handleLogoutClick() {
+//   this.setState({ isLoggedIn: false });
+// }
 
 export default App;

@@ -24,6 +24,14 @@ interface InputProp {
 }
 
 function TransferMeal(props: TransferMealProp) {
+  const onSubmit = (inputData: InputProp) => storeInputData();
+
+  function storeInputData() {
+    console.log(inputEmail);
+    console.log(inputDescription);
+    console.log(inputAmount);
+  }
+
   const [inputEmail, setInputEmail] = useState<string>("");
   const [inputDescription, setInputDescription] = useState<string | null>(null);
   const [inputAmount, setInputAmount] = useState<string | null>(null);
@@ -34,17 +42,10 @@ function TransferMeal(props: TransferMealProp) {
     formState: { errors },
   } = useForm<InputProp>();
 
-  function storeInputData() {
-    console.log(inputEmail);
-    console.log(inputDescription);
-    console.log(inputAmount);
-  }
-
-  const onSubmit = (inputData: InputProp) => storeInputData();
-
   const currUserEmail = "Jillian_Dominguez@brown.edu"; //hard coding for now until we have auth established and can store curr user data
   let currUserMealSwipes: number = 0;
   let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
+
   if (props.rows) {
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, currUserEmail)) {
@@ -52,6 +53,7 @@ function TransferMeal(props: TransferMealProp) {
 
         currUserMealSwipes = parseInt(props.rows[i].mealSwipes);
       }
+
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         //recipient
 
@@ -67,9 +69,11 @@ function TransferMeal(props: TransferMealProp) {
 
   let newNumMealSwipes: number = 0;
   let newRecipientMealSwipes: number = 0;
+
   if (inputAmount) {
     newNumMealSwipes = currUserMealSwipes - parseInt(inputAmount);
     newRecipientMealSwipes = recipientCurrMealSwipes + parseInt(inputAmount);
+
     console.log("new user meal swipes: " + newNumMealSwipes);
     console.log("recipient new meal swipes: " + newRecipientMealSwipes);
   }
@@ -78,6 +82,7 @@ function TransferMeal(props: TransferMealProp) {
     storeInputData();
     //here we are updating the mealSwipes column in the StudentData table
     //decrementing the current user's meal swipes by 1 since they are transferring
+
     const body: string =
       '{"tableName": ' +
       '"' +
@@ -106,7 +111,9 @@ function TransferMeal(props: TransferMealProp) {
       headers: { "Content-Type": "application/json" },
       body: body,
     };
+
     console.log("req body: " + requestOptions.body);
+
     fetch("http://localhost:4567/update", requestOptions).then((response) => {
       response.json();
       console.log("response: " + response.status);
@@ -142,7 +149,9 @@ function TransferMeal(props: TransferMealProp) {
       headers: { "Content-Type": "application/json" },
       body: body,
     };
+
     console.log("req body: " + requestOptions.body);
+
     fetch("http://localhost:4567/update", requestOptions).then((response) => {
       response.json();
       console.log("response: " + response.status);
