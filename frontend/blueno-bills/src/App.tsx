@@ -66,6 +66,7 @@ function App() {
         })
             .then(r => r.json())
             .then((db: database) => setDatabase(db))
+        console.log("database loaded")
 
     }
 
@@ -78,7 +79,28 @@ function App() {
 
       }, [])
      
+      //creating a dummy user until we have auth established! 
 
+    const currUserEmail = "Jillian_Dominguez@brown.edu"; //hard coding for now until we have auth established and can store curr user data
+    let currUserMealSwipes: number = 0;
+    let currUserFlexPoints: number = 0;
+    let currUserBearBucks: number = 0;
+    if (rows) {
+        for (let i = 0; i < rows.length; i++) {
+        if (equalsIgnoringCase(rows[i].email, currUserEmail)) {
+            //user
+            currUserMealSwipes = parseInt(rows[i].mealSwipes);
+            currUserFlexPoints = parseInt(rows[i].flexPoints);
+            currUserBearBucks = parseInt(rows[i].bearBucks);
+        }
+        
+        }
+    }
+
+    //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  function equalsIgnoringCase(text: string, other: string) {
+    return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
+  }
 
 
     return (
@@ -92,7 +114,7 @@ function App() {
 
                 <Route path="/transfer" element={<Transfer/>}/>
                 <Route path="/menu" element={<Menu/>}/>
-                <Route path="/account" element={<Account tableHeaders = {tableHeaders} rows = {rows} />}/>
+                <Route path="/account" element={<Account tableHeaders = {tableHeaders} userEmail = {currUserEmail} userMS = {currUserMealSwipes} userFP = {currUserFlexPoints} userBB = {currUserBearBucks} />}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/logout" element={<LogOut/>}/>
 
@@ -101,9 +123,9 @@ function App() {
                 <Route path="/requestBear" element={<RequestBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
 
 
-                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
+                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows} loadDatabase={() => loadDatabase()} userEmail = {currUserEmail} userMS = {currUserMealSwipes} />}/>
+                <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userFP = {currUserFlexPoints} />}/>
+                <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userBB = {currUserBearBucks}/>}/>
             </Routes>
         </Router>
     );

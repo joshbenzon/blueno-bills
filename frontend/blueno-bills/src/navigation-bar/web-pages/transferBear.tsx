@@ -11,6 +11,8 @@ interface Row{
 interface TableProp  {
     tableHeaders : string[] | null;
     rows : Row[] | null;
+    userEmail :string;
+    userBB: number;
 }
 
 function TransferBear(props: TableProp){

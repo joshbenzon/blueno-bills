@@ -15,6 +15,10 @@ interface Row {
 interface TransferMealProp {
   tableHeaders: string[] | null;
   rows: Row[] | null;
+  loadDatabase: Function;
+  userEmail :string;
+  userMS: number;
+
 }
 
 interface InputProp {
@@ -42,16 +46,9 @@ function TransferMeal(props: TransferMealProp) {
 
   const onSubmit = (inputData: InputProp) => storeInputData();
 
-  const currUserEmail = "Jillian_Dominguez@brown.edu"; //hard coding for now until we have auth established and can store curr user data
-  let currUserMealSwipes: number = 0;
   let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
   if (props.rows) {
     for (let i = 0; i < props.rows.length; i++) {
-      if (equalsIgnoringCase(props.rows[i].email, currUserEmail)) {
-        //user
-
-        currUserMealSwipes = parseInt(props.rows[i].mealSwipes);
-      }
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         //recipient
 
@@ -68,14 +65,14 @@ function TransferMeal(props: TransferMealProp) {
   let newNumMealSwipes: number = 0;
   let newRecipientMealSwipes: number = 0;
   if (inputAmount) {
-    newNumMealSwipes = currUserMealSwipes - parseInt(inputAmount);
+    newNumMealSwipes = props.userMS - parseInt(inputAmount);
     newRecipientMealSwipes = recipientCurrMealSwipes + parseInt(inputAmount);
-    console.log("new user meal swipes: " + newNumMealSwipes);
-    console.log("recipient new meal swipes: " + newRecipientMealSwipes);
+    
   }
 
-  const UpdateRequest = () => {
-
+  const UpdateRequest = async() => {
+    console.log("new user meal swipes: " + newNumMealSwipes);
+    console.log("recipient new meal swipes: " + newRecipientMealSwipes);
     console.log("enters POST")
     storeInputData();
     //here we are updating the mealSwipes column in the StudentData table
@@ -99,7 +96,7 @@ function TransferMeal(props: TransferMealProp) {
       '"' +
       " : " +
       '"' +
-      currUserEmail +
+      props.userEmail +
       '"' +
       "}}";
 
@@ -109,10 +106,9 @@ function TransferMeal(props: TransferMealProp) {
       body: body,
     };
     console.log("req body: " + requestOptions.body);
-    fetch("http://localhost:4567/update", requestOptions).then((response) => {
-      response.json();
-      console.log("response: " + response.status);
-    });
+    const response = await fetch("http://localhost:4567/update", requestOptions)
+    const jsonResponse = await response.json()
+    console.log("response1: " + jsonResponse)
 
     //we need another POST request to update the values of the user who was sent the meal swipe
 
@@ -126,8 +122,11 @@ function TransferMeal(props: TransferMealProp) {
             body: recipientBody
         };
         console.log("req body: " + requestOptionsRecipient.body)
-        fetch('http://localhost:4567/update', requestOptionsRecipient)
-            .then(response => {response.json();console.log("response: " + response.status)})
+        const response1 = await fetch('http://localhost:4567/update', requestOptionsRecipient)
+        const jsonResponse1 = await response1.json()
+        console.log("response2: " + jsonResponse1)
+      
+    props.loadDatabase()
   };
 
   return (
