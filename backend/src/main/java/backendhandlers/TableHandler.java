@@ -62,6 +62,7 @@ public class TableHandler implements Route {
     table = getTable(tableName);
     //closing connection here, so I don't have multiple connects to same table open
     dp.closeConn();
+
     return table;
   }
 
@@ -137,11 +138,11 @@ public class TableHandler implements Route {
    */
   @Override
   public Object handle(Request request, Response response) {
-    if (ob.getTable() == null) {
+    if (table == null) {
       return "ERROR: Database not loaded";
     }
     try {
-      return GSON.toJson(ob.getTable());
+      return GSON.toJson(table);
     } catch (IllegalStateException | IllegalArgumentException e) {
       return GSON.toJson(e.getMessage());
     }

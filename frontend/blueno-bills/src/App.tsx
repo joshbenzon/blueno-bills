@@ -123,7 +123,7 @@ function App() {
                 <Route path="/requestBear" element={<RequestBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
 
 
-                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows} loadDatabase={() => loadDatabase()} userEmail = {currUserEmail} userMS = {currUserMealSwipes} />}/>
+                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userMS = {currUserMealSwipes} />}/>
                 <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userFP = {currUserFlexPoints} />}/>
                 <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userBB = {currUserBearBucks}/>}/>
             </Routes>

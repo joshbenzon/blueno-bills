@@ -59,6 +59,8 @@ public class InsertRowHandler implements Route {
       return GSON.toJson("ERROR: was not able to execute insertion command");
     }
     db.closeConn();
+    //calling this at the end of the update method so the endpoint reflects the new update
+    TableHandler.loadDatabase(objectOrganizer.getFileName());
     return GSON.toJson("Success");
   }
 

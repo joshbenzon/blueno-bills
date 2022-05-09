@@ -15,7 +15,6 @@ interface Row {
 interface TransferMealProp {
   tableHeaders: string[] | null;
   rows: Row[] | null;
-  loadDatabase: Function;
   userEmail :string;
   userMS: number;
 
@@ -126,7 +125,7 @@ function TransferMeal(props: TransferMealProp) {
         const jsonResponse1 = await response1.json()
         console.log("response2: " + jsonResponse1)
       
-    props.loadDatabase()
+
   };
 
   return (

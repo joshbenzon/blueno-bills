@@ -57,6 +57,8 @@ public class UpdateHandler implements Route {
     int updateQueryRes = db.executeWCommands(sqlString);
 
     db.closeConn();
+    //calling this at the end of the update method so the endpoint reflects the new update
+    TableHandler.loadDatabase(objectOrganizer.getFileName());
     return GSON.toJson("Success");
   }
 

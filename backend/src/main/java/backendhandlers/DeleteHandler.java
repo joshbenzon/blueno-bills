@@ -51,6 +51,8 @@ public class DeleteHandler implements Route {
     }
     //closing connection so I don't have multiple connections to the same database
     db.closeConn();
+    //calling this at the end of the update method so the endpoint reflects the new update
+    TableHandler.loadDatabase(objectOrganizer.getFileName());
     return GSON.toJson("Success");
   }
 
