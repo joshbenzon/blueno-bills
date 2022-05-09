@@ -23,7 +23,7 @@ public class SQLTableTest {
     firstRow.put("second", "secondVal");
     rows.add(firstRow);
     SQLTable sqlTable = new SQLTable(tableName, headers, rows);
-    assertEquals(sqlTable.getheaders(), headers);
+    assertEquals(sqlTable.getHeaders(), headers);
     assertEquals(sqlTable.getNumRows(), rows.size());
   }
 }

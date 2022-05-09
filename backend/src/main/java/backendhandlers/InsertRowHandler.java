@@ -2,10 +2,10 @@ package backendhandlers;
 
 import com.google.gson.Gson;
 import databaseaccessor.DatabaseProxy;
-import replcommands.ObjectOrganizer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -16,11 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the Route for my /insert API endpoint and handles POST requests made to this
+ * endpoint
+ */
 public class InsertRowHandler implements Route {
   private final ObjectOrganizer objectOrganizer;
   private static final Gson GSON = new Gson();
 
 
+  /**
+   * @param objectOrganizer the objectOrganizer that contains the fileName of the database I am modifying
+   */
   public InsertRowHandler(ObjectOrganizer objectOrganizer) {
     this.objectOrganizer = objectOrganizer;
   }

@@ -13,15 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is the Route for my /update API endpoint and handles POST requests made to this
+ * endpoint
+ */
 public class UpdateHandler implements Route {
 
   private static final Gson GSON = new Gson();
   private final ObjectOrganizer objectOrganizer;
 
+  /**
+   * @param objectOrganizer the objectOrganizer that contains the fileName of the database I am modifying
+   */
   public UpdateHandler(ObjectOrganizer objectOrganizer) {
     this.objectOrganizer = objectOrganizer;
   }
 
+  /**
+   * @param request  The request object providing information about the HTTP request
+   * @param response The response object providing functionality for modifying the response
+   * @return The content to be set in the response
+   * @throws Exception implementation can choose to throw exception
+   */
   @Override
   public Object handle(Request request, Response response) throws Exception {
     JSONObject reqData = new JSONObject(request.body());

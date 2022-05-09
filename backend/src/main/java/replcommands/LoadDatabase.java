@@ -10,11 +10,18 @@ import java.sql.SQLException;
  */
 public class LoadDatabase implements Command {
 
+  /**
+   * @return the REPL command name
+   */
   @Override
   public String getName() {
     return "load-database";
   }
 
+  /**
+   * @param args            represents the arguments that the command executes upon
+   * @param objectOrganizer the ObjectOrganizer object for the repl
+   */
   @Override
   public void run(String[] args, ObjectOrganizer objectOrganizer) {
     try {

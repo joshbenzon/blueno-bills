@@ -45,17 +45,6 @@ public class DatabaseProxy {
       System.out.println("ERROR: " + e.getMessage());
     }
     return null;
-//    if (conn == null) {
-//      throw new IllegalStateException("ERROR: Cannot prepare statement before db is loaded.");
-//    }
-//    PreparedStatement command = conn.prepareStatement(sql);
-//    if (command != null && command.execute()) {
-//
-//      return command.getResultSet();
-//    } else {
-//      command.close();
-//      return null;
-//    }
 
   }
 
@@ -78,8 +67,6 @@ public class DatabaseProxy {
       System.out.println("ERROR: " + throwable.getMessage());
     }
 
-    // these two lines tell the database to enforce foreign keys during operations,
-    // and should be present
     Statement stat = null;
     try {
       stat = conn.createStatement();

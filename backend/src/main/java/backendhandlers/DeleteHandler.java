@@ -2,8 +2,8 @@ package backendhandlers;
 
 import com.google.gson.Gson;
 import databaseaccessor.DatabaseProxy;
-import replcommands.ObjectOrganizer;
 import org.json.JSONObject;
+import replcommands.ObjectOrganizer;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -12,11 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is the Route for my /delete API endpoint and handles POST requests made to this
+ * endpoint
+ */
 public class DeleteHandler implements Route {
 
   private static final Gson GSON = new Gson();
   private final ObjectOrganizer objectOrganizer;
 
+  /**
+   * @param objectOrganizer the objectOrganizer that contains the fileName of the database I am modifying
+   */
   public DeleteHandler(ObjectOrganizer objectOrganizer) {
     this.objectOrganizer = objectOrganizer;
   }
