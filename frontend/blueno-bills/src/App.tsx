@@ -7,19 +7,14 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import WithNav from "./navigation-bar/web-pages/withNav";
-import Main from "./navigation-bar/web-pages/main";
-
 import WithoutNav from "./navigation-bar/web-pages/withoutNav";
 import Login from "./navigation-bar/web-pages/login";
-
-import Authentication from "./navigation-bar/web-pages/authentication";
 
 import Home from "./navigation-bar/web-pages/home";
 import Request from "./navigation-bar/web-pages/request";
 import Transfer from "./navigation-bar/web-pages/transfer";
 import Menu from "./navigation-bar/web-pages/menu";
 import Account from "./navigation-bar/web-pages/account";
-// import Login from "./navigation-bar/web-pages/login";
 
 import RequestMeal from "./navigation-bar/web-pages/requestMeal";
 import RequestFlex from "./navigation-bar/web-pages/requestFlex";
@@ -84,39 +79,6 @@ function App() {
     console.log("table values: " + rows);
   }, []);
 
-  //   const [isLogIn, setIsLogIn] = useState<boolean | null>(false);
-
-  //   return (
-  //     <Router>
-  //       <Routes>
-  //         <Route path="/" element={<Main />} />
-  //         <Route path="/login" element={<Main />} />
-  //       </Routes>
-  //     </Router>
-  //   );
-
-  //   const [isLogin, setIsLogin] = useState<boolean | null>(false);
-
-  //   function setStatusTrue() {
-  //     setIsLogin(true);
-  //   }
-
-  //   function setStatusFalse() {
-  //     setIsLogin(false);
-  //   }
-
-  //   let pageStatus;
-
-  //   if (!isLogin) {
-  //     pageStatus = <Main></Main>;
-  //     // setStatusTrue();
-  //   } else {
-  //     pageStatus = <Login></Login>;
-  //     // setStatusFalse();
-  //   }
-
-  //   return <React.Fragment>{pageStatus}</React.Fragment>;
-
   return (
     <Router>
       <Routes>
@@ -125,9 +87,6 @@ function App() {
         </Route>
 
         <Route element={<WithNav />}>
-          <Route path="/main/*" element={<Main />} />
-
-          {/* <Route path="/" element={<Login />} /> */}
           <Route path="/home" element={<Home />} />
           <Route path="/request" element={<Request />} />
           <Route path="/transfer" element={<Transfer />} />
@@ -166,16 +125,6 @@ function App() {
       </Routes>
     </Router>
   );
-
-  //   return <React.Fragment></React.Fragment>;
 }
-
-// function handleLoginClick() {
-//   this.setState({ isLoggedIn: true });
-// }
-
-// function handleLogoutClick() {
-//   this.setState({ isLoggedIn: false });
-// }
 
 export default App;
