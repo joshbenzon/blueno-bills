@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
-import axios from "axios";
 import { useState } from "react";
 
+// represents a row of data
 interface Row {
   StudentID: string;
   email: string;
@@ -12,6 +11,7 @@ interface Row {
   bearBucks: string;
 }
 
+// represents parameters for transfers
 interface TransferMealProp {
   tableHeaders: string[] | null;
   rows: Row[] | null;
@@ -19,68 +19,51 @@ interface TransferMealProp {
   userMS: number;
 }
 
-interface InputProp {
-  email: string | null;
-  description: string | null;
-  amount: number | null;
-}
-
-let inDataBase: boolean | false;
-
 function TransferMeal(props: TransferMealProp) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<InputProp>();
-
-  const onSubmit = (inputData: InputProp) => storeInputData();
-
-  function storeInputData() {
-    console.log(inputEmail);
-    console.log(inputDescription);
-    console.log(inputAmount);
-  }
-
+  // initialize input data
   const [inputEmail, setInputEmail] = useState<string>("");
   const [inputDescription, setInputDescription] = useState<string | null>(null);
   const [inputAmount, setInputAmount] = useState<string | null>(null);
 
-  let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  let recipientCurrentMeal: number = 0; // amount of meal swipes of the person receiving swipes
 
   if (props.rows) {
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
-        //recipient
-        recipientCurrMealSwipes = parseInt(props.rows[i].mealSwipes);
-        inDataBase = true;
+        recipientCurrentMeal = parseInt(props.rows[i].mealSwipes);
       }
     }
   }
 
-  //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  // https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
   function equalsIgnoringCase(text: string, other: string) {
     return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
   }
 
-  let newNumMealSwipes: number = 0;
-  let newRecipientMealSwipes: number = 0;
+  let userTransferMeal: number = 0; // amount of meal swipes of the person transferring swipes
+  let userReceiveMeal: number = 0; // amount of meal swipes of the person receiving swipes
 
   if (inputAmount) {
-    newNumMealSwipes = props.userMS - parseInt(inputAmount);
-    newRecipientMealSwipes = recipientCurrMealSwipes + parseInt(inputAmount);
+    userTransferMeal = props.userMS - parseInt(inputAmount);
+    userReceiveMeal = recipientCurrentMeal + parseInt(inputAmount);
   }
 
+  // updating the "mealSwipes" column in the StudentData table and
+  // decrementing the current user's meal swipes since they are transferring
   const UpdateRequest = async () => {
-    console.log("new user meal swipes: " + newNumMealSwipes);
-    console.log("recipient new meal swipes: " + newRecipientMealSwipes);
-    console.log("enters POST");
+    console.log("User Who Transferred Meal: " + userTransferMeal);
+    console.log("User Who Received Meal: " + userReceiveMeal);
+    console.log("Input Email: " + inputEmail);
+    console.log("Input Description: " + inputDescription);
+    console.log("Input Amount: " + inputAmount);
 
-    storeInputData();
-    //here we are updating the mealSwipes column in the StudentData table
-    //decrementing the current user's meal swipes by 1 since they are transferring
-
-    const body: string =
+    const transferBody: string =
       '{"tableName": ' +
       '"' +
       "Students" +
@@ -91,7 +74,7 @@ function TransferMeal(props: TransferMealProp) {
       '"' +
       " : " +
       '"' +
-      newNumMealSwipes +
+      userTransferMeal +
       '"' +
       '}, "conditions" : {' +
       '"' +
@@ -103,22 +86,21 @@ function TransferMeal(props: TransferMealProp) {
       '"' +
       "}}";
 
-    const requestOptions = {
+    const requestTransferOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: body,
+      body: transferBody,
     };
 
-    console.log("req body: " + requestOptions.body);
-    const response = await fetch(
+    const responseOne = await fetch(
       "http://localhost:4567/update",
-      requestOptions
+      requestTransferOptions
     );
 
-    const jsonResponse = await response.json();
-    console.log("response1: " + jsonResponse);
+    const jsonResponseOne = await responseOne.json();
+    console.log("Response 1: " + jsonResponseOne);
 
-    //we need another POST request to update the values of the user who was sent the meal swipe
+    // another POST request to update the values of the user who was sent the meal swipe
     const recipientBody: string =
       '{"tableName": ' +
       '"' +
@@ -130,7 +112,7 @@ function TransferMeal(props: TransferMealProp) {
       '"' +
       " : " +
       '"' +
-      newRecipientMealSwipes +
+      userReceiveMeal +
       '"' +
       '}, "conditions" : {' +
       '"' +
@@ -142,27 +124,23 @@ function TransferMeal(props: TransferMealProp) {
       '"' +
       "}}";
 
-    const requestOptionsRecipient = {
+    const requestRecipientOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: recipientBody,
     };
 
-    console.log("req body: " + requestOptionsRecipient.body);
-    const response1 = await fetch(
+    const responseTwo = await fetch(
       "http://localhost:4567/update",
-      requestOptionsRecipient
+      requestRecipientOptions
     );
 
-    const jsonResponse1 = await response1.json();
-    console.log("response2: " + jsonResponse1);
+    const jsonResponseTwo = await responseTwo.json();
+    console.log("Response 2: " + jsonResponseTwo);
 
-    console.log("req body: " + requestOptions.body);
-
-    fetch("http://localhost:4567/update", requestOptions)
+    fetch("http://localhost:4567/update", requestTransferOptions)
       .then((response) => {
         response.json();
-        console.log("response: " + response.status);
       })
       .then(() => (window.location.href = "/transferMeal"));
   };
