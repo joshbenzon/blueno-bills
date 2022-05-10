@@ -1,95 +1,170 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import axios from 'axios';
-import { useState } from 'react';
+import axios from "axios";
+import { useState } from "react";
 
-interface TransferMealProp{
-  tableHeaders: string[]|null;
-  rows: string[][]|null;
+interface Row {
+  StudentID: string;
+  email: string;
+  mealSwipes: string;
+  flexPoints: string;
+  bearBucks: string;
 }
 
-function TransferMeal(props:TransferMealProp){
-  const {register, handleSubmit, formState: {errors}} = useForm();
-  // const onSubmit = (data: any) => UpdateRequest;  // stores in map
+interface TransferMealProp {
+  tableHeaders: string[] | null;
+  rows: Row[] | null;
+  userEmail: string;
+  userMS: number;
+}
 
-  const UpdateRequest = () => {
-    console.log("headers: " + props.tableHeaders);
-    console.log("rows: " + props.rows);
-    const request = 'http://localhost:4567/update';  // 1) location for request
+interface InputProp {
+  email: string | null;
+  description: string | null;
+  amount: number | null;
+}
 
-    let config = {  // 3) configuration
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-      }
-    }
+let inDataBase: boolean | false;
 
-    axios.post(request, config)
+function TransferMeal(props: TransferMealProp) {
+  const onSubmit = (inputData: InputProp) => storeInputData();
 
-        .then((response: any) => {
-          console.log(response.data);
-        })
-
-        .catch((error: any) => {
-          console.log(error);
-        });
+  function storeInputData() {
+    console.log(inputEmail);
+    console.log(inputDescription);
+    console.log(inputAmount);
   }
 
-const onSubmit = (data: any) => console.log(data); // stores in map
+  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputDescription, setInputDescription] = useState<string | null>(null);
+  const [inputAmount, setInputAmount] = useState<string | null>(null);
 
-// const TableRequest = () => {
-//   const request = "http://localhost:4567/table"; // 1) location for request
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputProp>();
 
-//   let config = {
-//     // 3) configuration
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//     },
-//   };
+  let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
 
-//   axios
-//     .get(request, config)
+  if (props.rows) {
+    for (let i = 0; i < props.rows.length; i++) {
+      if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
+        //recipient
+        recipientCurrMealSwipes = parseInt(props.rows[i].mealSwipes);
+        inDataBase = true;
+      }
+    }
+  }
 
-//     .then((response: any) => {
-//       console.log(response.data);
-//     })
+  //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  function equalsIgnoringCase(text: string, other: string) {
+    return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
+  }
 
-//     .catch((error: any) => {
-//       console.log(error);
-//     });
-// };
+  let newNumMealSwipes: number = 0;
+  let newRecipientMealSwipes: number = 0;
 
-// const UpdateRequest = () => {
-//   const request = "http://localhost:4567/update"; // 1) location for request
+  if (inputAmount) {
+    newNumMealSwipes = props.userMS - parseInt(inputAmount);
+    newRecipientMealSwipes = recipientCurrMealSwipes + parseInt(inputAmount);
+  }
 
-//   let config = {
-//     // 3) configuration
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//     },
-//   };
+  const UpdateRequest = async () => {
+    console.log("new user meal swipes: " + newNumMealSwipes);
+    console.log("recipient new meal swipes: " + newRecipientMealSwipes);
+    console.log("enters POST");
+    storeInputData();
+    //here we are updating the mealSwipes column in the StudentData table
+    //decrementing the current user's meal swipes by 1 since they are transferring
 
-//   axios
-//     .post(request, config)
+    const body: string =
+      '{"tableName": ' +
+      '"' +
+      "Students" +
+      '"' +
+      ', "colNameToNewVal" : {' +
+      '"' +
+      "mealSwipes" +
+      '"' +
+      " : " +
+      '"' +
+      newNumMealSwipes +
+      '"' +
+      '}, "conditions" : {' +
+      '"' +
+      "email" +
+      '"' +
+      " : " +
+      '"' +
+      props.userEmail +
+      '"' +
+      "}}";
 
-//     .then((response: any) => {
-//       console.log(response.data);
-//     })
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+    };
 
-//     .catch((error: any) => {
-//       console.log(error);
-//     });
-// };
+    console.log("req body: " + requestOptions.body);
+    const response = await fetch(
+      "http://localhost:4567/update",
+      requestOptions
+    );
 
-// const TransferMeal = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
+    const jsonResponse = await response.json();
+    console.log("response1: " + jsonResponse);
+
+    //we need another POST request to update the values of the user who was sent the meal swipe
+    const recipientBody: string =
+      '{"tableName": ' +
+      '"' +
+      "Students" +
+      '"' +
+      ', "colNameToNewVal" : {' +
+      '"' +
+      "mealSwipes" +
+      '"' +
+      " : " +
+      '"' +
+      newRecipientMealSwipes +
+      '"' +
+      '}, "conditions" : {' +
+      '"' +
+      "email" +
+      '"' +
+      " : " +
+      '"' +
+      inputEmail +
+      '"' +
+      "}}";
+
+    const requestOptionsRecipient = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: recipientBody,
+    };
+
+    console.log("req body: " + requestOptionsRecipient.body);
+    const response1 = await fetch(
+      "http://localhost:4567/update",
+      requestOptionsRecipient
+    );
+
+    const jsonResponse1 = await response1.json();
+    console.log("response2: " + jsonResponse1);
+
+    console.log("req body: " + requestOptions.body);
+
+    fetch("http://localhost:4567/update", requestOptions)
+      .then((response) => {
+        response.json();
+        console.log("response: " + response.status);
+      })
+      .then(() => (window.location.href = "/transferMeal"));
+  };
 
   return (
     <React.Fragment>
@@ -98,20 +173,22 @@ const onSubmit = (data: any) => console.log(data); // stores in map
       </div>
 
       <div className={"page-buttons"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(UpdateRequest)}>
           <div className="input-group">
             <div>To Who*:</div>
 
             <input
               type="text"
-              placeholder="Name"
-              {...register("name", {
+              placeholder="Email"
+              {...register("email", {
                 required: true,
-                maxLength: 20,
-                pattern: /^[A-Za-z]+$/i,
+                maxLength: 50,
               })}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                setInputEmail(event.target.value)
+              }
             />
-            <div className="error-message">{errors.name && "Required!"}</div>
+            <div className="error-message">{errors.email && "Required!"}</div>
           </div>
 
           <div className="input-group">
@@ -121,6 +198,9 @@ const onSubmit = (data: any) => console.log(data); // stores in map
               type="text"
               placeholder="Optional"
               {...register("description", { maxLength: 100 })}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                setInputDescription(event.target.value)
+              }
             />
           </div>
 
@@ -131,6 +211,9 @@ const onSubmit = (data: any) => console.log(data); // stores in map
               type="number"
               placeholder="Between 1-20"
               {...register("amount", { required: true, min: 1, max: 20 })}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                setInputAmount(event.target.value)
+              }
             />
             <div className="error-message">{errors.amount && "Required!"}</div>
           </div>

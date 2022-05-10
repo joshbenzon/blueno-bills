@@ -1,9 +1,24 @@
 package edu.brown.cs.student.main;
 
+
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
 import backendhandlers.UpdateHandler;
+
+import replcommands.DeleteRowCommand;
+import replcommands.InsertRowCommand;
+import replcommands.LoadDatabase;
+import replcommands.ObjectOrganizer;
+import replcommands.PrintStudentsCommand;
+import replcommands.REPL;
+import replcommands.UpdateRowCommand;
+import freemarker.template.Configuration;
+
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import org.eclipse.jetty.websocket.api.Session;
+
 import org.json.JSONObject;
 import spark.ModelAndView;
 import spark.Request;
@@ -12,33 +27,21 @@ import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
 import websockets.SocketHandler;
 import websockets.UserInfo;
-import replcommands.DeleteRowCommand;
-import replcommands.InsertRowCommand;
-import replcommands.LoadDatabase;
-import replcommands.ObjectOrganizer;
-import replcommands.PrintStudentsCommand;
-import replcommands.REPL;
-import replcommands.UpdateRowCommand;
 
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import org.eclipse.jetty.websocket.api.Session;
 import spark.Spark;
 
 import java.io.File;
 import java.io.IOException;
 
-import freemarker.template.Configuration;
-
 import static freemarker.template.Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The Main class of our project. This is where execution begins.
@@ -52,9 +55,9 @@ public final class Main {
   public static int nextUserNumber = 1; // assign to username for next connecting user
   public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
-  private Main(String[] args) {
-    this.args = args;
-  }
+ private Main(String[] args) {
+   this.args = args;
+ }
 
   /**
    * The initial method called when execution begins.
@@ -64,9 +67,15 @@ public final class Main {
   public static void main(String[] args) {
     new Main(args).run();
     runSparkServer(DEFAULT_PORT);
+    
+    // user auth
+//    IDandPassword iDandPassword = new IDandPassword();
+//    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
   private void run() {
+//    new WebScraper();
+
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);

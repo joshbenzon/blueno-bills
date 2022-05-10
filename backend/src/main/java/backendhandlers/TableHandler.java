@@ -33,7 +33,7 @@ public class TableHandler implements Route {
   /**
    * a constructor for TableHandler.
    *
-   * @param objectOrganizer the object organizer for the table handler, which will have the database
+   * @param objectOrganizer the object organizer for the table handler, which will contain the table object
    */
   public TableHandler(ObjectOrganizer objectOrganizer) {
     ob = objectOrganizer;
@@ -62,26 +62,35 @@ public class TableHandler implements Route {
     table = getTable(tableName);
     //closing connection here, so I don't have multiple connects to same table open
     dp.closeConn();
+
     return table;
   }
 
-  //TODO: javadocs
+
+  /**
+   * @return A Set of Strings that contain the table names of the table(s) in the database
+   * @throws SQLException
+   * @throws IllegalStateException
+   */
   //in this case: only 1 table but keeping it like this in case table added in future
   public static Set<String> getTableNames()
       throws SQLException, IllegalStateException {
-
-//        PreparedStatement ps = .prepareStatement("SELECT tbl_name FROM sqlite_master;");
     ResultSet dbRes = dp.executeSQLCommand("SELECT tbl_name FROM sqlite_master;");
 
     Set<String> tableNames = new HashSet<>();
     while (dbRes.next()) {
       tableNames.add(dbRes.getString(1));
     }
-
     return tableNames;
   }
 
-  //TODO: javadocs
+  /**
+   * @param tableName the name of the Table I want to create a SQLTable object of
+   * @return a SQLTable that represents the passed in table from the database
+   * @throws SQLException
+   * @throws IllegalStateException
+   * @throws IllegalArgumentException
+   */
   public static SQLTable getTable(String tableName)
       throws SQLException, IllegalStateException, IllegalArgumentException {
     if (tableName == null) {
@@ -93,9 +102,7 @@ public class TableHandler implements Route {
       throw new IllegalArgumentException(
           "ERROR: Table \"" + tableName + "\" does not exist.");
     }
-
     // Prepare a statement to get everything from the table.
-//        PreparedStatement ps = SimpleProxy.prepareStatement("SELECT * FROM " + tableName + ";");
     ResultSet dbRes = dp.executeSQLCommand("SELECT * FROM " + tableName + ";");
     ResultSetMetaData dbResMeta = dbRes.getMetaData();
 
@@ -105,7 +112,6 @@ public class TableHandler implements Route {
     for (int i = 1; i <= numCols; i++) {
       columnNames.add(dbResMeta.getColumnName(i));
     }
-
 
     // Add each row of the db to a list
     List<Map<String, String>> rows = new ArrayList<>();
@@ -125,14 +131,18 @@ public class TableHandler implements Route {
   }
 
 
-
+  /**
+   * @param request the request to the endpoint
+   * @param response the response to the request
+   * @return a JSON representation of the table or if the request fails an error message
+   */
   @Override
   public Object handle(Request request, Response response) {
-    if (ob.getTable() == null) {
+    if (table == null) {
       return "ERROR: Database not loaded";
     }
     try {
-      return GSON.toJson(ob.getTable());
+      return GSON.toJson(table);
     } catch (IllegalStateException | IllegalArgumentException e) {
       return GSON.toJson(e.getMessage());
     }

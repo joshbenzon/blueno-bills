@@ -16,11 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the Route for my /insert API endpoint and handles POST requests made to this
+ * endpoint
+ */
 public class InsertRowHandler implements Route {
   private final ObjectOrganizer objectOrganizer;
   private static final Gson GSON = new Gson();
 
 
+  /**
+   * @param objectOrganizer the objectOrganizer that contains the fileName of the database I am modifying
+   */
   public InsertRowHandler(ObjectOrganizer objectOrganizer) {
     this.objectOrganizer = objectOrganizer;
   }
@@ -52,6 +59,8 @@ public class InsertRowHandler implements Route {
       return GSON.toJson("ERROR: was not able to execute insertion command");
     }
     db.closeConn();
+    //calling this at the end of the update method so the endpoint reflects the new update
+    TableHandler.loadDatabase(objectOrganizer.getFileName());
     return GSON.toJson("Success");
   }
 
@@ -141,4 +150,6 @@ public class InsertRowHandler implements Route {
     return String.valueOf(insertQuery);
   }
 
+
 }
+

@@ -1,6 +1,7 @@
 package replcommands;
 
 
+import backendhandlers.TableHandler;
 import client.ClientRequestGenerator;
 
 import java.util.HashMap;

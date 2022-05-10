@@ -1,0 +1,5 @@
+INPUT
+load-database ../data/WrongFile.sqlite3
+OUTPUT
+ERROR: Invalid file name
+END

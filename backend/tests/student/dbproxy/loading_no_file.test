@@ -1,0 +1,5 @@
+INPUT
+load-database
+OUTPUT
+ERROR: File name required
+END
