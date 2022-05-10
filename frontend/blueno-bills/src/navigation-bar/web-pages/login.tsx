@@ -19,7 +19,7 @@ const Login = () => {
 
       <div className={"page-buttons"}>
         <div className="login-button">
-          <button onClick={googleSignIn}>Login!</button>
+          <button onClick={googleSignIn}>Login</button>
         </div>
       </div>
     </React.Fragment>

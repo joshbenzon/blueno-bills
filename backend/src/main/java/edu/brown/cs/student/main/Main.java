@@ -71,7 +71,7 @@ public final class Main {
   }
 
   private void run() {
-    new WebScraper();
+//    new WebScraper();
 
     OptionParser parser = new OptionParser();
     parser.accepts("gui");

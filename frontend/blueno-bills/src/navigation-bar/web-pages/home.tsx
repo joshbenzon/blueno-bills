@@ -1,80 +1,46 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-
-let wsurl: string = "";
-let webSocket: any = null;
 
 const Home = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (inputData: any) => console.log(inputData);
-
-  //Send a message if it's not empty, then clear the input field
-  function sendMessage(message: string) {
-    if (message !== "") {
-      webSocket.send(message);
-      id("message")!.value = "";
-    }
-  }
-
-  //Update the chat-panel, and the list of connected users
-  function updateChat(msg: MessageEvent) {
-    console.log("UPDATE CHAT");
-
-    console.log(msg);
-    var data = JSON.parse(msg.data);
-    console.log(data);
-    id("userlist").innerHTML = "";
+  // update the chat panel and the list of connected users
+  function addUser(message: MessageEvent) {
+    var data = JSON.parse(message.data);
+    getId("user-list").innerHTML = "";
 
     data.userlist.forEach(function (user: any) {
-      console.log(user);
-      insert("userlist", "<li>" + user + "</li>");
+      insertUser("user-list", "<li>" + user + "</li>");
     });
-
-    console.log("UPDATE CHATYY");
   }
 
-  //Helper function for inserting HTML as the first child of an element
-  function insert(targetId: string, message: any) {
-    id(targetId).insertAdjacentHTML("afterbegin", message);
+  // helper function for inserting HTML as the first child of an element
+  function insertUser(targetId: string, message: any) {
+    getId(targetId).insertAdjacentHTML("afterbegin", message);
   }
 
-  //Helper function for selecting element by id
-  function id(id: string) {
+  // helper function for selecting element by id
+  function getId(id: string) {
     return document.getElementById(id) as HTMLInputElement;
   }
 
-  const logger = async (event: React.FormEvent<HTMLFormElement>) => {
+  // creates the websocket from the user list
+  const updateUserList = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    id("form").hidden = true;
-    id("chatter").hidden = false;
+    getId("form").hidden = true;
+    getId("chatter").hidden = false;
 
-    // let username = id("username").value;
     let username = localStorage.getItem("gmail");
-
-    wsurl = "ws://localhost:4567/home?username=" + username;
-
-    webSocket = new WebSocket(wsurl);
+    let webUrl = "ws://localhost:4567/home?username=" + username;
+    let webSocket = new WebSocket(webUrl);
 
     webSocket.onmessage = function (msg: MessageEvent) {
-      console.log("lol");
-      updateChat(msg);
-    };
-    console.log("aespa");
-
-    webSocket.webSocket.onclose = function () {
-      console.log("oncliose");
-      alert("WebSocket connection closed");
+      addUser(msg);
     };
 
-    console.log("done");
+    webSocket.onclose = function () {
+      alert("WebSocket Connection Closed!");
+    };
 
-    return wsurl;
+    return webUrl;
   };
 
   return (
@@ -85,18 +51,14 @@ const Home = () => {
 
       <div className={"page-buttons"}>
         <div id="form">
-          <form onSubmit={logger}>
-            {/* <input id="username" type="text" name="position" required></input> */}
-            <button id="send">Check Active Users!</button>
+          <form onSubmit={updateUserList}>
+            <button>Check Active Users</button>
           </form>
         </div>
 
         <div id="chatter">
-          <ul id="userlist"></ul>
-          <div id="chat"></div>
+          <li id="user-list"></li>
         </div>
-
-        {/* <script src="./websockets.tsx" /> */}
       </div>
     </React.Fragment>
   );
