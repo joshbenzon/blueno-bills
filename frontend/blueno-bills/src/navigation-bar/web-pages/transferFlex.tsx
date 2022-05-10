@@ -10,6 +10,8 @@ interface Row{
 interface TableProp  {
     tableHeaders : string[] | null;
     rows : Row[] | null;
+    userEmail :string;
+    userFP: number;
 }
 function TransferFlex(props: TableProp){
     return (

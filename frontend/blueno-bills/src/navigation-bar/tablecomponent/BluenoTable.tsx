@@ -8,7 +8,10 @@ interface Row{
 
 interface TableProp  {
     tableHeaders : string[] | null;
-    rows : Row[] | null;
+    userEmail :string;
+    userMS: number;
+    userFP : number;
+    userBB: number;
 }
 
 function BluenoTable(props: TableProp){
@@ -34,14 +37,13 @@ function BluenoTable(props: TableProp){
                   </tr>
               </thead>
               <tbody>
-              {props.rows?.map(row => 
-                  <tr key = {props.rows?.indexOf(row)}>
-                  <td>{row.email}</td> 
-                  <td>{row.mealSwipes}</td>
-                  <td>{row.flexPoints}</td>
-                  <td>{row.mealSwipes}</td>   
-                  </tr>
-              )}
+              <tr>
+
+                  <td> {props.userEmail}</td>
+                  <td> {props.userMS}</td>
+                  <td> {props.userFP}</td>
+                  <td> {props.userBB}</td>
+              </tr>
               </tbody>
           </table>
           

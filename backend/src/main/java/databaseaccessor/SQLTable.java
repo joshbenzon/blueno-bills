@@ -1,16 +1,19 @@
 package databaseaccessor;
 
 import com.google.common.collect.ImmutableList;
-import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
-
+//I referenced this repo: https://github.com/cs0320-s2022/project-2-bpiekarz-jurrutic-sgundotr/blob/backend/backend/src/main/java/edu/brown/cs/student/main/databaseaccessor/SQLTable.java
+/**
+ * This class is a representation of a table in a SQL database
+ */
 public class SQLTable {
-  private String name;
-  private List<String> headers;
-  private List<Map<String, String>> rows;
-  private static final Gson GSON = new Gson();
+  private final String name;
+      //I don't use this variable here because I only have one table but am keeping it to accommodate the potential for multiple tables
+  private final List<String> headers;
+  private final List<Map<String, String>> rows;
+
 
   public SQLTable(String name, List<String> headers, List<Map<String, String>> rows) {
     this.name = name;
@@ -18,14 +21,21 @@ public class SQLTable {
     this.rows = rows;
   }
 
-  public List<String> getheaders() {
+  /**
+   * @return A List representation of the table's headers
+   * This method is used for JUnit testing
+   */
+  public List<String> getHeaders() {
     return ImmutableList.copyOf(this.headers);
   }
 
+  /**
+   * @return the number of rows in the table
+   * This method is used for JUnit testing
+   */
   public int getNumRows() {
     return this.rows.size();
   }
-
 
 
 }

@@ -35,13 +35,17 @@ public class DatabaseProxy {
    * to execute the passed in command.
    */
   public ResultSet executeSQLCommand(String sql) throws SQLException {
+
+    PreparedStatement roleFinder = null;
     try {
-      PreparedStatement roleFinder = conn.prepareStatement(sql);
-      return roleFinder.executeQuery();
+      roleFinder = conn.prepareStatement(sql);
+      if(roleFinder!= null && roleFinder.execute())
+      return roleFinder.getResultSet();
     } catch (SQLException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
     return null;
+
   }
 
   /**
@@ -63,8 +67,6 @@ public class DatabaseProxy {
       System.out.println("ERROR: " + throwable.getMessage());
     }
 
-    // these two lines tell the database to enforce foreign keys during operations,
-    // and should be present
     Statement stat = null;
     try {
       stat = conn.createStatement();
@@ -112,11 +114,21 @@ public class DatabaseProxy {
    * This method executes my commands with W/RW permissions.
    */
   public int executeWCommands(String sql) {
+
+    PreparedStatement roleFinder = null;
     try {
-      PreparedStatement roleFinder = conn.prepareStatement(sql);
+      roleFinder = conn.prepareStatement(sql);
       return roleFinder.executeUpdate();
     } catch (SQLException e) {
       System.out.println("ERROR: " + e.getMessage());
+    } finally {
+      try {
+        if (roleFinder != null) {
+          roleFinder.close();
+        }
+      } catch (SQLException throwables) {
+        throwables.printStackTrace();
+      }
     }
     return -1;
   }

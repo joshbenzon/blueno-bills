@@ -15,8 +15,6 @@ import replcommands.REPL;
 import replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
 
-import edu.brown.cs.student.main.WebScraping.WebScraper;
-
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.eclipse.jetty.websocket.api.Session;
@@ -29,23 +27,11 @@ import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
 import websockets.SocketHandler;
 import websockets.UserInfo;
-import replcommands.DeleteRowCommand;
-import replcommands.InsertRowCommand;
-import replcommands.LoadDatabase;
-import replcommands.ObjectOrganizer;
-import replcommands.PrintStudentsCommand;
-import replcommands.REPL;
-import replcommands.UpdateRowCommand;
 
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import org.eclipse.jetty.websocket.api.Session;
 import spark.Spark;
 
 import java.io.File;
 import java.io.IOException;
-
-import freemarker.template.Configuration;
 
 import static freemarker.template.Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS;
 
