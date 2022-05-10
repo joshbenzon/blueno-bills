@@ -1,11 +1,16 @@
 package edu.brown.cs.student.main;
 
 
+import backendhandlers.AndrewsHandler;
+import backendhandlers.BlueRoomHandler;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
+import backendhandlers.JosHandler;
+import backendhandlers.RattyHandler;
 import backendhandlers.TableHandler;
 import backendhandlers.UpdateHandler;
 
+import backendhandlers.VDubHandler;
 import replcommands.DeleteRowCommand;
 import replcommands.InsertRowCommand;
 import replcommands.LoadDatabase;
@@ -14,8 +19,6 @@ import replcommands.PrintStudentsCommand;
 import replcommands.REPL;
 import replcommands.UpdateRowCommand;
 import freemarker.template.Configuration;
-
-import edu.brown.cs.student.main.WebScraping.WebScraper;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -29,23 +32,11 @@ import spark.TemplateViewRoute;
 import spark.template.freemarker.FreeMarkerEngine;
 import websockets.SocketHandler;
 import websockets.UserInfo;
-import replcommands.DeleteRowCommand;
-import replcommands.InsertRowCommand;
-import replcommands.LoadDatabase;
-import replcommands.ObjectOrganizer;
-import replcommands.PrintStudentsCommand;
-import replcommands.REPL;
-import replcommands.UpdateRowCommand;
 
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import org.eclipse.jetty.websocket.api.Session;
 import spark.Spark;
 
 import java.io.File;
 import java.io.IOException;
-
-import freemarker.template.Configuration;
 
 import static freemarker.template.Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS;
 
@@ -54,6 +45,8 @@ import java.util.List;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The Main class of our project. This is where execution begins.
@@ -83,7 +76,7 @@ public final class Main {
 
   private void run() {
 
-    new WebScraper();
+
 
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
@@ -152,6 +145,11 @@ public final class Main {
     Spark.post("/update", new UpdateHandler(objectOrganizer));
     Spark.post("/insert", new InsertRowHandler(objectOrganizer));
     Spark.post("/delete", new DeleteHandler(objectOrganizer));
+    Spark.get("/jos", new JosHandler());
+    Spark.get("/ratty", new RattyHandler());
+    Spark.get("/vdub", new VDubHandler());
+    Spark.get("/blueroom", new BlueRoomHandler());
+    Spark.get("/andrews", new AndrewsHandler());
 
     Spark.init();
   }
