@@ -47,32 +47,53 @@ form {
   display: flex;
 }
 
+input {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
 button {
   height: 100px;
   width: 200px;
 
   align-items: center;
   margin-right: 24px;
+  margin-left: 24px;
 
-  display: flex;
   text-align: center;
   font-size: 22px;
 
   border-radius: 25px;
   background: #79acff;
-  padding: 10px 50px;
+  padding: 10px 10px 10px 10px;
   color: #ffffff;
+
   outline: none;
   border: none;
+
   cursor: pointer;
   text-decoration: none;
-  margin-left: 24px;
+
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 button:hover {
   transition: all 0.2s ease-in-out;
   background: #ffffff;
   color: #000814;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.login-pic {
+  width: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+}
+
+.login-title {
+  font-size: 100px;
 }
 
 body {
@@ -91,11 +112,10 @@ code {
 /* credit: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
 .styled-table {
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin: auto;
+
+  font-size: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 .styled-table thead tr {

@@ -15,7 +15,7 @@ const Navbar = () => {
         <NavLink to="/home">
           <img
             src={require("../../images/blueno-logo.png")}
-            alt="logo"
+            alt="blueno-bills-logo"
             width="75px"
           />
         </NavLink>

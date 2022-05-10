@@ -5,12 +5,20 @@ import { googleSignIn } from "./authentication";
 const Login = () => {
   return (
     <React.Fragment>
+      <div>
+        <img
+          className="login-pic"
+          src={require("../images/blueno-logo.png")}
+          alt="blueno bills logo"
+        />
+      </div>
+
       <div className={"page-info"}>
-        <h1>Blueno Bills</h1>
+        <h1 className="login-title">Blueno Bills</h1>
       </div>
 
       <div className={"page-buttons"}>
-        <div className="log-out-button">
+        <div className="login-button">
           <button onClick={googleSignIn}>Login!</button>
         </div>
       </div>
