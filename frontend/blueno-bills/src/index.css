@@ -96,6 +96,10 @@ button:hover {
   font-size: 100px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;

@@ -28,6 +28,12 @@ interface InputProp {
 let inDataBase: boolean | false;
 
 function TransferMeal(props: TransferMealProp) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputProp>();
+
   const onSubmit = (inputData: InputProp) => storeInputData();
 
   function storeInputData() {
@@ -39,12 +45,6 @@ function TransferMeal(props: TransferMealProp) {
   const [inputEmail, setInputEmail] = useState<string>("");
   const [inputDescription, setInputDescription] = useState<string | null>(null);
   const [inputAmount, setInputAmount] = useState<string | null>(null);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<InputProp>();
 
   let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
 
@@ -75,6 +75,7 @@ function TransferMeal(props: TransferMealProp) {
     console.log("new user meal swipes: " + newNumMealSwipes);
     console.log("recipient new meal swipes: " + newRecipientMealSwipes);
     console.log("enters POST");
+
     storeInputData();
     //here we are updating the mealSwipes column in the StudentData table
     //decrementing the current user's meal swipes by 1 since they are transferring

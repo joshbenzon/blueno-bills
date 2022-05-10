@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import UpdateChat from "./websockets";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -39,6 +40,7 @@ export const googleSignIn = () => {
       console.log("GOOGLE SIGN IN");
     })
     .then(() => (window.location.href = "/home"))
+    // .then(UpdateChat)
 
     .catch((error) => {
       console.log(error);
