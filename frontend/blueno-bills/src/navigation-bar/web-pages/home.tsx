@@ -6,16 +6,12 @@ const Home = () => {
     <React.Fragment>
       <div className={"page-info"}>
         <h1>Home Page!</h1>
-      </div>
-
-      <div>
-        <ul id="userlist">NAME</ul>
+          <ul id="userlist">USERS</ul>
         <div id="chat">CHAT</div>
-        <script src="websocketDemo.js"/>
+        <script src="../../../../web-sockets/websocketDemo.js"/>
       </div>
     </React.Fragment>
   );
-
   // pure frontend
   // return (
   //   <React.Fragment>
