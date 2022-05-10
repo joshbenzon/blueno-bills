@@ -77,10 +77,8 @@ function App() {
 
   //creating a dummy user until we have auth established!
   //hard coding for now until we have auth established and can store curr user data
-  const currUserEmail = "Jillian_Dominguez@brown.edu";
-  //   const currUserEmail = "Joshua_Benzon@brown.edu";
-  //   const currUserEmail = "joshua_benzon@brown.edu";
-  //   const currUserEmail = localStorage.getItem("gmail") as string;
+  //   const currUserEmail = "jillian_dominguez@brown.edu";
+  const currUserEmail = localStorage.getItem("gmail") as string;
 
   let currUserMealSwipes: number = 0;
   let currUserFlexPoints: number = 0;

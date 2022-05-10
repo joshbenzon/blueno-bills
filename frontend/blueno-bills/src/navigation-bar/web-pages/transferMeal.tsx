@@ -25,6 +25,8 @@ interface InputProp {
   amount: number | null;
 }
 
+let inDataBase: boolean | false;
+
 function TransferMeal(props: TransferMealProp) {
   const onSubmit = (inputData: InputProp) => storeInputData();
 
@@ -50,8 +52,8 @@ function TransferMeal(props: TransferMealProp) {
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         //recipient
-
         recipientCurrMealSwipes = parseInt(props.rows[i].mealSwipes);
+        inDataBase = true;
       }
     }
   }
