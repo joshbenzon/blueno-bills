@@ -75,9 +75,6 @@ function App() {
     console.log("table values: " + rows);
   }, []);
 
-  //creating a dummy user until we have auth established!
-  //hard coding for now until we have auth established and can store curr user data
-  //   const currUserEmail = "jillian_dominguez@brown.edu";
   const currUserEmail = localStorage.getItem("gmail") as string;
 
   let currUserMealSwipes: number = 0;
@@ -87,7 +84,6 @@ function App() {
   if (rows) {
     for (let i = 0; i < rows.length; i++) {
       if (equalsIgnoringCase(rows[i].email, currUserEmail)) {
-        //user
         currUserMealSwipes = parseInt(rows[i].mealSwipes);
         currUserFlexPoints = parseInt(rows[i].flexPoints);
         currUserBearBucks = parseInt(rows[i].bearBucks);
@@ -95,7 +91,7 @@ function App() {
     }
   }
 
-  //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  // source: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
   function equalsIgnoringCase(text: string, other: string) {
     return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
   }

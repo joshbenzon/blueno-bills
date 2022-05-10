@@ -1,29 +1,26 @@
-import React from 'react';
-interface Row{
-    StudentID: string;
-    email:string;
-    mealSwipes:string;
-    flexPoints:string;
-    bearBucks:string;
+import React from "react";
+
+interface Row {
+  StudentID: string;
+  email: string;
+  mealSwipes: string;
+  flexPoints: string;
+  bearBucks: string;
 }
 
-interface TableProp  {
-    tableHeaders : string[] | null;
-    rows : Row[] | null;
+interface TableProp {
+  tableHeaders: string[] | null;
+  rows: Row[] | null;
 }
+
 function RequestFlex(props: TableProp) {
-    return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'Center',
-                alignItems: 'Top',
-                height: '100vh'
-            }}
-        >
-            <h1>Request Flex Page!</h1>
-        </div>
-    );
-};
+  return (
+    <React.Fragment>
+      <div className="page-info">
+        <h1>Request: Flex Points</h1>
+      </div>
+    </React.Fragment>
+  );
+}
 
 export default RequestFlex;
