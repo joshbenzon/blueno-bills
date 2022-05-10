@@ -1,11 +1,18 @@
-import React from "react";
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./navigation";
 
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    navigate("/menu");
+  };
+
   return (
     <>
       <Nav>
-        <NavLink to="/">
+        <NavLink to="/home">
           <img
             src={require("../../images/blueno-logo.png")}
             alt="logo"
@@ -19,11 +26,10 @@ const Navbar = () => {
           <NavLink to="/transfer">Transfer</NavLink>
           <NavLink to="/menu">Menus</NavLink>
           <NavLink to="/account">Account</NavLink>
-          {/* <NavLink to="/settings">Settings</NavLink> */}
         </NavMenu>
 
         <NavBtn>
-          <NavBtnLink to="/logout">Log Out</NavBtnLink>
+          <NavBtnLink to="/">Log Out</NavBtnLink>
         </NavBtn>
       </Nav>
     </>

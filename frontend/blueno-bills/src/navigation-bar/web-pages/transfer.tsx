@@ -1,6 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Transfer = () => {
+  const navigate = useNavigate();
+
+  const navigateToTransferMeal = () => {
+    navigate("/transferMeal");
+  };
+
+  const navigateToTransferFlex = () => {
+    navigate("/transferFlex");
+  };
+
+  const navigateToTransferBear = () => {
+    navigate("/transferBear");
+  };
+
   return (
     <React.Fragment>
       <div className="page-info">
@@ -9,21 +24,15 @@ const Transfer = () => {
 
       <div className={"page-buttons"}>
         <div className="transfer-meal-button">
-          <button onClick={() => (window.location.href = "/transferMeal")}>
-            Meal Credits
-          </button>
+          <button onClick={navigateToTransferMeal}>Meal Credits</button>
         </div>
 
         <div className="transfer-flex-button">
-          <button onClick={() => (window.location.href = "/transferFlex")}>
-            Flex Points
-          </button>
+          <button onClick={navigateToTransferFlex}>Flex Points</button>
         </div>
 
         <div className="transfer-bear-button">
-          <button onClick={() => (window.location.href = "/transferBear")}>
-            Bear Bucks
-          </button>
+          <button onClick={navigateToTransferBear}>Bear Bucks</button>
         </div>
       </div>
     </React.Fragment>
