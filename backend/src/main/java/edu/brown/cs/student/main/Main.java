@@ -69,8 +69,8 @@ public final class Main {
     runSparkServer(DEFAULT_PORT);
     
     // user auth
-    IDandPassword iDandPassword = new IDandPassword();
-    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
+//    IDandPassword iDandPassword = new IDandPassword();
+//    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
   private void run() {
