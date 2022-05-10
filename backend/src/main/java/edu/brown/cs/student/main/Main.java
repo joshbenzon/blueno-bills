@@ -5,6 +5,7 @@ import backendhandlers.AndrewsHandler;
 import backendhandlers.BlueRoomHandler;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
+import backendhandlers.IvyRoomHandler;
 import backendhandlers.JosHandler;
 import backendhandlers.RattyHandler;
 import backendhandlers.TableHandler;
@@ -150,6 +151,7 @@ public final class Main {
     Spark.get("/vdub", new VDubHandler());
     Spark.get("/blueroom", new BlueRoomHandler());
     Spark.get("/andrews", new AndrewsHandler());
+    Spark.get("/ivyroom", new IvyRoomHandler());
 
     Spark.init();
   }
