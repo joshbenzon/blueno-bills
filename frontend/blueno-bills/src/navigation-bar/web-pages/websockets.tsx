@@ -15,7 +15,7 @@ function sendMessage(message: string) {
 }
 
 //Update the chat-panel, and the list of connected users
-export function updateChat(msg: any) {
+function updateChat(msg: any) {
   var data = JSON.parse(msg.data);
   id("userlist").innerHTML = "";
 
@@ -36,7 +36,7 @@ function id(id: string) {
   return document.getElementById(id) as HTMLInputElement;
 }
 
-function logger(e: any) {
+export function logger(e: any) {
   console.log("AESPA");
 
   e.preventDefault();

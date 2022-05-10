@@ -1,6 +1,7 @@
 package edu.brown.cs.student.main;
 
 
+import WebScraping.WebScraper;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
@@ -67,14 +68,10 @@ public final class Main {
   public static void main(String[] args) {
     new Main(args).run();
     runSparkServer(DEFAULT_PORT);
-    
-    // user auth
-//    IDandPassword iDandPassword = new IDandPassword();
-//    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
   private void run() {
-//    new WebScraper();
+    new WebScraper();
 
     OptionParser parser = new OptionParser();
     parser.accepts("gui");

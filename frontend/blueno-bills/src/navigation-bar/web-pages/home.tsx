@@ -54,7 +54,8 @@ const Home = () => {
     id("form").hidden = true;
     id("chatter").hidden = false;
 
-    let username = id("username").value;
+    // let username = id("username").value;
+    let username = localStorage.getItem("gmail");
 
     wsurl = "ws://localhost:4567/home?username=" + username;
 
@@ -84,18 +85,13 @@ const Home = () => {
 
       <div className={"page-buttons"}>
         <div id="form">
-          {/* <form action="return logger(event)"> */}
           <form onSubmit={logger}>
-            <input id="username" type="text" name="position" required></input>
-
-            {/* <input type="submit"></input> */}
-            {/* <button id="send" type="submit"> */}
-            <button id="send">Submit!</button>
+            {/* <input id="username" type="text" name="position" required></input> */}
+            <button id="send">Check Active Users!</button>
           </form>
         </div>
 
         <div id="chatter">
-          <h2>Active Users</h2>
           <ul id="userlist"></ul>
           <div id="chat"></div>
         </div>
