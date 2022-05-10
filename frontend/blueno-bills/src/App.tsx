@@ -74,27 +74,30 @@ function App() {
     console.log("table headers: " + tableHeaders);
     console.log("table values: " + rows);
   }, []);
-  
-   //creating a dummy user until we have auth established! 
-    const currUserEmail = "Jillian_Dominguez@brown.edu"; //hard coding for now until we have auth established and can store curr user data
-    
-    let currUserMealSwipes: number = 0;
-    let currUserFlexPoints: number = 0;
-    let currUserBearBucks: number = 0;
-  
-    if (rows) {
-        for (let i = 0; i < rows.length; i++) {
-        if (equalsIgnoringCase(rows[i].email, currUserEmail)) {
-          
-            //user
-            currUserMealSwipes = parseInt(rows[i].mealSwipes);
-            currUserFlexPoints = parseInt(rows[i].flexPoints);
-            currUserBearBucks = parseInt(rows[i].bearBucks);
-        }
-    }
-    }
 
-    //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  //creating a dummy user until we have auth established!
+  //hard coding for now until we have auth established and can store curr user data
+  const currUserEmail = "Jillian_Dominguez@brown.edu";
+  //   const currUserEmail = "Joshua_Benzon@brown.edu";
+  //   const currUserEmail = "joshua_benzon@brown.edu";
+  //   const currUserEmail = localStorage.getItem("gmail") as string;
+
+  let currUserMealSwipes: number = 0;
+  let currUserFlexPoints: number = 0;
+  let currUserBearBucks: number = 0;
+
+  if (rows) {
+    for (let i = 0; i < rows.length; i++) {
+      if (equalsIgnoringCase(rows[i].email, currUserEmail)) {
+        //user
+        currUserMealSwipes = parseInt(rows[i].mealSwipes);
+        currUserFlexPoints = parseInt(rows[i].flexPoints);
+        currUserBearBucks = parseInt(rows[i].bearBucks);
+      }
+    }
+  }
+
+  //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
   function equalsIgnoringCase(text: string, other: string) {
     return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
   }
@@ -111,16 +114,65 @@ function App() {
           <Route path="/request" element={<Request />} />
           <Route path="/transfer" element={<Transfer />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/account" element={<Account tableHeaders = {tableHeaders} userEmail = {currUserEmail} userMS = {currUserMealSwipes} userFP = {currUserFlexPoints} userBB = {currUserBearBucks} />}/>
+          <Route
+            path="/account"
+            element={
+              <Account
+                tableHeaders={tableHeaders}
+                userEmail={currUserEmail}
+                userMS={currUserMealSwipes}
+                userFP={currUserFlexPoints}
+                userBB={currUserBearBucks}
+              />
+            }
+          />
 
-           <Route path="/requestMeal" element={<RequestMeal tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/requestFlex" element={<RequestFlex tableHeaders = {tableHeaders} rows = {rows}/>}/>
-                <Route path="/requestBear" element={<RequestBear tableHeaders = {tableHeaders} rows = {rows}/>}/>
+          <Route
+            path="/requestMeal"
+            element={<RequestMeal tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/requestFlex"
+            element={<RequestFlex tableHeaders={tableHeaders} rows={rows} />}
+          />
+          <Route
+            path="/requestBear"
+            element={<RequestBear tableHeaders={tableHeaders} rows={rows} />}
+          />
 
-
-                <Route path="/transferMeal" element={<TransferMeal tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userMS = {currUserMealSwipes} />}/>
-                <Route path="/transferFlex" element={<TransferFlex tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userFP = {currUserFlexPoints} />}/>
-                <Route path="/transferBear" element={<TransferBear tableHeaders = {tableHeaders} rows = {rows} userEmail = {currUserEmail} userBB = {currUserBearBucks}/>}/>
+          <Route
+            path="/transferMeal"
+            element={
+              <TransferMeal
+                tableHeaders={tableHeaders}
+                rows={rows}
+                userEmail={currUserEmail}
+                userMS={currUserMealSwipes}
+              />
+            }
+          />
+          <Route
+            path="/transferFlex"
+            element={
+              <TransferFlex
+                tableHeaders={tableHeaders}
+                rows={rows}
+                userEmail={currUserEmail}
+                userFP={currUserFlexPoints}
+              />
+            }
+          />
+          <Route
+            path="/transferBear"
+            element={
+              <TransferBear
+                tableHeaders={tableHeaders}
+                rows={rows}
+                userEmail={currUserEmail}
+                userBB={currUserBearBucks}
+              />
+            }
+          />
         </Route>
       </Routes>
     </Router>

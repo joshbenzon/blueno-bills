@@ -15,9 +15,8 @@ interface Row {
 interface TransferMealProp {
   tableHeaders: string[] | null;
   rows: Row[] | null;
-  userEmail :string;
+  userEmail: string;
   userMS: number;
-
 }
 
 interface InputProp {
@@ -45,14 +44,6 @@ function TransferMeal(props: TransferMealProp) {
     formState: { errors },
   } = useForm<InputProp>();
 
-  function storeInputData() {
-    console.log(inputEmail);
-    console.log(inputDescription);
-    console.log(inputAmount);
-  }
-
-  const onSubmit = (inputData: InputProp) => storeInputData();
-    
   let recipientCurrMealSwipes: number = 0; //the current number of meal swipes of the person being sent swipes
 
   if (props.rows) {
@@ -78,10 +69,10 @@ function TransferMeal(props: TransferMealProp) {
     newRecipientMealSwipes = recipientCurrMealSwipes + parseInt(inputAmount);
   }
 
-  const UpdateRequest = async() => {
+  const UpdateRequest = async () => {
     console.log("new user meal swipes: " + newNumMealSwipes);
     console.log("recipient new meal swipes: " + newRecipientMealSwipes);
-    console.log("enters POST")
+    console.log("enters POST");
     storeInputData();
     //here we are updating the mealSwipes column in the StudentData table
     //decrementing the current user's meal swipes by 1 since they are transferring
@@ -116,38 +107,61 @@ function TransferMeal(props: TransferMealProp) {
     };
 
     console.log("req body: " + requestOptions.body);
-    const response = await fetch("http://localhost:4567/update", requestOptions)
-    const jsonResponse = await response.json()
-    console.log("response1: " + jsonResponse)
+    const response = await fetch(
+      "http://localhost:4567/update",
+      requestOptions
+    );
+
+    const jsonResponse = await response.json();
+    console.log("response1: " + jsonResponse);
 
     //we need another POST request to update the values of the user who was sent the meal swipe
+    const recipientBody: string =
+      '{"tableName": ' +
+      '"' +
+      "Students" +
+      '"' +
+      ', "colNameToNewVal" : {' +
+      '"' +
+      "mealSwipes" +
+      '"' +
+      " : " +
+      '"' +
+      newRecipientMealSwipes +
+      '"' +
+      '}, "conditions" : {' +
+      '"' +
+      "email" +
+      '"' +
+      " : " +
+      '"' +
+      inputEmail +
+      '"' +
+      "}}";
 
-    const recipientBody :string =  "{\"tableName\": " + "\"" + "Students" + "\"" + ", \"colNameToNewVal\" : {" +  "\"" +"mealSwipes" + "\"" + " : " 
-        + "\""+ newRecipientMealSwipes + "\"" + "}, \"conditions\" : {" 
-        + "\"" + "email" + "\"" + " : "  + "\"" + inputEmail + "\""+ "}}"
-
-        const requestOptionsRecipient = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: recipientBody
-        };
-        console.log("req body: " + requestOptionsRecipient.body)
-        const response1 = await fetch('http://localhost:4567/update', requestOptionsRecipient)
-        const jsonResponse1 = await response1.json()
-        console.log("response2: " + jsonResponse1)
-      
     const requestOptionsRecipient = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: body,
+      body: recipientBody,
     };
+
+    console.log("req body: " + requestOptionsRecipient.body);
+    const response1 = await fetch(
+      "http://localhost:4567/update",
+      requestOptionsRecipient
+    );
+
+    const jsonResponse1 = await response1.json();
+    console.log("response2: " + jsonResponse1);
 
     console.log("req body: " + requestOptions.body);
 
-    fetch("http://localhost:4567/update", requestOptions).then((response) => {
-      response.json();
-      console.log("response: " + response.status);
-    });
+    fetch("http://localhost:4567/update", requestOptions)
+      .then((response) => {
+        response.json();
+        console.log("response: " + response.status);
+      })
+      .then(() => (window.location.href = "/transferMeal"));
   };
 
   return (
