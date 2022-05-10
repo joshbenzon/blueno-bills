@@ -1,5 +1,5 @@
 INPUT
 load-database ../data/WrongFile.sqlite3
 OUTPUT
-ERROR:
+ERROR: Invalid file name
 END
