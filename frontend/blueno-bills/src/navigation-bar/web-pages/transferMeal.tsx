@@ -31,9 +31,10 @@ function TransferMeal(props: TransferMealProp) {
     formState: { errors },
   } = useForm();
 
-  let recipientCurrentMeal: number = 0; // amount of meal swipes of the person receiving swipes
+  let recipientCurrentMeal: number = 0; // amount of meal swipes of the person receiving
 
   if (props.rows) {
+    // check if there's rows
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         recipientCurrentMeal = parseInt(props.rows[i].mealSwipes);
@@ -46,8 +47,8 @@ function TransferMeal(props: TransferMealProp) {
     return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
   }
 
-  let userTransferMeal: number = 0; // amount of meal swipes of the person transferring swipes
-  let userReceiveMeal: number = 0; // amount of meal swipes of the person receiving swipes
+  let userTransferMeal: number = 0; // amount of meal swipes of the person transferring
+  let userReceiveMeal: number = 0; // amount of meal swipes of the person receiving
 
   if (inputAmount) {
     userTransferMeal = props.userMS - parseInt(inputAmount);
