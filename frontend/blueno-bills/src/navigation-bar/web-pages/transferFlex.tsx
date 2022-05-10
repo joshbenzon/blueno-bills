@@ -189,7 +189,7 @@ function TransferFlex(props: TransferFlexProp) {
 
             <input
               type="number"
-              placeholder="Between 1-20"
+              placeholder="Between 1-100"
               {...register("amount", { required: true, min: 1, max: 20 })}
               onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                 setInputAmount(event.target.value)

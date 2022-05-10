@@ -17,7 +17,7 @@ function RequestBear(props: TableProp) {
   return (
     <React.Fragment>
       <div className="page-info">
-        <h1>Request: Meal Credits</h1>
+        <h1>Request: Bear Bucks</h1>
       </div>
     </React.Fragment>
   );
