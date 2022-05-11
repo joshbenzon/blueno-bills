@@ -153,3 +153,7 @@ code {
   font-weight: bold;
   color: #79acff;
 }
+
+th {
+  font-style: italic;
+}

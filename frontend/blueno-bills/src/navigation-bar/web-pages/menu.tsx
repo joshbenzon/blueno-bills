@@ -1,59 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-
-// ratty and vdub
-interface threeMeals {
-  breakfast: foodItems[];
-  lunch: foodItems[];
-  dinner: foodItems[];
-}
-
-// andrews and ivy
-interface twoMealsOne {
-  lunch: foodItems[];
-  dinner: foodItems[];
-}
-
-// blue room
-interface twoMealsTwo {
-  breakfast: foodItems[];
-  lunch: foodItems[];
-}
-
-// jos
-interface oneMeal {
-  dinner: foodItems[];
-}
-
-interface foodItems {
-  foods: string[];
-}
 
 const Menu = () => {
-  const [menuBreakfast, setMenuBreakfast] = useState<foodItems | null>(null);
-  const [menuLunch, setMenuLunch] = useState<foodItems | null>(null);
-  const [menuDinner, setMenuDinner] = useState<foodItems | null>(null);
-
-  function setRatty(menu: foodItems[]): void {
-    console.log(menu[0] + " BREAKFAST");
-    console.log(menu[1] + " LUNCH");
-    console.log(menu[2] + " DINNER");
-
-    setMenuBreakfast(menu[0]);
-    setMenuLunch(menu[1]);
-    setMenuDinner(menu[2]);
-  }
-
-  function loadRatty(): void {
-    console.log("RATTY");
-
-    fetch("http://localhost:4567/ratty", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((menu: foodItems[]) => setRatty(menu));
-  }
+  const navigateToRattyMenus = () => {
+    window.location.href = "/rattyMenus";
+  };
 
   return (
     <React.Fragment>
@@ -63,7 +13,7 @@ const Menu = () => {
 
       <div className={"page-buttons"}>
         <div className="ratty-button">
-          <button onClick={loadRatty}>Sharpe Refectory</button>
+          <button onClick={navigateToRattyMenus}>Sharpe Refectory</button>
         </div>
 
         <div className="vdub-button">

@@ -24,6 +24,8 @@ import TransferMeal from "./navigation-bar/web-pages/transferMeal";
 import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
 
+import RattyMenus from "./navigation-bar/web-pages/rattyMenus";
+
 interface Row {
   StudentID: string;
   email: string;
@@ -38,7 +40,44 @@ interface database {
   rows: Row[]; // each value for a header is a slot in the inner-inner array
 }
 
+// interface threeMeals {
+//   breakfast: foodItems;
+//   lunch: foodItems;
+//   dinner: foodItems;
+// }
+
+// interface foodItems {
+//   foods: string[];
+// }
+
 function App() {
+  // load menus
+  const [menuBreakfast, setMenuBreakfast] = useState<string[] | null>(null);
+  const [menuLunch, setMenuLunch] = useState<string[] | null>(null);
+  const [menuDinner, setMenuDinner] = useState<string[] | null>(null);
+  const [menuAll, setMenuAll] = useState<string[][]>([]);
+
+  function setRatty(menu: string[][]): void {
+    setMenuBreakfast(menu[0]);
+    setMenuLunch(menu[1]);
+    setMenuDinner(menu[2]);
+
+    menuAll[0] = menu[0] as string[];
+    menuAll[1] = menu[1] as string[];
+    menuAll[2] = menu[2] as string[];
+
+    setMenuAll(menuAll);
+  }
+
+  function loadRatty(): void {
+    fetch("http://localhost:4567/ratty", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setRatty(menu));
+  }
+
+  // load database
   const [tableName, setTableName] = useState<string | null>(null);
   const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
   const [rows, setRows] = useState<Row[] | null>(null);
@@ -59,10 +98,14 @@ function App() {
 
   useEffect(() => {
     loadDatabase();
-
     console.log("Table Name: " + tableName);
     console.log("Table Headers: " + tableHeaders);
     console.log("Table Values: " + rows);
+
+    loadRatty();
+    console.log("Breakfast: " + menuBreakfast);
+    console.log("Lunch: " + menuLunch);
+    console.log("Dinner: " + menuDinner);
   }, []);
 
   const currUserEmail = localStorage.getItem("gmail") as string;
@@ -157,6 +200,8 @@ function App() {
               />
             }
           />
+
+          <Route path="/rattyMenus" element={<RattyMenus props={menuAll} />} />
         </Route>
       </Routes>
     </Router>
