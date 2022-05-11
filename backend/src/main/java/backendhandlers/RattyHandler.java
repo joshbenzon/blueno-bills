@@ -6,6 +6,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RattyHandler implements Route {
@@ -27,9 +28,17 @@ public class RattyHandler implements Route {
 //      System.out.println(scraper.getRattyBreak() + " BREAKFAST");
 //      System.out.println(scraper.getRattyLunch() + " LUNCH");
 //      System.out.println(scraper.getRattyDin() + " DINNER");
+      ArrayList<ArrayList<String[]>> rattyMenus = new ArrayList<>();
+      rattyMenus.add(scraper.getRattyBreak());
+      rattyMenus.add(scraper.getRattyLunch());
+      rattyMenus.add(scraper.getRattyDin());
 
-      return GSON.toJson(scraper.getRattyBreak()) +
-          GSON.toJson(scraper.getRattyLunch()) + GSON.toJson(scraper.getRattyDin());
+      System.out.println(rattyMenus + " RATTY MENUS");
+
+      return GSON.toJson(rattyMenus);
+//      return GSON.toJson(scraper.getRattyBreak());
+//      return GSON.toJson(scraper.getRattyBreak()) +
+//          GSON.toJson(scraper.getRattyLunch()) + GSON.toJson(scraper.getRattyDin());
 
     } catch (IllegalStateException | IllegalArgumentException e) {
       return GSON.toJson(e.getMessage());

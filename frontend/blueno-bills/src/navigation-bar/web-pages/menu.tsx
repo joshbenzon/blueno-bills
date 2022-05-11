@@ -31,33 +31,29 @@ interface foodItems {
 }
 
 const Menu = () => {
-  // const [menuBreakfast, setMenuBreakfast] = useState<any | null>(null);
-  // const [menuLunch, setMenuLunch] = useState<any | null>(null);
-  // const [menuDinner, setMenuDinner] = useState<any | null>(null);
+  const [menuBreakfast, setMenuBreakfast] = useState<foodItems | null>(null);
+  const [menuLunch, setMenuLunch] = useState<foodItems | null>(null);
+  const [menuDinner, setMenuDinner] = useState<foodItems | null>(null);
 
-  // function setRatty(menu: threeMeals): void {
-  //   setMenuBreakfast(menu["breakfast"]);
-  //   setMenuLunch(menu["lunch"]);
-  //   setMenuDinner(menu["dinner"]);
-  // }
+  function setRatty(menu: foodItems[]): void {
+    console.log(menu[0] + " BREAKFAST");
+    console.log(menu[1] + " LUNCH");
+    console.log(menu[2] + " DINNER");
+
+    setMenuBreakfast(menu[0]);
+    setMenuLunch(menu[1]);
+    setMenuDinner(menu[2]);
+  }
 
   function loadRatty(): void {
     console.log("RATTY");
 
     fetch("http://localhost:4567/ratty", {
       method: "GET",
-    }).then((response) => response.json());
-    // .then((response) => console.log(response.json()));
-    // .then((menu: threeMeals) => setRatty(menu));
+    })
+      .then((response) => response.json())
+      .then((menu: foodItems[]) => setRatty(menu));
   }
-
-  useEffect(() => {
-    loadRatty();
-
-    // console.log("BREAKFAST: " + menuBreakfast);
-    // console.log("LUNCH: " + menuLunch);
-    // console.log("DINNER: " + menuDinner);
-  }, []);
 
   return (
     <React.Fragment>
@@ -67,7 +63,7 @@ const Menu = () => {
 
       <div className={"page-buttons"}>
         <div className="ratty-button">
-          <button>Sharpe Refectory</button>
+          <button onClick={loadRatty}>Sharpe Refectory</button>
         </div>
 
         <div className="vdub-button">
