@@ -33,15 +33,9 @@ interface Row {
 }
 
 interface database {
-  // each table is a slot in the array
-  name: string;
-
-  // each table is a slot in the outer array, each header for a table is a slot in the inner array
-  headers: string[];
-
-  // each table is a slot in the outer array, each header for a table is a slot in the inner array, each value for a
-  // header is a slot in the inner-inner array
-  rows: Row[];
+  name: string; // each table is a slot in the outer array
+  headers: string[]; // each header for a table is a slot in the inner array
+  rows: Row[]; // each value for a header is a slot in the inner-inner array
 }
 
 function App() {
@@ -50,29 +44,25 @@ function App() {
   const [rows, setRows] = useState<Row[] | null>(null);
 
   function setDatabase(db: database): void {
-    console.log("enters set db");
-
     setTableName(db["name"]);
     setTableHeaders(db["headers"]);
     setRows(db["rows"]);
   }
 
   function loadDatabase(): void {
-    console.log("enters load database");
-
     fetch("http://localhost:4567/table", {
       method: "GET",
     })
-      .then((r) => r.json())
+      .then((response) => response.json())
       .then((db: database) => setDatabase(db));
   }
 
   useEffect(() => {
     loadDatabase();
 
-    console.log("table name: " + tableName);
-    console.log("table headers: " + tableHeaders);
-    console.log("table values: " + rows);
+    console.log("Table Name: " + tableName);
+    console.log("Table Headers: " + tableHeaders);
+    console.log("Table Values: " + rows);
   }, []);
 
   const currUserEmail = localStorage.getItem("gmail") as string;

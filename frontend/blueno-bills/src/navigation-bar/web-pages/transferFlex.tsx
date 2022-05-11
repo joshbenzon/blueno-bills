@@ -34,7 +34,6 @@ function TransferFlex(props: TransferFlexProp) {
   let recipientCurrentFlex: number = 0; // amount of flex points of the person receiving
 
   if (props.rows) {
-    // check if there's rows
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         recipientCurrentFlex = parseInt(props.rows[i].flexPoints);
@@ -190,7 +189,7 @@ function TransferFlex(props: TransferFlexProp) {
             <input
               type="number"
               placeholder="Between 1-100"
-              {...register("amount", { required: true, min: 1, max: 20 })}
+              {...register("amount", { required: true, min: 1, max: 100 })}
               onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                 setInputAmount(event.target.value)
               }
@@ -200,7 +199,7 @@ function TransferFlex(props: TransferFlexProp) {
 
           <div className="input-group">
             <button className="sending-button" type="submit">
-              Transfer!
+              Transfer
             </button>
           </div>
         </form>

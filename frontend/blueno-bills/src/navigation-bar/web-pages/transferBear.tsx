@@ -189,7 +189,7 @@ function TransferBear(props: TransferBearProp) {
             <input
               type="number"
               placeholder="Between 1-50"
-              {...register("amount", { required: true, min: 1, max: 20 })}
+              {...register("amount", { required: true, min: 1, max: 50 })}
               onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                 setInputAmount(event.target.value)
               }
@@ -199,7 +199,7 @@ function TransferBear(props: TransferBearProp) {
 
           <div className="input-group">
             <button className="sending-button" type="submit">
-              Transfer!
+              Transfer
             </button>
           </div>
         </form>

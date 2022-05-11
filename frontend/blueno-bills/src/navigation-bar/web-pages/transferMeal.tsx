@@ -34,7 +34,6 @@ function TransferMeal(props: TransferMealProp) {
   let recipientCurrentMeal: number = 0; // amount of meal swipes of the person receiving
 
   if (props.rows) {
-    // check if there's rows
     for (let i = 0; i < props.rows.length; i++) {
       if (equalsIgnoringCase(props.rows[i].email, inputEmail)) {
         recipientCurrentMeal = parseInt(props.rows[i].mealSwipes);
@@ -200,7 +199,7 @@ function TransferMeal(props: TransferMealProp) {
 
           <div className="input-group">
             <button className="sending-button" type="submit">
-              Transfer!
+              Transfer
             </button>
           </div>
         </form>
