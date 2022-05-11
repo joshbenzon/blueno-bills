@@ -110,6 +110,10 @@ function RattyMenus(props: { props: string[][] }) {
         </div>
 
         <table className="styled-table">
+          <thead>
+            <th>Courses</th>
+            <th>Ingredients</th>
+          </thead>
           <tbody>
             {resultBreakfast
               .slice(1, resultBreakfast.length)
@@ -118,7 +122,6 @@ function RattyMenus(props: { props: string[][] }) {
                   <tr key={index}>
                     <td key={item[0]}>{item[0]}</td>
                     <td key={item[1]}>{item[1]}</td>
-                    <td key={item[2]}>{item[2]}</td>
                   </tr>
                 );
               })}
@@ -130,13 +133,16 @@ function RattyMenus(props: { props: string[][] }) {
         </div>
 
         <table className="styled-table">
+          <thead>
+            <th>Courses</th>
+            <th>Ingredients</th>
+          </thead>
           <tbody>
             {resultLunch.slice(1, resultLunch.length).map((item, index) => {
               return (
                 <tr key={index}>
                   <td key={item[0]}>{item[0]}</td>
                   <td key={item[1]}>{item[1]}</td>
-                  <td key={item[2]}>{item[2]}</td>
                 </tr>
               );
             })}
@@ -148,13 +154,16 @@ function RattyMenus(props: { props: string[][] }) {
         </div>
 
         <table className="styled-table">
+          <thead>
+            <th>Courses</th>
+            <th>Ingredients</th>
+          </thead>
           <tbody>
             {resultDinner.slice(1, resultDinner.length).map((item, index) => {
               return (
                 <tr key={index}>
                   <td key={item[0]}>{item[0]}</td>
                   <td key={item[1]}>{item[1]}</td>
-                  <td key={item[2]}>{item[2]}</td>
                 </tr>
               );
             })}

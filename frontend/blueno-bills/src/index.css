@@ -147,6 +147,13 @@ code {
   text-align: center;
 }
 
+.styled-table th {
+  background-color: #649fff;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
+}
+
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
@@ -162,14 +169,9 @@ code {
 
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid #649fff;
-  /* padding-bottom: 50px; */
 }
 
 .styled-table tbody tr.active-row {
   font-weight: bold;
   color: #79acff;
-}
-
-th {
-  font-style: italic;
 }
