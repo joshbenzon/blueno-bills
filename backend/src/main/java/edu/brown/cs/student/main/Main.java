@@ -1,6 +1,7 @@
 package edu.brown.cs.student.main;
 
 import WebScraping.WebScraper;
+import backendhandlers.RattyHandler;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
@@ -69,8 +70,6 @@ public final class Main {
   }
 
   private void run() {
-    new WebScraper();
-
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
@@ -131,6 +130,8 @@ public final class Main {
     Spark.post("/update", new UpdateHandler(objectOrganizer));
     Spark.post("/insert", new InsertRowHandler(objectOrganizer));
     Spark.post("/delete", new DeleteHandler(objectOrganizer));
+
+    Spark.get("/ratty", new RattyHandler());
 
     Spark.init();
   }
