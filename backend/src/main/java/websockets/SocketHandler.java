@@ -22,11 +22,10 @@ public class SocketHandler {
 
 
     String username = "User" + Main.nextUserNumber++;
-    username = urlString.split("username=")[1].split("&room=")[0];
+    username = urlString.split("username=")[1];
 
     UserInfo thisUser = new UserInfo(user, username);
     Main.users.put(user, thisUser);
-
     Main.broadcastMessage(sender = "Server", msg = (username + " joined the chat"));
   }
 

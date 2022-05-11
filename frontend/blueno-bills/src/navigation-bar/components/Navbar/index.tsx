@@ -1,14 +1,6 @@
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./navigation";
 
-import { useNavigate } from "react-router-dom";
-
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const navigateToLogin = () => {
-    navigate("/menu");
-  };
-
   return (
     <>
       <Nav>

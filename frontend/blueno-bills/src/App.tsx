@@ -24,6 +24,8 @@ import TransferMeal from "./navigation-bar/web-pages/transferMeal";
 import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
 
+import RattyMenus from "./navigation-bar/web-pages/rattyMenus";
+
 interface Row {
   StudentID: string;
   email: string;
@@ -33,51 +35,79 @@ interface Row {
 }
 
 interface database {
-  // each table is a slot in the array
-  name: string;
-
-  // each table is a slot in the outer array, each header for a table is a slot in the inner array
-  headers: string[];
-
-  // each table is a slot in the outer array, each header for a table is a slot in the inner array, each value for a
-  // header is a slot in the inner-inner array
-  rows: Row[];
+  name: string; // each table is a slot in the outer array
+  headers: string[]; // each header for a table is a slot in the inner array
+  rows: Row[]; // each value for a header is a slot in the inner-inner array
 }
 
+// interface threeMeals {
+//   breakfast: foodItems;
+//   lunch: foodItems;
+//   dinner: foodItems;
+// }
+
+// interface foodItems {
+//   foods: string[];
+// }
+
 function App() {
+  // load menus
+  const [menuBreakfast, setMenuBreakfast] = useState<string[] | null>(null);
+  const [menuLunch, setMenuLunch] = useState<string[] | null>(null);
+  const [menuDinner, setMenuDinner] = useState<string[] | null>(null);
+  const [menuAll, setMenuAll] = useState<string[][]>([]);
+
+  function setRatty(menu: string[][]): void {
+    setMenuBreakfast(menu[0]);
+    setMenuLunch(menu[1]);
+    setMenuDinner(menu[2]);
+
+    menuAll[0] = menu[0] as string[];
+    menuAll[1] = menu[1] as string[];
+    menuAll[2] = menu[2] as string[];
+
+    setMenuAll(menuAll);
+  }
+
+  function loadRatty(): void {
+    fetch("http://localhost:4567/ratty", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setRatty(menu));
+  }
+
+  // load database
   const [tableName, setTableName] = useState<string | null>(null);
   const [tableHeaders, setTableHeaders] = useState<string[] | null>(null);
   const [rows, setRows] = useState<Row[] | null>(null);
 
   function setDatabase(db: database): void {
-    console.log("enters set db");
-
     setTableName(db["name"]);
     setTableHeaders(db["headers"]);
     setRows(db["rows"]);
   }
 
   function loadDatabase(): void {
-    console.log("enters load database");
-
     fetch("http://localhost:4567/table", {
       method: "GET",
     })
-      .then((r) => r.json())
+      .then((response) => response.json())
       .then((db: database) => setDatabase(db));
   }
 
   useEffect(() => {
     loadDatabase();
+    console.log("Table Name: " + tableName);
+    console.log("Table Headers: " + tableHeaders);
+    console.log("Table Values: " + rows);
 
-    console.log("table name: " + tableName);
-    console.log("table headers: " + tableHeaders);
-    console.log("table values: " + rows);
+    loadRatty();
+    console.log("Breakfast: " + menuBreakfast);
+    console.log("Lunch: " + menuLunch);
+    console.log("Dinner: " + menuDinner);
   }, []);
 
-  //creating a dummy user until we have auth established!
-  //hard coding for now until we have auth established and can store curr user data
-  //   const currUserEmail = "jillian_dominguez@brown.edu";
   const currUserEmail = localStorage.getItem("gmail") as string;
 
   let currUserMealSwipes: number = 0;
@@ -87,7 +117,6 @@ function App() {
   if (rows) {
     for (let i = 0; i < rows.length; i++) {
       if (equalsIgnoringCase(rows[i].email, currUserEmail)) {
-        //user
         currUserMealSwipes = parseInt(rows[i].mealSwipes);
         currUserFlexPoints = parseInt(rows[i].flexPoints);
         currUserBearBucks = parseInt(rows[i].bearBucks);
@@ -95,7 +124,7 @@ function App() {
     }
   }
 
-  //from here: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+  // source: https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
   function equalsIgnoringCase(text: string, other: string) {
     return text.localeCompare(other, undefined, { sensitivity: "base" }) === 0;
   }
@@ -171,6 +200,8 @@ function App() {
               />
             }
           />
+
+          <Route path="/rattyMenus" element={<RattyMenus props={menuAll} />} />
         </Route>
       </Routes>
     </Router>

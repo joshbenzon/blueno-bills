@@ -1,6 +1,7 @@
 package edu.brown.cs.student.main;
 
-
+import WebScraping.WebScraper;
+import backendhandlers.RattyHandler;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
@@ -49,15 +50,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class Main {
   private static final int DEFAULT_PORT = 4567;
-  //  private static final int DEFAULT_PORT = 3000;
   private static ObjectOrganizer objectOrganizer;
   private final String[] args;
   public static int nextUserNumber = 1; // assign to username for next connecting user
   public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
- private Main(String[] args) {
-   this.args = args;
- }
+  private Main(String[] args) {
+    this.args = args;
+  }
 
   /**
    * The initial method called when execution begins.
@@ -67,15 +67,9 @@ public final class Main {
   public static void main(String[] args) {
     new Main(args).run();
     runSparkServer(DEFAULT_PORT);
-    
-    // user auth
-//    IDandPassword iDandPassword = new IDandPassword();
-//    LoginFrontEnd loginFrontEnd = new LoginFrontEnd(iDandPassword.getLoginInformation());
   }
 
   private void run() {
-//    new WebScraper();
-
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
     parser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(DEFAULT_PORT);
@@ -103,21 +97,14 @@ public final class Main {
   }
 
   private static void runSparkServer(int port) {
-    // new stuff
     String localHost = "127.0.0.1";
     Spark.ipAddress(localHost);
 
     Spark.port(port);
     Spark.externalStaticFileLocation("src/main/resources/static");
 
-
-    // web sockets
-
-    String localhost = "127.0.0.1";
-    Spark.ipAddress(localhost);
-
     FreeMarkerEngine engine = createEngine();
-    Spark.webSocket("", SocketHandler.class);
+    Spark.webSocket("/home", SocketHandler.class);
     Spark.get("", new HomePage(), engine);
 
     Spark.init();
@@ -143,6 +130,8 @@ public final class Main {
     Spark.post("/update", new UpdateHandler(objectOrganizer));
     Spark.post("/insert", new InsertRowHandler(objectOrganizer));
     Spark.post("/delete", new DeleteHandler(objectOrganizer));
+
+    Spark.get("/ratty", new RattyHandler());
 
     Spark.init();
   }

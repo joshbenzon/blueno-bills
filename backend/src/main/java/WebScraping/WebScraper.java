@@ -12,148 +12,97 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import java.util.Objects;
+
 public class WebScraper {
+  private ChromeDriver driver;
+  private final ArrayList<String[]> rattyBreak =  new ArrayList<>();
+  private final ArrayList<String[]> rattyLunch = new ArrayList<>();
+  private final ArrayList<String[]> rattyDin = new ArrayList<>();
+  private final ArrayList<String[]> vDubBreak =  new ArrayList<>();
+  private final ArrayList<String[]> vDubLunch =  new ArrayList<>();
+  private final ArrayList<String[]> vDubDin =  new ArrayList<>();
+  private final ArrayList<String[]> andrewsLunch =  new ArrayList<>();
+  private final ArrayList<String[]> andrewsDin =  new ArrayList<>();
+  private final ArrayList<String[]> ivyRoomLunch =  new ArrayList<>();
+  private final ArrayList<String[]> ivyRoomDin =  new ArrayList<>();
+  private final ArrayList<String[]> blueRoomBreak =  new ArrayList<>();
+  private final ArrayList<String[]> blueRoomLunch =  new ArrayList<>();
+  private ArrayList<String[]> josDin =  new ArrayList<>();
 
-    private final ChromeDriver driver;
+  public WebScraper(){
+//      WebDriverManager.chromedriver().setup();
+//      ChromeOptions options = new ChromeOptions();
+//      this.driver = new ChromeDriver(options);
+//      this.scrapeJos();
 
+//      System.out.println("RATTY BREAKFAST IS: ");
+//      for (String[] menu : this.getRattyBreak()){
+//        System.out.println(Arrays.toString(menu));
+//      }
 
+//
+//      driver.quit();
 
-    private final ArrayList<String[]> rattyBreak =  new ArrayList<>();
-    private final ArrayList<String[]> rattyLunch = new ArrayList<>();
-    private final ArrayList<String[]> rattyDin = new ArrayList<>();
-    private final ArrayList<String[]> vDubBreak =  new ArrayList<>();
-    private final ArrayList<String[]> vDubLunch =  new ArrayList<>();
-    private final ArrayList<String[]> vDubDin =  new ArrayList<>();
-    private final ArrayList<String[]> andrewsLunch =  new ArrayList<>();
-    private final ArrayList<String[]> andrewsDin =  new ArrayList<>();
-    private final ArrayList<String[]> ivyRoomLunch =  new ArrayList<>();
-    private final ArrayList<String[]> ivyRoomDin =  new ArrayList<>();
-    private final ArrayList<String[]> blueRoomBreak =  new ArrayList<>();
-    private final ArrayList<String[]> blueRoomLunch =  new ArrayList<>();
-    private ArrayList<String[]> josDin =  new ArrayList<>();
-
-    public WebScraper(){
-      WebDriverManager.chromedriver().setup();
-      ChromeOptions options = new ChromeOptions();
-      this.driver = new ChromeDriver(options);
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeRatty();
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeVDub();
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeAndrews();
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeIvyRoom();
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeBlueRoom();
-      driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-      this.scrapeJos();
-
-      System.out.println("RATTY BREAKFAST IS: ");
-      for (String[] menu : this.getRattyBreak()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("RATTY LUNCH IS: ");
-
-      for (String[] menu : this.getRattyLunch()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("RATTY DINNER IS: ");
-
-      for (String[] menu : this.getRattyDin()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("VDUB BREAKFAST IS: ");
-      for (String[] menu : this.getvDubBreak()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("VDUB LUNCH IS: ");
-      for (String[] menu : this.getvDubLunch()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("VDUB DINNER IS: ");
-
-      for (String[] menu : this.getvDubDin()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("BLUEROOM BREAKFAST IS: ");
-      for (String[] menu : this.getBlueRoomBreak()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("BLUEROOM LUNCH IS: ");
-
-      for (String[] menu : this.getBlueRoomLunch()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("IVYROOM LUNCH IS: ");
-      for (String[] menu : this.getIvyRoomLunch()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("IVYROOM DINNER IS: ");
-      for (String[] menu : this.getIvyRoomDin()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("ANDREWS LUNCH IS: ");
-      for (String[] menu : this.getAndrewsLunch()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("ANDREWS DINNER IS: ");
-      for (String[] menu : this.getAndrewsDin()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      System.out.println("JO'S DINNER IS: ");
-      for (String[] menu : this.getJosDin()){
-        System.out.println(Arrays.toString(menu));
-      }
-
-      driver.quit();
-
-    }
+  }
 
   public void scrapeAndrews (){
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
 
     scrapeTwo("https://dining.brown.edu/cafe/andrews-commons/", andrewsLunch,andrewsDin);
+    driver.quit();
 
   }
 
   public void scrapeIvyRoom (){
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
 
     scrapeTwo("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch,ivyRoomDin);
+    driver.quit();
 
   }
 
   public void scrapeBlueRoom (){
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
 
     scrapeTwo("https://dining.brown.edu/cafe/blue-room/", blueRoomBreak,blueRoomLunch);
+    driver.quit();
 
   }
 
   public void scrapeJos(){
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
+
     josDin = scrapeOneMenu("https://dining.brown.edu/cafe/josiahs/");
+    driver.quit();
+    driver.quit();
   }
 
 
-  private void scrapeRatty() {
+  public void scrapeRatty() {
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
 
-   scrapeThree("https://dining.brown.edu/cafe/sharpe-refectory/", rattyBreak, rattyLunch, rattyDin);
-
+    scrapeThree("https://dining.brown.edu/cafe/sharpe-refectory/", rattyBreak, rattyLunch, rattyDin);
+    driver.quit();
   }
 
-  private void scrapeVDub() {
+  public void scrapeVDub() {
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    driver = new ChromeDriver(options);
 
     scrapeThree("https://dining.brown.edu/cafe/verney-woolley/", vDubBreak,vDubLunch,vDubDin);
+    driver.quit();
 
   }
 
@@ -217,7 +166,7 @@ public class WebScraper {
     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
     expandDropDowns();
 
-    List<WebElement> menuItems = menu.findElements(By.className("site-panel__daypart-item"));
+    List<WebElement> menuItems = menu.findElements(By.className("site-panel__daypart-item-container"));
     driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
 
     ArrayList<String[]> menuList = new ArrayList<>();
@@ -227,13 +176,20 @@ public class WebScraper {
 
   private ArrayList<String[]> getMenuItems(List<WebElement> menuItems,
                                            ArrayList<String[]> menuList) {
+
     for (WebElement menuItem : menuItems) {
       String header =
           menuItem.findElement(By.className("site-panel__daypart-item-header")).getText();
+
+      //running over again in case text did not register the first time
+      while(Objects.equals(
+          header, "")){
+        header = menuItem.findElement(By.className("site-panel__daypart-item-header")).getText();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
+      }
       driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
       String description =
           menuItem.findElement(By.className("site-panel__daypart-item-content")).getText();
-
       driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
 
       String[] food = {header, description};
@@ -250,6 +206,7 @@ public class WebScraper {
       if(!Boolean.parseBoolean(button.getAttribute("aria-expanded"))){
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
         button.sendKeys(Keys.ENTER);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
       }
     }
   }
@@ -309,5 +266,3 @@ public class WebScraper {
     return josDin;
   }
 }
-
-
