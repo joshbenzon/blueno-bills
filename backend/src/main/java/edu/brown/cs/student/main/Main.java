@@ -1,6 +1,5 @@
 package edu.brown.cs.student.main;
 
-
 import WebScraping.WebScraper;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
@@ -50,15 +49,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class Main {
   private static final int DEFAULT_PORT = 4567;
-  //  private static final int DEFAULT_PORT = 3000;
   private static ObjectOrganizer objectOrganizer;
   private final String[] args;
   public static int nextUserNumber = 1; // assign to username for next connecting user
   public static Map<Session, UserInfo> users = new ConcurrentHashMap<>();
 
- private Main(String[] args) {
-   this.args = args;
- }
+  private Main(String[] args) {
+    this.args = args;
+  }
 
   /**
    * The initial method called when execution begins.
@@ -71,7 +69,7 @@ public final class Main {
   }
 
   private void run() {
-//    new WebScraper();
+    new WebScraper();
 
     OptionParser parser = new OptionParser();
     parser.accepts("gui");
@@ -100,7 +98,6 @@ public final class Main {
   }
 
   private static void runSparkServer(int port) {
-    // new stuff
     String localHost = "127.0.0.1";
     Spark.ipAddress(localHost);
 
