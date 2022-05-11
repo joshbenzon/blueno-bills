@@ -105,7 +105,10 @@ function RattyMenus(props: { props: string[][] }) {
       </div>
 
       <div className="table-page">
-        <h2>Breakfast</h2>
+        <div className="title-table">
+          <h2>Breakfast</h2>
+        </div>
+
         <table className="styled-table">
           <tbody>
             {resultBreakfast
@@ -122,7 +125,10 @@ function RattyMenus(props: { props: string[][] }) {
           </tbody>
         </table>
 
-        <h2>Lunch</h2>
+        <div className="title-table">
+          <h2>Lunch</h2>
+        </div>
+
         <table className="styled-table">
           <tbody>
             {resultLunch.slice(1, resultLunch.length).map((item, index) => {
@@ -137,7 +143,10 @@ function RattyMenus(props: { props: string[][] }) {
           </tbody>
         </table>
 
-        <h2>Dinner</h2>
+        <div className="title-table">
+          <h2>Dinner</h2>
+        </div>
+
         <table className="styled-table">
           <tbody>
             {resultDinner.slice(1, resultDinner.length).map((item, index) => {
