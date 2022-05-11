@@ -1,14 +1,6 @@
 import React from "react";
 import BluenoTable from "../tablecomponent/BluenoTable";
 
-interface Row {
-  StudentID: string;
-  email: string;
-  mealSwipes: string;
-  flexPoints: string;
-  bearBucks: string;
-}
-
 interface TableProp {
   tableHeaders: string[] | null;
   userEmail: string;

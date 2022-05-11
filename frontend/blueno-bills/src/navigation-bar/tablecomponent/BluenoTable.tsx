@@ -1,11 +1,3 @@
-interface Row {
-  StudentID: string;
-  email: string;
-  mealSwipes: string;
-  flexPoints: string;
-  bearBucks: string;
-}
-
 interface TableProp {
   tableHeaders: string[] | null;
   userEmail: string;
@@ -17,7 +9,7 @@ interface TableProp {
 function BluenoTable(props: TableProp) {
   const headerContent = [];
 
-  //we don't want the studentID column to show up
+  // we don't want the studentID column to show up
   if (props.tableHeaders) {
     for (let i = 0; i < props.tableHeaders.length; i++) {
       if (i != 0) {
