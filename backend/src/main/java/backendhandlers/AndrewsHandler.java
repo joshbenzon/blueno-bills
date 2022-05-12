@@ -7,29 +7,28 @@ import spark.Response;
 import spark.Route;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class RattyHandler implements Route {
+public class AndrewsHandler implements Route {
   private static final Gson GSON = new Gson();
   WebScraper scraper;
 
-  public RattyHandler() {
+  public AndrewsHandler() {
     scraper = new WebScraper();
-    scraper.scrapeRatty();
+    scraper.scrapeAndrews();
   }
 
   @Override
   public Object handle(Request request, Response response) throws IllegalArgumentException {
     try {
-      ArrayList<ArrayList<String[]>> rattyMenus = new ArrayList<>();
-      rattyMenus.add(scraper.getRattyBreak());
-      rattyMenus.add(scraper.getRattyLunch());
-      rattyMenus.add(scraper.getRattyDin());
+      ArrayList<ArrayList<String[]>> andrewsMenus = new ArrayList<>();
+      andrewsMenus.add(scraper.getAndrewsLunch());
+      andrewsMenus.add(scraper.getAndrewsDin());
 
-      return GSON.toJson(rattyMenus);
+      return GSON.toJson(andrewsMenus);
 
     } catch (IllegalStateException | IllegalArgumentException e) {
       return GSON.toJson(e.getMessage());
     }
+
   }
 }

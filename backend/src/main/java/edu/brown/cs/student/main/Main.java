@@ -1,12 +1,17 @@
 package edu.brown.cs.student.main;
 
 import WebScraping.WebScraper;
+import backendhandlers.AndrewsHandler;
+import backendhandlers.BlueRoomHandler;
+import backendhandlers.IvyRoomHandler;
+import backendhandlers.JosHandler;
 import backendhandlers.RattyHandler;
 import backendhandlers.DeleteHandler;
 import backendhandlers.InsertRowHandler;
 import backendhandlers.TableHandler;
 import backendhandlers.UpdateHandler;
 
+import backendhandlers.VDubHandler;
 import replcommands.DeleteRowCommand;
 import replcommands.InsertRowCommand;
 import replcommands.LoadDatabase;
@@ -132,6 +137,11 @@ public final class Main {
     Spark.post("/delete", new DeleteHandler(objectOrganizer));
 
     Spark.get("/ratty", new RattyHandler());
+    Spark.get("/vdub", new VDubHandler());
+    Spark.get("/andrews", new AndrewsHandler());
+    Spark.get("/ivyroom", new IvyRoomHandler());
+    Spark.get("/blueroom", new BlueRoomHandler());
+    Spark.get("/jos", new JosHandler());
 
     Spark.init();
   }

@@ -5,6 +5,26 @@ const Menu = () => {
     window.location.href = "/rattyMenus";
   };
 
+  const navigateToVDubMenus = () => {
+    window.location.href = "/vdubMenus";
+  };
+
+  const navigateToAndrewsMenus = () => {
+    window.location.href = "/andrewsMenus";
+  };
+
+  const navigateToIvyRoomMenus = () => {
+    window.location.href = "/ivyRoomMenus";
+  };
+
+  const navigateToBlueRoomMenus = () => {
+    window.location.href = "/blueRoomMenus";
+  };
+
+  const navigateToJosMenus = () => {
+    window.location.href = "/josMenus";
+  };
+
   return (
     <React.Fragment>
       <div className={"page-info"}>
@@ -17,25 +37,25 @@ const Menu = () => {
         </div>
 
         <div className="vdub-button">
-          <button>Verney Wooley</button>
+          <button onClick={navigateToVDubMenus}>Verney Wooley</button>
         </div>
 
         <div className="andrews-button">
-          <button>Andrews Commons</button>
+          <button onClick={navigateToAndrewsMenus}>Andrews Commons</button>
         </div>
       </div>
 
       <div className={"page-buttons"}>
         <div className="ivy-button">
-          <button>Ivy Room</button>
+          <button onClick={navigateToIvyRoomMenus}>Ivy Room</button>
         </div>
 
         <div className="blue-button">
-          <button>Blue Room</button>
+          <button onClick={navigateToBlueRoomMenus}>Blue Room</button>
         </div>
 
         <div className="joes-button">
-          <button>Josiah's</button>
+          <button onClick={navigateToJosMenus}>Josiah's</button>
         </div>
       </div>
     </React.Fragment>
