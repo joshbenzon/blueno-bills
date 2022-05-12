@@ -2,17 +2,16 @@
 
 ## How to Run Our App
 ### IMPORTANT: For SQL connections to work, change “version” in the “pom.xml” file to:
-- if you have M1 Chip: 3.34.0
-- if you don’t have M1 Chip: 3.34.1
+- **M1 Chip:** 3.34.0
+- **No M1 Chip:** 3.34.1
 ### BackEnd
 - In the "backend" folder with the "pom.xml" file, type `mvn package`.
 - Then, type `./run --gui`. This will run our REPL and also run the web scraper componenet that loads a Chrome Web Page to scrape menus. (This might take awhile to load!)
-- then, type in the terminal `load-database ../data/StudentData.sqlite3`. This will load our database of students.
+- Then, type in the terminal `load-database ../data/StudentData.sqlite3`. This will load our database of students.
 
 ### FrontEnd
 - In the "frontend" folder, type `npm start` to load our website in our terminal.
 - From there, follow the descriptions on the page and buttons.
-- Enjoy!
 
 ## Section 1: Introduction
 ### 1.1 Project Specific Details
@@ -143,7 +142,7 @@
 
 ## Section 3: System Features and Requirements
 ### 3.1 Risks
-*Stakeholder Risks*
+#### *Stakeholder Risks*
 **How might data used for decision-making within your app result in unfair outcomes for certain users or stakeholders?**
 - Certain users might make less “friends” and receive more or less requests/transfers but this is not a harm that can really be mitigated.
 - BDS might have a hard time adjusting to the new system
@@ -154,7 +153,7 @@
 **What limitations exist on stakeholders’ ability to manipulate the data relevant to them?**
 - They can only input or edit their meal credits/points/bear bucks
 
-**Does the app benefit one group of stakeholders more than others? **
+**Does the app benefit one group of stakeholders more than others?**
 - It benefits all Brown student users but not admin stakeholders
 
 **Which data are publicly accessible?**
@@ -172,7 +171,7 @@
 **Does your app make inefficient or unnecessary uses of resources and/or energy?**
 - Since we can’t use the GET info directly (Brown won’t let us), students will manually have to input and update their meal points and credits for the time-being. This would be resolved in a future sprint!
 
-*External Risks*
+#### *External Risks*
 **How does your app fit into its social, economic, and political context? Does it actively work against systems of oppression (racism, sexism, classism) How?**
 - It doesn’t work against systems of oppression but it does increase food security for students regardless of identity or economic status.
 
@@ -202,7 +201,7 @@
 **How will you make modules reusable and generic when necessary?**
 - If a user regularly sends funds to another specific user, we can implement a “suggestion” button that autofills given previous transaction histories.
 
-**Are there any known bugs in your program?
+**Are there any known bugs in your program?**
 - None as of right now
 
 ### 3.4 Functional Requirements
@@ -238,7 +237,7 @@
 - Users can send transfers publicly or privately at their discretion and their points, swipes, and bear bucks counts are private to them.
 
 **How “flashy” and aesthetically pleasing does your UI need to be?**
--Should be clean and simple, easy to use. Figma prototype looks great
+- Should be clean and simple, easy to use. Figma prototype looks great
 
 **How accessible does your UI need to be?**
--As accessible as possible since ALL students should be able to use and access this resource.
+- As accessible as possible since ALL students should be able to use and access this resource.
