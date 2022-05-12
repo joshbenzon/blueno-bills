@@ -142,3 +142,103 @@
 - Usage of Brown actual GET App
 
 ## Section 3: System Features and Requirements
+### 3.1 Risks
+*Stakeholder Risks*
+**How might data used for decision-making within your app result in unfair outcomes for certain users or stakeholders?**
+- Certain users might make less “friends” and receive more or less requests/transfers but this is not a harm that can really be mitigated.
+- BDS might have a hard time adjusting to the new system
+
+**Which features of the represented groups do your app’s data not represent?**
+- Race, gender, sexuality, most identities and features honestly. We are only really collecting a username and info about meal credits/points/etc
+
+**What limitations exist on stakeholders’ ability to manipulate the data relevant to them?**
+- They can only input or edit their meal credits/points/bear bucks
+
+**Does the app benefit one group of stakeholders more than others? **
+- It benefits all Brown student users but not admin stakeholders
+
+**Which data are publicly accessible?**
+- Dining hall menus
+
+**Is data ever harvested or used without stakeholder consent?**
+- No
+
+**Are there situations when a stakeholder cannot inspect how your app came to a decision relevant to them?**
+- No, all transfers are mutually approved
+
+**Does your app disrupt community wellbeing in any way, such as undermining trust, communication, or participation?**
+- Nope! Does the opposite
+
+**Does your app make inefficient or unnecessary uses of resources and/or energy?**
+- Since we can’t use the GET info directly (Brown won’t let us), students will manually have to input and update their meal points and credits for the time-being. This would be resolved in a future sprint!
+
+*External Risks*
+**How does your app fit into its social, economic, and political context? Does it actively work against systems of oppression (racism, sexism, classism) How?**
+- It doesn’t work against systems of oppression but it does increase food security for students regardless of identity or economic status.
+
+**Does your app rely on services that participate in labor exploitation or create environmental harms?**
+- No!
+
+### 3.2 Data Requirements
+**If you only plan on storing this datum, not using it, why?**
+- We will be unable to get access to Brown’s actual data behind the information stored in the GET App, due to it being a secured server, students will be required to store their data by hand when they first download our app and from there, our app is responsible for keeping track of the different transactions.
+
+**If you plan on using this datum, what function does it fulfill?**
+- This will let the user know what their transaction history is, how many meal credits, points, etc. they have left, and who they have sent/received funds from
+
+**What process of consent, if any, do you provide your user when collecting this data from them? If you don’t provide one, why?**
+- When a user registers with our system, they will first have to create a username and password (for added security) and before they create an account, we can include a statement that explains it is their responsibility to ensure that the data they have inputted is correct so that we have an accurate dataset to execute our application successfully.
+
+### 3.3 System Features
+**What high-level modules define the functionality of your app?**
+- Requesting, Transferring, viewing menus and your account, seeing other active users
+
+**How will you separate your code into these separate modules?**
+- We separated our code into its frontend and backend aspects. From the names themselves, our backend folder contained our src folder with the bulk of our code and our frontend holds the overall aesthetic code for our app. 
+
+**How will modules communicate with each other?**
+- The modules communicate with each other via spark server connections, websockets, etc. 
+
+**How will you make modules reusable and generic when necessary?**
+- If a user regularly sends funds to another specific user, we can implement a “suggestion” button that autofills given previous transaction histories.
+
+**Are there any known bugs in your program?
+- None as of right now
+
+### 3.4 Functional Requirements
+**When during the user flow should this component be available?**
+- The user enters the app and has the ability to choose whether to request points, transfer points, or view menus, and get recommendations. The users can further describe their transfer and requests after they’ve clicked on their options.
+
+**How does this component interface with the rest of the app? Does it collect user input directly? Does it communicate with other components? External APIs? Backend database?**
+- Our app will have to retrieve data from a database where students will be able to store their information on how many swipes, flex points, bear bucks, etc they have left according to the GET App
+
+**Are there security measures to prevent all but certain components from accessing it?**
+- Our project requires a user to sign in with Google in order to access the app. To implement this user authentication, we used a firebase backend and implemented a popup to be signed into google. In a future sprint, we would add a terms and conditions contact so that users would be able to sign off on having their emails displayed on our app.
+
+**How does it process data?**
+- Algorithms, data structures, etc
+
+### 3.5 Testing Plan
+
+### 3.6 External Interface Requirements
+**How will your user interact with your app? Specifically, how will you make it accessible to visually, motor, cognitive, or otherwise impaired users?**
+- Users will be able to download the app and use their fingers to toggle between the different options/buttons of our app. To make our app accessible to those who are visually impared, we can implement a screen reader to our program that will tell the user everything they need to know
+
+**If applicable, how will your app communicate with external software? This will likely include your database, since you probably won’t want to host it locally, but rather on a service like Google Cloud Platform or Firebase.**
+- Our app will have to retrieve data from a database where students will be able to store their information on how many swipes, flex points, bear bucks, etc they have left according to the GET App, and our App will have to be responsible for regularly updating the numbers as the user transfers or receives funds.
+
+### 3.7 Non-Functional Requirements
+**What standards of performance must your product meet?**
+- It needs to work efficiently and fast so that students can access meals in a timely manner and transfer funds amongst themselves within seconds. It needs to be safe for all users and reliably transfer funds so that dining halls and BUDS staff can appropriately charge for meals.
+
+**What standards of security must your product meet?**
+- User data must be protected against leaks (number of swipes, username, anonymous requests for transfers)
+
+**What standards of privacy must your product meet?**
+- Users can send transfers publicly or privately at their discretion and their points, swipes, and bear bucks counts are private to them.
+
+**How “flashy” and aesthetically pleasing does your UI need to be?**
+-Should be clean and simple, easy to use. Figma prototype looks great
+
+**How accessible does your UI need to be?**
+-As accessible as possible since ALL students should be able to use and access this resource.
