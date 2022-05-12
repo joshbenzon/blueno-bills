@@ -71,7 +71,7 @@
 - Let them provide input on regulations and use
 
 ### 1.5 Scope and User Stories
-** What are you not planning on implementing? What are some features you’ve thought of that are outside your project scope? You can always implement these if you have time, but set them aside for now. At least you’ve written them down, and can come back to them later.
+**What are you not planning on implementing? What are some features you’ve thought of that are outside your project scope? You can always implement these if you have time, but set them aside for now. At least you’ve written them down, and can come back to them later.
 - We do not intend on implementing a live map feature where a user can locate other users who are willing to give away the types of Brown payments.
 - We also do not intend on adding a feature where a user can add funds from personal bank accounts (cash, credit, debit, etc.) directly on our app.
 - We also do not intend on adding complex features to students, such as getting the distance between the current user’s location and a selected student’s location.
@@ -86,16 +86,59 @@
 - User can interact visually on a web application and have privacy policy and security measures noted
 
 ### 1.6 Definitions and Acronyms
-- Active Users: In terms of our application, active users are student who have logged into Blueno Bills and are attempting to receive or transfer funds
-- Bear Bucks: Like flex points that can be used to buy certain items and do laundry
-- Blueno Bills: The name of our App. This is where current students are able to transfer funds used at Brown facilities (such as meal credits, flex points, etc) to other Brown University students
-- Flex Points: Like meal credits, Flex points can be used in place of cash at any of Brown’s Dining Services!
-- Meal Credits: A meal credit is how a student can pay to eat on campus. A meal credit is priced at about $9 and can be used every time you swipe into one of the Dining Halls (V-Dub, Ratty, Blue Room, Andrew's Commons, the Ivy Room, and Jo's)!
-- Menu: Description of foods and drinks
-- Request: Ability to receive some of another student’s payment
-- Selenium: Is responsible for automating web browsers
-- Transfer: Ability to give some of your payment to another student
-- Web Scraping: A form of extracting a website’s data 8
-- Web Sockets: A type of API that allows for a browser to connect with a server.
+- **Active Users:** In terms of our application, active users are student who have logged into Blueno Bills and are attempting to receive or transfer funds
+- **Bear Bucks:** Like flex points that can be used to buy certain items and do laundry
+- **Blueno Bills:** The name of our App. This is where current students are able to transfer funds used at Brown facilities (such as meal credits, flex points, etc) to other Brown University students
+- **Flex Points:** Like meal credits, Flex points can be used in place of cash at any of Brown’s Dining Services!
+- **Meal Credits:** A meal credit is how a student can pay to eat on campus. A meal credit is priced at about $9 and can be used every time you swipe into one of the Dining Halls (V-Dub, Ratty, Blue Room, Andrew's Commons, the Ivy Room, and Jo's)!
+- **Menu:** Description of foods and drinks
+- **Request:** Ability to receive some of another student’s payment
+- **Selenium:** Is responsible for automating web browsers
+- **Transfer:** Ability to give some of your payment to another student
+- **Web Scraping:** A form of extracting a website’s data 8
+- **Web Sockets:** A type of API that allows for a browser to connect with a server.
 
 ## Section 2: Overall Description
+### 2.1 User Needs
+**What are the most important tasks your users have to perform in the context of your product? (E.g., for my recipe app, maybe it’s finding an appropriate recipe based on ingredients and finding time to cook)**
+- Buy food with meal credits and flex points
+
+**What are the biggest gaps in current tools used by your users? (E.g., cookbooks don’t have sophisticated search functionality)**
+- Students have no way of sharing swipes and points with other students
+
+**What general feelings do users express about the problem you’re working on? (E.g., people express frustration at how long it takes to find an appropriate recipe)**
+- They feel that it would be a more effective use of their money, as they often have extra meal swipes when the year ends.
+
+**How often do users perform tasks in the context of your project (i.e., how often will they use the product)?**
+- Multiple times a day
+
+**In what context will users interact with your product? At work? At home? In school? Some combination?**
+- On campus
+
+**Are there secondary users? Do they have different needs? (E.g., makers of medical devices need to know the needs of doctors as well as the needs of their patients)**
+- No
+
+**Separate from user research: Can you think of any ways your app might create user needs that didn’t exist before? (E.g., the addictiveness of many social media apps creates a “need” that didn’t exist before)**
+- Students might experience confusion with staff within dining halls regarding how the transfer system works
+
+### 2.2 Assumptions and Dependencies
+**What software and other technology does your project rely on?**
+- React, Selenium, SQL, Intellij, VSCode, Firebase
+
+**What non-technical dependencies does your project rely on? Are you relying on the legality of collecting data from your users?**
+- We are collecting the following data: The amount of meal swipes a student has, the amount of flex points a student has, the amount of flex points a student has, whether a user is online
+
+**Does the relevance of your app rely on a social and/or cultural context? (E.g., a Squid Game-themed app)**
+- Social Context: Being a Brown Student 
+
+**What normative assumptions are you making? Are you choosing to center a particular group over others? Why?**
+- We are centering Brown Students since as students at Brown we have noticed many complications with the meal plan where often some Students have a surplus of meal swipes and not enough flex points. Students can’t transfer meal swipes so if you end the semester with extra meal swipes that money you paid for meal plan goes to waste. There are also Students who are on meal plans where the weekly meal swipes reset so for these students having friends who could transfer meal swipes when they run out of their weekly meal swipes would be helpful. 
+
+**What assumptions are you making in claiming that your app adds value to people’s lives?**
+- We are assuming that students would like to have access to more meal swipes and flex points
+
+**Based on the dependencies enumerated above, what are the financial needs for development of your project (broadly speaking)? You don’t need exact numbers, especially for the purposes of this class, but are there services or technologies you’ll need to pay for? You shouldn’t have to pay for anything in this class, but maybe there are external APIs that have a paid tier you’d like to use eventually after the class is over.**
+- Firebase
+- Usage of Brown actual GET App
+
+## Section 3: System Features and Requirements
