@@ -31,6 +31,8 @@ import IvyRoomMenus from "./navigation-bar/web-pages/ivyRoomMenus";
 import BlueRoomMenus from "./navigation-bar/web-pages/blueRoomMenus";
 import JosMenus from "./navigation-bar/web-pages/josMenus";
 
+import PrivacyPolicy from "./navigation-bar/web-pages/privacyPolicy";
+
 interface Row {
   StudentID: string;
   email: string;
@@ -210,6 +212,7 @@ function App() {
       <Routes>
         <Route element={<WithoutNav />}>
           <Route path="/" element={<Login />} />
+          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
         </Route>
 
         <Route element={<WithNav />}>
