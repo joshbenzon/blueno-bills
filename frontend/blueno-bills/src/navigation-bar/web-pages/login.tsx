@@ -2,6 +2,8 @@ import React from "react";
 
 import { googleSignIn } from "./authentication";
 
+// this is what the user will first see when they open our application
+// they will be prompted to log in via Google to continue using our services
 const Login = () => {
   return (
     <React.Fragment>
@@ -20,6 +22,7 @@ const Login = () => {
 
         <div className={"page-buttons"}>
           <div>
+            {/* this is an on demand click button that will open our pop up window to Google */}
             <button className="login-button" onClick={googleSignIn}>
               Login
             </button>

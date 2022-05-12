@@ -22,9 +22,10 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
-const gmailProvider = new GoogleAuthProvider();
+const gmailProvider = new GoogleAuthProvider(); // using Gmail as our authentication form
 
 export const googleSignIn = () => {
+  // makes a popup window appear where a user will be prompted to sign in with their Gmail
   signInWithPopup(auth, gmailProvider)
     .then((result) => {
       const name = result.user.displayName;
@@ -37,7 +38,10 @@ export const googleSignIn = () => {
 
       console.log("GOOGLE SIGN IN");
     })
-    .then(updateUserList)
+    .then(updateUserList) // will add user to the list of active Blueno Bill users
+
+    // because their emails will be listed for all users to see,
+    // we added a privacy policy agreement for added transparency with our users
     .then(() => (window.location.href = "/privacyPolicy"))
 
     .catch((error) => {
