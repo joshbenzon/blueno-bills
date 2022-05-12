@@ -11,7 +11,15 @@
 - Then, type in the terminal `load-database ../data/StudentData.sqlite3`. This will load our database of students.
 
 ### FrontEnd
-- In the "frontend" folder, type `npm start` to load our website in our terminal.
+- In the "frontend" folder, type `cd blueno-bills`.
+- Then, install our dependencies and imports by typing:
+  - `npm install react-icons`
+  - `npm install react-hook-form`
+  - `npm install react-router`
+  - `npm install react-router-dom`
+  - `npm install styled-components`
+  - `npm install firebase`
+- Then, type `npm start` to load our app.
 - From there, follow the descriptions on the page and buttons.
 
 ## Section 1: Introduction
