@@ -1,12 +1,4 @@
 # Blueno Bills
-**Members and Roles**
-- Josh Benzon (jbenzon): Main FrontEnd + FrontEnd/BackEnd Integration (Web Sockets, Web Scraping, Authentication)
-- Jillian Dominguez (jdoming8): SQL Database + FrontEnd/BackEnd Integration (Trasnfer Requests and Table Visualization)
-- Shivani Mendiratta (smendir1): Web Sockets
-- Sarah George (sgeorge8): Web Scraping
-- Guadalupe Cantera (gcantera): Authentication
-
-**Estimated Total Time:** 50 Hours
 
 ## How to Run Our App
 ### IMPORTANT: In order for to SQL connections to work, change “version” in the “pom.xml” file to:
@@ -22,3 +14,14 @@
 - From there, follow the descriptions on the page and buttons.
 - Enjoy!
 
+## Section 1: Introduction
+### 1.1 Project Specific Details
+
+**Members and Roles**
+- **Josh Benzon (jbenzon):** Main FrontEnd + FrontEnd/BackEnd Integration (Web Sockets, Web Scraping, Authentication)
+- **Jillian Dominguez (jdoming8):** SQL Database + FrontEnd/BackEnd Integration (Trasnfer Requests and Table Visualization)
+- **Shivani Mendiratta (smendir1):** Web Sockets
+- **Sarah George (sgeorge8):** Web Scraping
+- **Guadalupe Cantera (gcantera):** Authentication
+
+**Estimated Total Time:** 50 Hours
