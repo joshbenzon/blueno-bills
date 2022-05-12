@@ -1,7 +1,7 @@
 # Blueno Bills
 
 ## How to Run Our App
-### IMPORTANT: In order for SQL connections to work, change “version” in the “pom.xml” file to:
+### IMPORTANT: For SQL connections to work, change “version” in the “pom.xml” file to:
 - if you have M1 Chip: 3.34.0
 - if you don’t have M1 Chip: 3.34.1
 ### BackEnd
