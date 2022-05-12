@@ -25,6 +25,13 @@ import TransferFlex from "./navigation-bar/web-pages/transferFlex";
 import TransferBear from "./navigation-bar/web-pages/transferBear";
 
 import RattyMenus from "./navigation-bar/web-pages/rattyMenus";
+import VDubMenus from "./navigation-bar/web-pages/vdubMenus";
+import AndrewsMenus from "./navigation-bar/web-pages/andrewsMenus";
+import IvyRoomMenus from "./navigation-bar/web-pages/ivyRoomMenus";
+import BlueRoomMenus from "./navigation-bar/web-pages/blueRoomMenus";
+import JosMenus from "./navigation-bar/web-pages/josMenus";
+
+import PrivacyPolicy from "./navigation-bar/web-pages/privacyPolicy";
 
 interface Row {
   StudentID: string;
@@ -40,33 +47,16 @@ interface database {
   rows: Row[]; // each value for a header is a slot in the inner-inner array
 }
 
-// interface threeMeals {
-//   breakfast: foodItems;
-//   lunch: foodItems;
-//   dinner: foodItems;
-// }
-
-// interface foodItems {
-//   foods: string[];
-// }
-
 function App() {
-  // load menus
-  const [menuBreakfast, setMenuBreakfast] = useState<string[] | null>(null);
-  const [menuLunch, setMenuLunch] = useState<string[] | null>(null);
-  const [menuDinner, setMenuDinner] = useState<string[] | null>(null);
-  const [menuAll, setMenuAll] = useState<string[][]>([]);
+  // load ratty menus
+  const [menuRatty, setMenuRatty] = useState<string[][]>([]);
 
   function setRatty(menu: string[][]): void {
-    setMenuBreakfast(menu[0]);
-    setMenuLunch(menu[1]);
-    setMenuDinner(menu[2]);
+    menuRatty[0] = menu[0] as string[];
+    menuRatty[1] = menu[1] as string[];
+    menuRatty[2] = menu[2] as string[];
 
-    menuAll[0] = menu[0] as string[];
-    menuAll[1] = menu[1] as string[];
-    menuAll[2] = menu[2] as string[];
-
-    setMenuAll(menuAll);
+    setMenuRatty(menuRatty);
   }
 
   function loadRatty(): void {
@@ -75,6 +65,96 @@ function App() {
     })
       .then((response) => response.json())
       .then((menu: string[][]) => setRatty(menu));
+  }
+
+  // load vdub menus
+  const [menuVDub, setMenuVDub] = useState<string[][]>([]);
+
+  function setVDub(menu: string[][]): void {
+    menuVDub[0] = menu[0] as string[];
+    menuVDub[1] = menu[1] as string[];
+    menuVDub[2] = menu[2] as string[];
+
+    setMenuVDub(menuVDub);
+  }
+
+  function loadVDub(): void {
+    fetch("http://localhost:4567/vdub", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setVDub(menu));
+  }
+
+  // load andrews menus
+  const [menuAndrews, setMenuAndrews] = useState<string[][]>([]);
+
+  function setAndrews(menu: string[][]): void {
+    menuAndrews[0] = menu[0] as string[];
+    menuAndrews[1] = menu[1] as string[];
+
+    setMenuAndrews(menuAndrews);
+  }
+
+  function loadAndrews(): void {
+    fetch("http://localhost:4567/andrews", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setAndrews(menu));
+  }
+
+  // load ivy room menus
+  const [menuIvyRoom, setMenuIvyRoom] = useState<string[][]>([]);
+
+  function setIvyRoom(menu: string[][]): void {
+    menuIvyRoom[0] = menu[0] as string[];
+    menuIvyRoom[1] = menu[1] as string[];
+
+    setMenuIvyRoom(menuIvyRoom);
+  }
+
+  function loadIvyRoom(): void {
+    fetch("http://localhost:4567/ivyroom", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setIvyRoom(menu));
+  }
+
+  // load blue room menus
+  const [menuBlueRoom, setMenuBlueRoom] = useState<string[][]>([]);
+
+  function setBlueRoom(menu: string[][]): void {
+    menuBlueRoom[0] = menu[0] as string[];
+    menuBlueRoom[1] = menu[1] as string[];
+
+    setMenuBlueRoom(menuBlueRoom);
+  }
+
+  function loadBlueRoom(): void {
+    fetch("http://localhost:4567/blueroom", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setBlueRoom(menu));
+  }
+
+  // load jos menus
+  const [menuJos, setMenuJos] = useState<string[][]>([]);
+
+  function setJos(menu: string[][]): void {
+    menuJos[0] = menu[0] as string[];
+
+    setMenuJos(menuJos);
+  }
+
+  function loadJos(): void {
+    fetch("http://localhost:4567/jos", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((menu: string[][]) => setJos(menu));
   }
 
   // load database
@@ -98,14 +178,12 @@ function App() {
 
   useEffect(() => {
     loadDatabase();
-    console.log("Table Name: " + tableName);
-    console.log("Table Headers: " + tableHeaders);
-    console.log("Table Values: " + rows);
-
     loadRatty();
-    console.log("Breakfast: " + menuBreakfast);
-    console.log("Lunch: " + menuLunch);
-    console.log("Dinner: " + menuDinner);
+    loadVDub();
+    loadAndrews();
+    loadIvyRoom();
+    loadBlueRoom();
+    loadJos();
   }, []);
 
   const currUserEmail = localStorage.getItem("gmail") as string;
@@ -134,6 +212,7 @@ function App() {
       <Routes>
         <Route element={<WithoutNav />}>
           <Route path="/" element={<Login />} />
+          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
         </Route>
 
         <Route element={<WithNav />}>
@@ -153,7 +232,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/requestMeal"
             element={<RequestMeal tableHeaders={tableHeaders} rows={rows} />}
@@ -166,7 +244,6 @@ function App() {
             path="/requestBear"
             element={<RequestBear tableHeaders={tableHeaders} rows={rows} />}
           />
-
           <Route
             path="/transferMeal"
             element={
@@ -200,8 +277,24 @@ function App() {
               />
             }
           />
-
-          <Route path="/rattyMenus" element={<RattyMenus props={menuAll} />} />
+          <Route
+            path="/rattyMenus"
+            element={<RattyMenus props={menuRatty} />}
+          />
+          <Route path="/vdubMenus" element={<VDubMenus props={menuVDub} />} />
+          <Route
+            path="/andrewsMenus"
+            element={<AndrewsMenus props={menuAndrews} />}
+          />
+          <Route
+            path="/ivyRoomMenus"
+            element={<IvyRoomMenus props={menuIvyRoom} />}
+          />
+          <Route
+            path="/blueRoomMenus"
+            element={<BlueRoomMenus props={menuBlueRoom} />}
+          />
+          <Route path="/josMenus" element={<JosMenus props={menuJos} />} />
         </Route>
       </Routes>
     </Router>

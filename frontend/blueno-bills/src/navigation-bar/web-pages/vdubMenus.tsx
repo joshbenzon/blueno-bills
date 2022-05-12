@@ -1,7 +1,7 @@
 import React from "react";
 
 // gets menu items from each meal
-function RattyMenus(props: { props: string[][] }) {
+function VDubMenus(props: { props: string[][] }) {
   // [][][0] --> main dish
   // [][][1] --> ingredients
   const breakfast = props.props[0];
@@ -92,7 +92,7 @@ function RattyMenus(props: { props: string[][] }) {
   return (
     <React.Fragment>
       <div className={"page-info"}>
-        <h1>Sharpe Refectory Menu!</h1>
+        <h1>Verney Wooley Menu!</h1>
       </div>
 
       <div className="table-page">
@@ -165,4 +165,4 @@ function RattyMenus(props: { props: string[][] }) {
   );
 }
 
-export default RattyMenus;
+export default VDubMenus;

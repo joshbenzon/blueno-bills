@@ -10,6 +10,8 @@
 .page-info {
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: 15px;
 }
 
@@ -32,7 +34,7 @@
 
 input {
   padding: 5px;
-  border: 2px solid #79acff;
+  border: 2px solid #3381fe;
   border-radius: 5px;
 }
 
@@ -41,6 +43,37 @@ input {
   justify-content: center;
   padding: 5px;
   color: red;
+}
+
+.privacy-title {
+  margin: 0;
+  font-size: 40px;
+}
+
+.privacy-description {
+  margin: 0;
+  font-size: 20px;
+}
+
+.login-button {
+  background: #3381fe;
+  height: 50px;
+  width: 150px;
+  padding: 10px 27px;
+}
+
+.continue-button {
+  background: #3381fe;
+  height: 50px;
+  width: 150px;
+  padding: 10px 27px;
+}
+
+.go-back-button {
+  background: #79acff;
+  height: 50px;
+  width: 150px;
+  padding: 10px 27px;
 }
 
 form {
@@ -124,8 +157,8 @@ code {
   margin: 25px;
 
   color: #ffffff;
-  background-color: #649fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  background-color: #3381fe;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 
 /* credit: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
@@ -168,7 +201,7 @@ code {
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #649fff;
+  border-bottom: 2px solid #3381fe;
 }
 
 .styled-table tbody tr.active-row {

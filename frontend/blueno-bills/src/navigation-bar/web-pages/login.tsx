@@ -19,8 +19,10 @@ const Login = () => {
         </div>
 
         <div className={"page-buttons"}>
-          <div className="login-button">
-            <button onClick={googleSignIn}>Login</button>
+          <div>
+            <button className="login-button" onClick={googleSignIn}>
+              Login
+            </button>
           </div>
         </div>
       </div>

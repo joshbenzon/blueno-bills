@@ -38,7 +38,7 @@ export const googleSignIn = () => {
       console.log("GOOGLE SIGN IN");
     })
     .then(updateUserList)
-    .then(() => (window.location.href = "/home"))
+    .then(() => (window.location.href = "/privacyPolicy"))
 
     .catch((error) => {
       console.log(error);
