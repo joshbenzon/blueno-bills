@@ -17,7 +17,6 @@
 
     <div id = "chatter" hidden>
         <ul id="userlist"> <!-- Built by JS --> </ul>
-        <span class="logged-in">●</span>
         <div id="chat">    <!-- Built by JS --> </div>
     </div>
     <script src="websocketDemo.js"></script>

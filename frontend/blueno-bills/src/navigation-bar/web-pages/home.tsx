@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  // update the chat panel and the list of connected users
+  // update the list of connected users
   function addUser(message: MessageEvent) {
     var data = JSON.parse(message.data);
     getId("user-list").innerHTML = "";

@@ -151,8 +151,8 @@ public final class Main {
     return new FreeMarkerEngine(config);
   }
 
-  // sends a message from one user to all users, along with a list of current usernames
-  public static void broadcastMessage(String sender, String message) {
+  // sends a list of current usernames
+  public static void broadcastMessage(String sender, String msg) {
     List<Session> sessionsToSend = new ArrayList<>();
     List<String> usersList = new ArrayList<>();
 
