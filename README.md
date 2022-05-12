@@ -3,7 +3,8 @@
 ## How to Run Our App
 ### IMPORTANT: For SQL connections to work, change “version” in the “pom.xml” file to:
 - **M1 Chip:** 3.34.0
-- **No M1 Chip:** 3.34.1
+- **No M1 Chip:** 3.30.1
+- *Not sure if these are still relevant at the moment*
 ### BackEnd
 - In the "backend" folder with the "pom.xml" file, type `mvn package`.
 - Then, type `./run --gui`. This will run our REPL and also run the web scraper componenet that loads a Chrome Web Page to scrape menus. (This might take awhile to load!)
