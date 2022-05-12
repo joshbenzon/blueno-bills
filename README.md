@@ -218,6 +218,22 @@
 - Algorithms, data structures, etc
 
 ### 3.5 Testing Plan
+**Backend Testing**
+- JUnit Tests for each of our relevant classes and methods
+  - Web Socket testing
+  - Web scraping testing
+- Creating a ClientRequestGenerator Class as well as REPL Commands to ensure that our API requests work 
+- System Tests to test REPL commands
+
+**Frontend Testing**
+- Selenium Testing for front end functionality
+
+**User Authentication Testing**
+- In this project, we implemented a google user authentication system using Firebase. Because Firebase is already a secured software that keeps track of users information and other analytical information about the people who use our services, there isn’t an efficient way to test this feature. After hearing from multiple TAs about how they would go about testing this, they all suggested demonstrating a sign in from a user who isn’t already saved in the Firebase database. During the final presentation, we intend on showing our Firebase data to show that it is properly keeping track of who logs into Blueno Bills. 
+
+**Selenium Testing**
+- Via recommendations from our mentors throughout the duration of this project, we were told to test our selenium software by checking to see if our app updates daily with the food menus/ingredients from x date until the date of the final term presentation
+
 
 ### 3.6 External Interface Requirements
 **How will your user interact with your app? Specifically, how will you make it accessible to visually, motor, cognitive, or otherwise impaired users?**
