@@ -18,7 +18,7 @@ function VDubMenus(props: { props: string[][] }) {
       if (breakfast[i][1].length !== 0) {
         ingredientsBreakfast.push(breakfast[i][1]);
       } else {
-        ingredientsBreakfast.push("No Ingredients Listed!");
+        ingredientsBreakfast.push("No Description Listed!");
       }
     }
 
@@ -45,7 +45,7 @@ function VDubMenus(props: { props: string[][] }) {
       if (lunch[i][1].length !== 0) {
         ingredientsLunch.push(lunch[i][1]);
       } else {
-        ingredientsLunch.push("No Ingredients Listed!");
+        ingredientsLunch.push("No Description Listed!");
       }
     }
 
@@ -72,7 +72,7 @@ function VDubMenus(props: { props: string[][] }) {
       if (dinner[i][1].length !== 0) {
         ingredientsDinner.push(dinner[i][1]);
       } else {
-        ingredientsDinner.push("No Ingredients Listed!");
+        ingredientsDinner.push("No Description Listed!");
       }
     }
 
@@ -103,7 +103,7 @@ function VDubMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultBreakfast
@@ -126,7 +126,7 @@ function VDubMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultLunch.slice(1, resultLunch.length).map((item, index) => {
@@ -147,7 +147,7 @@ function VDubMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultDinner.slice(1, resultDinner.length).map((item, index) => {

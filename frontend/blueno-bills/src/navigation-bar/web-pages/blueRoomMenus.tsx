@@ -17,7 +17,7 @@ function BlueRoomMenus(props: { props: string[][] }) {
       if (breakfast[i][1].length !== 0) {
         ingredientsBreakfast.push(breakfast[i][1]);
       } else {
-        ingredientsBreakfast.push("No Ingredients Listed!");
+        ingredientsBreakfast.push("No Description Listed!");
       }
     }
 
@@ -44,7 +44,7 @@ function BlueRoomMenus(props: { props: string[][] }) {
       if (lunch[i][1].length !== 0) {
         ingredientsLunch.push(lunch[i][1]);
       } else {
-        ingredientsLunch.push("No Ingredients Listed!");
+        ingredientsLunch.push("No Description Listed!");
       }
     }
 
@@ -75,7 +75,7 @@ function BlueRoomMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultBreakfast
@@ -98,7 +98,7 @@ function BlueRoomMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultLunch.slice(1, resultLunch.length).map((item, index) => {

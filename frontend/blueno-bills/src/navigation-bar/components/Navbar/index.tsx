@@ -14,7 +14,7 @@ const Navbar = () => {
 
         <Bars />
         <NavMenu>
-          <NavLink to="/request">Request</NavLink>
+          {/* <NavLink to="/request">Request</NavLink> */}
           <NavLink to="/transfer">Transfer</NavLink>
           <NavLink to="/menu">Menus</NavLink>
           <NavLink to="/account">Account</NavLink>

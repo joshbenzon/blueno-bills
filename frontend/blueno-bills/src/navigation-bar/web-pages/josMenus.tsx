@@ -16,7 +16,7 @@ function JosMenus(props: { props: string[][] }) {
       if (dinner[i][1].length !== 0) {
         ingredientsDinner.push(dinner[i][1]);
       } else {
-        ingredientsDinner.push("No Ingredients Listed!");
+        ingredientsDinner.push("No Description Listed!");
       }
     }
 
@@ -47,7 +47,7 @@ function JosMenus(props: { props: string[][] }) {
         <table className="styled-table">
           <thead>
             <th>Courses</th>
-            <th>Ingredients</th>
+            <th>Description</th>
           </thead>
           <tbody>
             {resultDinner.slice(1, resultDinner.length).map((item, index) => {
