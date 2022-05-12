@@ -7,6 +7,7 @@ import updateUserList from "./home";
 // add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // for Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
   apiKey: "AIzaSyDcAMSb5HEwUsL90VhH8IADPexu_D0CVcs",
   authDomain: "cs32-final-project-784ef.firebaseapp.com",
@@ -20,11 +21,11 @@ const firebaseConfig = {
 // initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 export const auth = getAuth(app);
-const gmailProvider = new GoogleAuthProvider();
+const gmailProvider = new GoogleAuthProvider(); // using Gmail as our authentication form
 
 export const googleSignIn = () => {
+    // makes a popup window appear where a user will be prompted to sign in with their Gmail
   signInWithPopup(auth, gmailProvider)
     .then((result) => {
       const name = result.user.displayName;
@@ -37,7 +38,10 @@ export const googleSignIn = () => {
 
       console.log("GOOGLE SIGN IN");
     })
+      // will add user to the list of active Blueno Bill users
     .then(updateUserList)
+      // Beacause their emails will be listed for all users to see,
+      // we added a privacy policy agreement for added transparency with our users
     .then(() => (window.location.href = "/privacyPolicy"))
 
     .catch((error) => {
