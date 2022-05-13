@@ -8,10 +8,18 @@ import spark.Route;
 
 import java.util.ArrayList;
 
+/**
+ * This is the JosHandler class. It converts the data from the WebScraper class to a JSON object
+ * to be accessed by the frontend.
+ */
 public class JosHandler implements Route {
   private static final Gson GSON = new Gson();
   WebScraper scraper;
 
+  /**
+   * This is the JosHandler constructor. It initializes the WebScraper class and calls the
+   * scrapeJos() method.
+   */
   public JosHandler() {
     scraper = new WebScraper();
     scraper.scrapeJos();
@@ -21,7 +29,10 @@ public class JosHandler implements Route {
   public Object handle(Request request, Response response) throws IllegalArgumentException {
     try {
       ArrayList<ArrayList<String[]>> josMenus = new ArrayList<>();
-      josMenus.add(scraper.getJosDin());
+
+      if (scraper.getJosDin() != null){
+        josMenus.add(scraper.getJosDin());
+      }
 
       return GSON.toJson(josMenus);
 
