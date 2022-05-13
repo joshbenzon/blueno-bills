@@ -70,14 +70,14 @@ public class WebScraper {
     WebDriverManager.chromedriver().setup();
     ChromeOptions options = new ChromeOptions();
     driver = new ChromeDriver(options);
-
+    String[] message = {"Meal currently not being served", ""};
 
     if(day!=DayOfWeek.FRIDAY && day!= DayOfWeek.SATURDAY){
     scrapeTwo("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch, ivyRoomDin);}
     else if (day == DayOfWeek.FRIDAY){
       scrapeOneMenu("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch);
+      ivyRoomDin.add(message);
     } else{
-      String[] message = {"Meal currently not being served", ""};
       ivyRoomLunch.add(message);
       ivyRoomDin.add(message);
     }

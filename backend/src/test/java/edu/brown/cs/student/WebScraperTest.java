@@ -25,6 +25,7 @@ public class WebScraperTest {
     scraper.scrapeAndrews();
 
     assertNotEquals(scraper.getIvyRoomLunch(),null);
+    assertNotEquals(scraper.getIvyRoomDin(),null);
     assertNotEquals(scraper.getAndrewsLunch(),null);
     assertNotEquals(scraper.getAndrewsDin(),null);
     assertNotEquals(scraper.getBlueRoomBreak(),null);
@@ -49,6 +50,7 @@ public class WebScraperTest {
     scraper.scrapeAndrews();
 
     assertNotEquals(scraper.getIvyRoomLunch().size(),0);
+    assertNotEquals(scraper.getIvyRoomDin().size(),0);
     assertNotEquals(scraper.getAndrewsLunch().size(),0);
     assertNotEquals(scraper.getAndrewsDin().size(),0);
     assertNotEquals(scraper.getBlueRoomBreak().size(),0);
