@@ -8,7 +8,7 @@
 ### BackEnd
 - In the "backend" folder with the "pom.xml" file, type `mvn package`.
 - Then, type `./run --gui`. This will run our REPL and also run the web scraper componenet that loads a Chrome Web Page to scrape menus. (This might take awhile to load!)
-- Then, type in the terminal `load-database ../data/StudentData.sqlite3`. This will load our database of students.
+- Then, type in a terminal window`load-database ../data/StudentData.sqlite3`. This will load our database of students.
 
 ### FrontEnd
 - In the "frontend" folder, type `cd blueno-bills`.
@@ -26,10 +26,10 @@
 ### 1.1 Project Specific Details
 
 **Members and Roles**
-- **Josh Benzon (jbenzon):** Main FrontEnd + FrontEnd/BackEnd Integration (Web Sockets, Web Scraping, Authentication)
+- **Josh Benzon (jbenzon):** Main FrontEnd + Backend Data Visualization (including Web Sockets, Web Scraping, Authentication visualization)
 - **Jillian Dominguez (jdoming8):** SQL Database + FrontEnd/BackEnd Integration (Transfer Requests and Table Visualization)
 - **Shivani Mendiratta (smendir1):** Web Sockets
-- **Sarah George (sgeorge8):** Web Scraping
+- **Sarah George (sgeorge8):** Web Scraping + API for webscraping data
 - **Guadalupe Cantera (gcantera):** Authentication
 
 **Estimated Total Time:** 50 Hours
@@ -232,7 +232,15 @@
   - Web Socket testing
   - Web scraping testing
 - Creating a ClientRequestGenerator Class as well as REPL Commands to ensure that our API requests work 
+  - Testing backend handlers (InsertRowHandler, DeleteHandler, UpdateHandler) using the following classes: ClientRequestGenerator.java, DeleteRowCommand.java, InsertRowCommand.java, PrintStudentsCommand.java, UpdataRowCommand.java. Here are the instructions for testing using these classes: 
+  1) First you must call load-database ../data/StudentData.sqlite3
+  2) Then you can do: insert-row
+  3) Then you can do: update-row
+  4) Then you can do: delete-row
+  After each step you can call on: print-students to see how the database Students table is changing 
+  NOTE: Because I tested using this way (as I was told to on ED) rather than JUnit tests, my testing coverage doesn't reflect how much testing I did. 
 - System Tests to test REPL commands
+  - System Tests for load-database REPL command (note: still experiencing a bug with these as referenced here: https://edstem.org/us/courses/19957/discussion/1479034?answer=3337526)
 
 **Frontend Testing**
 - Selenium Testing for front end functionality
