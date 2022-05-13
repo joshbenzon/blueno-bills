@@ -6,7 +6,7 @@
 - **No M1 Chip:** 3.30.1
 - *Not sure if these are still relevant at the moment*
 ### BackEnd
-- In the "backend" folder with the "pom.xml" file, type `mvn package`.
+- In the "backend" folder with the "pom.xml" file, type `mvn package -Dmaven.test.skip`.
 - Then, type `./run --gui`. This will run our REPL and also run the web scraper componenet that loads a Chrome Web Page to scrape menus. (This might take awhile to load!)
 - Then, type in a terminal window`load-database ../data/StudentData.sqlite3`. This will load our database of students.
 
