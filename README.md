@@ -26,7 +26,7 @@
 ### 1.1 Project Specific Details
 
 **Members and Roles**
-- **Josh Benzon (jbenzon):** Main FrontEnd + Backend Data Visualization (including Web Sockets, Web Scraping, Authentication visualization)
+- **Josh Benzon (jbenzon):** Main FrontEnd + Backend Data Visualization (Web Sockets, Web Scraping, Authentication Visualization)
 - **Jillian Dominguez (jdoming8):** SQL Database + FrontEnd/BackEnd Integration (Transfer Requests and Table Visualization)
 - **Shivani Mendiratta (smendir1):** Web Sockets
 - **Sarah George (sgeorge8):** Web Scraping + API for webscraping data
