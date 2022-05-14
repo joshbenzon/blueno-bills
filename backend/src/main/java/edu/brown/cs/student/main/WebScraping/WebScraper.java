@@ -66,22 +66,24 @@ public class WebScraper {
    */
   public void scrapeIvyRoom() {
 
-
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions options = new ChromeOptions();
-    driver = new ChromeDriver(options);
     String[] message = {"Meal currently not being served", ""};
-
-    if(day!=DayOfWeek.FRIDAY && day!= DayOfWeek.SATURDAY){
-    scrapeTwo("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch, ivyRoomDin);}
-    else if (day == DayOfWeek.FRIDAY){
+    if (day == DayOfWeek.FRIDAY){
+      WebDriverManager.chromedriver().setup();
+      ChromeOptions options = new ChromeOptions();
+      driver = new ChromeDriver(options);
       scrapeOneMenu("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch);
+      driver.quit();
       ivyRoomDin.add(message);
-    } else{
+    } else if(day== DayOfWeek.SATURDAY){
       ivyRoomLunch.add(message);
       ivyRoomDin.add(message);
+    } else {
+      WebDriverManager.chromedriver().setup();
+      ChromeOptions options = new ChromeOptions();
+      driver = new ChromeDriver(options);
+      scrapeTwo("https://dining.brown.edu/cafe/ivy-room/", ivyRoomLunch, ivyRoomDin);
+      driver.quit();
     }
-    driver.quit();
 
   }
 
@@ -90,18 +92,18 @@ public class WebScraper {
    * on the scrapeTwo() method.
    */
   public void scrapeBlueRoom() {
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions options = new ChromeOptions();
-    driver = new ChromeDriver(options);
 
-    if(day!=DayOfWeek.SATURDAY || day !=DayOfWeek.SUNDAY) {
-      scrapeTwo("https://dining.brown.edu/cafe/blue-room/", blueRoomBreak, blueRoomLunch);
-    } else{
+    if(day==DayOfWeek.SATURDAY || day ==DayOfWeek.SUNDAY) {
       String[] message = {"Meal currently not being served", ""};
       blueRoomBreak.add(message);
       blueRoomLunch.add(message);
+    } else{
+      WebDriverManager.chromedriver().setup();
+      ChromeOptions options = new ChromeOptions();
+      driver = new ChromeDriver(options);
+      scrapeTwo("https://dining.brown.edu/cafe/blue-room/", blueRoomBreak, blueRoomLunch);
+      driver.quit();
     }
-    driver.quit();
 
   }
 
@@ -115,7 +117,6 @@ public class WebScraper {
     driver = new ChromeDriver(options);
 
     scrapeOneMenu("https://dining.brown.edu/cafe/josiahs/", josDin);
-    driver.quit();
     driver.quit();
   }
 
@@ -140,19 +141,19 @@ public class WebScraper {
    */
   public void scrapeVDub() {
 
-    if(day!= DayOfWeek.SATURDAY || day!= DayOfWeek.SUNDAY) {
+    if (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY){
+      String[] message = {"Meal currently not being served", ""};
+      vDubBreak.add(message);
+      vDubLunch.add(message);
+      vDubDin.add(message);
+    }
+    else {
       WebDriverManager.chromedriver().setup();
       ChromeOptions options = new ChromeOptions();
       driver = new ChromeDriver(options);
 
       scrapeThree("https://dining.brown.edu/cafe/verney-woolley/", vDubBreak, vDubLunch, vDubDin);
       driver.quit();
-    } else{
-      String[] message = {"Meal currently not being served", ""};
-      vDubBreak.add(message);
-      vDubLunch.add(message);
-      vDubDin.add(message);
-
     }
 
   }
